@@ -60,7 +60,7 @@ function renderStore() {
         card.className = "card shop-item";
 
         card.innerHTML = `
-            <div class="shop-emoji">${item.emoji}</div>
+            <div class="shop-emoji">${itemArtHTML(item)}</div>
             <h3>${escapeHTML(item.name)}</h3>
             <p class="effect">${item.effect ? "✨ " + escapeHTML(item.effect) : t("Klinik süsü")}</p>
             <div class="price">${priceLabel(item)}</div>
@@ -210,7 +210,7 @@ function renderClinicTools() {
         button.classList.toggle("active", selectedClinicType === item.id);
 
         button.innerHTML = `
-            <span>${item.emoji}</span>
+            <span>${itemArtHTML(item)}</span>
             <small>${owned ? "" : "🔒 "}${escapeHTML(item.name)}</small>
         `;
 
@@ -246,7 +246,7 @@ function renderClinic() {
 
         // Hareket iç simgeye verilir; düğmenin kendi konumu ve dönüşü bozulmaz.
         const emoji = document.createElement("span");
-        emoji.textContent = info.emoji;
+        emoji.innerHTML = itemArtHTML(info);
         if (info.motion) emoji.className = info.motion;
         element.appendChild(emoji);
 
@@ -305,7 +305,7 @@ function renderClinic() {
     renderClinicStaff();
     renderDecor();
     renderDecorOptions();
-    $("clinicDoctor").textContent = doctorEmoji();
+    $("clinicDoctor").innerHTML = doctorFigure();
     applyTheme();
 }
 
@@ -326,7 +326,7 @@ function renderWalkers() {
         walker.style.animationDelay = -index * 3.7 + "s";
 
         const emoji = document.createElement("span");
-        emoji.textContent = visitor.emoji;
+        emoji.innerHTML = faceSVG(visitor, { mood: "happy" });
         walker.appendChild(emoji);
         area.appendChild(walker);
     });

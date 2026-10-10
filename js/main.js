@@ -130,6 +130,8 @@ function handleBack() {
 /* ===== BAŞLANGIÇ ===== */
 
 function initialize() {
+    $("authDoctor").innerHTML = doctorSVG(0);
+    applyMotion();
     translatePage();
     startIcons();
     applyReminder();

@@ -53,7 +53,7 @@
             <div class="hero-logo">🩺</div>
             <h1>Doktormust</h1>
             <p>Kendi kliniğini kur, oyun vakalarını çöz ve başarı rozetlerini topla!</p>
-            <div class="doctor-art">👨‍⚕️</div>
+            <div class="doctor-art" id="authDoctor"></div>
         </div>
 
         <div class="auth-form">
@@ -186,9 +186,27 @@
                         <p id="rankText"></p>
                         <p class="small muted" id="profileInfo"></p>
                         <p class="small" id="petLine" hidden></p>
+                        <p class="small event-banner" id="eventBanner"></p>
                         <button class="primary-btn" onclick="showScreen('patients')">🧒 Hastaları Gör</button>
                     </div>
-                    <div class="doctor-preview coat" id="doctorPreview">👨‍⚕️</div>
+                    <div class="doctor-preview doc-holder" id="doctorPreview"></div>
+                </div>
+
+                <div class="card robot-card">
+                    <div class="robot-head">
+                        <div class="robot-face" id="robotFace"></div>
+                        <div>
+                            <h3>🤖 Robi'ye Sor</h3>
+                            <p class="small muted">Robi kliniğinin yardımcı robotu. Oyun ve sağlık hakkında bildiklerini anlatır.</p>
+                        </div>
+                    </div>
+                    <p class="small muted" id="robotAsked" hidden></p>
+                    <p class="robot-bubble" id="robotText" aria-live="polite">Merhaba Doktor! Bir soru yaz ya da aşağıdakilerden birine dokun.</p>
+                    <div class="row" id="robotChips"></div>
+                    <form class="robot-form" onsubmit="submitRobot(event)">
+                        <input type="text" id="robotInput" maxlength="80" autocomplete="off" placeholder="Robi'ye bir soru yaz…" aria-label="Robi'ye soru">
+                        <button class="primary-btn" type="submit">Sor</button>
+                    </form>
                 </div>
 
                 <div class="grid">
@@ -271,7 +289,7 @@
                         <div class="clinic-garland" id="clinicGarland" aria-hidden="true"></div>
                         <div class="clinic-sign" id="clinicSign" aria-hidden="true"></div>
                         <div class="clinic-window" id="clinicWindow" aria-hidden="true">🌳</div>
-                        <div class="clinic-doctor coat" id="clinicDoctor">👨‍⚕️</div>
+                        <div class="clinic-doctor doc-holder" id="clinicDoctor"></div>
                     </div>
 
                     <div class="card">
@@ -342,6 +360,9 @@
                 </div>
                 <p class="card" id="filesNote">Henüz dosya yok. İlk hastanı iyileştirince dosyası burada görünür.</p>
                 <div class="patient-grid" id="filesGrid"></div>
+                <div class="section-title letter-title"><div><h3>💌 Teşekkür Panosu</h3><span class="muted">İyileştirdiğin hastalar bazen mektup bırakır. Mektuplar burada toplanır.</span></div></div>
+                <p class="small muted" id="letterNote">Henüz mektup yok. Bir hastayı iyileştir, belki ilk mektubun gelir!</p>
+                <div class="letter-grid" id="letterGrid"></div>
             </section>
 
             <section id="screen-body" hidden>
@@ -381,7 +402,7 @@
                     </div>
                 </div>
                 <p class="small muted" id="weeklyNote" hidden></p>
-                <p class="small muted" id="queueStrip"></p>
+                <p class="small muted"><span id="queueLabel"></span> <span class="queue-faces" id="queueStrip"></span></p>
                 <div class="patient-grid" id="patientGrid"></div>
             </section>
 
@@ -541,10 +562,16 @@
 
                 <div class="grid">
                     <div class="card game-card">
-                        <div class="doctor-preview coat" id="doctorBig"></div>
+                        <div class="doctor-preview doc-holder" id="doctorBig"></div>
                         <h3>Doktor karakteri</h3>
                         <div class="stack">
-                            <button class="secondary-btn" onclick="changeFace()">🔄 Yüzü Değiştir</button>
+                            <b class="small">Ten rengi</b>
+                            <div class="look-grid" id="skinGrid" aria-label="Ten rengi"></div>
+                            <b class="small">Saç rengi</b>
+                            <div class="look-grid" id="hairColorGrid" aria-label="Saç rengi"></div>
+                            <b class="small">Saç biçimi</b>
+                            <div class="look-grid" id="hairStyleGrid" aria-label="Saç biçimi"></div>
+                            <b class="small">Aksesuar</b>
                             <div class="acc-grid" id="accGrid" aria-label="Aksesuarlar"></div>
                         </div>
                     </div>
@@ -618,6 +645,10 @@
                     <div class="setting-row">
                         <b>📳 Titreşim</b>
                         <button class="toggle" id="vibrateToggle" onclick="toggleVibrate()">Açık</button>
+                    </div>
+                    <div class="setting-row">
+                        <b>🎬 Canlandırmalar</b>
+                        <button class="toggle" id="motionToggle" onclick="toggleMotion()">Açık</button>
                     </div>
                     <div class="setting-row">
                         <b>🌐 Dil / Language</b>
@@ -793,22 +824,34 @@
 <div class="modal-overlay" id="treatmentModal" hidden>
     <div class="modal" role="dialog" aria-modal="true" aria-labelledby="tmName" tabindex="-1">
         <button class="modal-close" onclick="closeModal()" aria-label="Muayeneyi kapat">✕</button>
-        <div class="modal-header">
+        <p class="coach" id="tmCoach" aria-live="polite" hidden></p>
+        <div class="exam-top">
             <div class="modal-emoji" id="tmEmoji"></div>
-            <h3 id="tmName"></h3>
-            <div class="problem" id="tmProblem"></div>
+            <div class="exam-side">
+                <h3 id="tmName"></h3>
+                <div class="problem" id="tmProblem"></div>
+                <div class="speech-row">
+                    <p class="speech-bubble" id="tmSpeech"></p>
+                    <button class="secondary-btn speak-btn" id="tmSpeak" onclick="speakPatient()" aria-label="Hastayı sesli dinle">🔊</button>
+                </div>
+                <div class="game-status" id="tmStatus" aria-live="off"></div>
+            </div>
         </div>
 
-        <div class="speech-row">
-            <p class="speech-bubble" id="tmSpeech"></p>
-            <button class="secondary-btn speak-btn" id="tmSpeak" onclick="speakPatient()" aria-label="Hastayı sesli dinle">🔊</button>
+        <div class="cure-box" id="tmCure" hidden>
+            <p class="cure-text" id="tmCureText"></p>
+            <div class="cure-dots" id="tmCureDots" aria-live="polite"></div>
+            <button class="primary-btn full cure-btn" id="tmCureButton" onclick="cureTap()"></button>
         </div>
 
-        <div class="game-status" id="tmStatus" aria-live="off"></div>
-
-        <h4 class="exam-title">🧰 Muayene aletleri</h4>
+        <h4 class="exam-title" id="tmToolsTitle">🧰 Muayene aletleri</h4>
         <div class="exam-tools" id="tmTools"></div>
         <ul class="finding-list" id="tmFindings" aria-live="polite"></ul>
+
+        <div class="robot-row" id="tmRobot">
+            <button class="secondary-btn" type="button" onclick="robotHint()">🤖 Robi'den İpucu Al</button>
+            <p class="robot-bubble" id="tmRobotText" aria-live="polite" hidden></p>
+        </div>
 
         <details class="cheat" id="tmCheatBox">
             <summary>📖 İpucu tablosu</summary>
@@ -839,6 +882,7 @@
         </div>
         <div class="result-box" id="gDescription"></div>
         <p class="notice" id="gNotice"></p>
+        <button class="secondary-btn full" id="gPhoto" onclick="savePhoto()" hidden>📸 Hatıra Fotoğrafını Kaydet</button>
     </div>
 </div>
 
@@ -917,9 +961,13 @@
 <script src="js/icons.js"></script>
 <script src="js/data.js"></script>
 <script src="js/app.js"></script>
+<script src="js/faces.js"></script>
+<script src="js/plus.js"></script>
+<script src="js/robot.js"></script>
 <script src="js/profiles.js"></script>
 <script src="js/music.js"></script>
 <script src="js/patients.js"></script>
+<script src="js/coach.js"></script>
 <script src="js/wards.js"></script>
 <script src="js/story.js"></script>
 <script src="js/games.js"></script>

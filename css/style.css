@@ -1206,3 +1206,153 @@ span.ico {
     .anim-walk, .anim-bob, .anim-sway, .anim-wiggle,
     .clinic-walker, .clinic-walker span { animation: none; }
 }
+
+/* ===== Çizilmiş karakterler ===== */
+
+.face { display: block; width: 100%; height: auto; overflow: visible; }
+.patient-face { width: 100px; margin: 0 auto 6px; }
+.patient-face.small { width: 74px; }
+
+.face .f-cheeks circle { fill: #ff9aa8; opacity: .45; }
+.face .f-cheeks.fever-mild circle { fill: #ff7474; opacity: .72; }
+.face .f-cheeks.fever-high circle { fill: #ff3d3d; opacity: .92; }
+
+.face .f-eyes { transform-box: fill-box; transform-origin: center; animation: face-blink 4.2s infinite; animation-delay: var(--d,0s); }
+.face.mood-happy .f-eyes, .face.mood-hurt .f-eyes, .face.mood-wide .f-eyes { animation: none; }
+.face .f-head { transform-box: fill-box; transform-origin: 50% 92%; }
+.face.mood-sick .f-head, .face.mood-worried .f-head { animation: face-sway 3.4s ease-in-out infinite; animation-delay: var(--d,0s); }
+.face .f-body { transform-box: fill-box; transform-origin: 50% 100%; animation: face-breathe 3s ease-in-out infinite; animation-delay: var(--d,0s); }
+.face .f-heart { transform-box: fill-box; transform-origin: center; animation: face-beat .8s ease-in-out infinite; }
+.face .f-sweat, .face .f-drip { transform-box: fill-box; animation: face-drip 1.8s ease-in infinite; }
+.face .f-pain { animation: face-flash .7s steps(2,jump-none) infinite; }
+.face .f-puff { animation: face-puff 1.6s ease-out infinite; }
+.face.cheer { animation: face-jump .32s ease-in-out 8 alternate; }
+.face.cheer .f-head { animation: face-nod .64s ease-in-out 4; }
+
+@keyframes face-blink { 0%, 92%, 100% { transform: scaleY(1); } 96% { transform: scaleY(.1); } }
+@keyframes face-sway { 0%, 100% { transform: rotate(-2.5deg); } 50% { transform: rotate(2.5deg); } }
+@keyframes face-breathe { 50% { transform: scale(1.03,1.035); } }
+@keyframes face-beat { 0%, 100% { transform: scale(1); } 18% { transform: scale(1.28); } 36% { transform: scale(1); } 54% { transform: scale(1.16); } }
+@keyframes face-drip { 0% { transform: translateY(-2px); opacity: 0; } 25% { opacity: 1; } 100% { transform: translateY(9px); opacity: 0; } }
+@keyframes face-flash { 0% { opacity: 1; } 100% { opacity: .25; } }
+@keyframes face-puff { 0% { opacity: 0; transform: translateX(-3px); } 40% { opacity: 1; } 100% { opacity: 0; transform: translateX(5px); } }
+@keyframes face-jump { from { transform: translateY(0); } to { transform: translateY(-16px); } }
+@keyframes face-nod { 50% { transform: rotate(6deg); } }
+
+/* Muayene sahnesi */
+
+.stage { position: relative; width: 150px; margin: 0 auto; line-height: 1; }
+.stage.shake .face { animation: shake .3s 2; }
+
+.stage-tool {
+    position: absolute;
+    left: var(--x,50%);
+    top: var(--y,60%);
+    transform: translate(-50%,-50%);
+    font-size: 40px;
+    pointer-events: none;
+    filter: drop-shadow(0 3px 4px rgba(0,0,0,.28));
+    animation: stage-fly 1s ease-in-out both;
+}
+
+.stage-pop {
+    position: absolute;
+    right: -4px;
+    top: 0;
+    font-size: 32px;
+    animation: stage-pop .45s cubic-bezier(.3,1.6,.5,1) both;
+}
+
+@keyframes stage-fly {
+    0% { left: 108%; top: 112%; transform: translate(-50%,-50%) scale(.5) rotate(-30deg); opacity: 0; }
+    42% { left: var(--x,50%); top: var(--y,60%); transform: translate(-50%,-50%) scale(1.12); opacity: 1; }
+    58% { transform: translate(-50%,-50%) rotate(9deg); }
+    74% { transform: translate(-50%,-50%) rotate(-9deg); }
+    100% { transform: translate(-50%,-50%) rotate(0); }
+}
+
+@keyframes stage-pop { from { transform: scale(0); opacity: 0; } }
+
+.modal-emoji.has-face { width: 132px; margin: 0 auto; line-height: 1; }
+
+.queue-faces { display: inline-flex; gap: 6px; vertical-align: middle; }
+.queue-faces .face { width: 34px; }
+.clinic-walker .face { width: 44px; }
+
+/* Doktor figürü */
+
+.doc-holder { position: relative; display: inline-block; width: 1.5em; line-height: 1; flex: none; }
+.doc-acc { position: absolute; top: -.12em; right: -.1em; font-size: .46em; }
+.doctor-art { width: 130px; margin: 0 auto; }
+
+/* İlk hasta rehberi */
+
+.coach {
+    position: sticky;
+    top: 0;
+    z-index: 3;
+    margin: 0 0 10px;
+    padding: 10px 12px;
+    border: 2px solid #f5b301;
+    border-radius: 14px;
+    background: #fff7d6;
+    color: #5f4300;
+    font-weight: 700;
+}
+
+.coach-target {
+    position: relative;
+    z-index: 1;
+    outline: 3px solid #f5b301;
+    outline-offset: 2px;
+    animation: coach-pulse 1s ease-in-out infinite;
+}
+
+@keyframes coach-pulse { 50% { box-shadow: 0 0 0 8px rgba(245,179,1,.35); transform: scale(1.04); } }
+
+/* Canlandırmalar kapalıyken (ayar ya da cihazın "hareketi azalt" seçeneği) karakterler sabit durur. */
+body.still .face, body.still .face *, body.still .stage-tool, body.still .stage-pop,
+body.still .coach-target { animation: none !important; }
+/* ===== v7: tam boy sahne, tedavi, mektuplar, doktor görünüşü, çizilmiş eşyalar ===== */
+
+.exam-top { display: flex; gap: 12px; align-items: flex-start; padding: 6px 4px 0; }
+.exam-top .stage { width: 112px; flex: none; margin: 0; }
+.exam-side { flex: 1; min-width: 0; }
+.exam-side h3 { margin: 4px 34px 6px 0; }
+.exam-side .speech-row { margin: 10px 0 4px; }
+
+.stage.talking .f-mouth { transform-box: fill-box; transform-origin: center; animation: face-talk .24s ease-in-out infinite alternate; }
+@keyframes face-talk { to { transform: scaleY(1.9); } }
+
+.cure-box { margin: 12px 0; padding: 14px; border-radius: 16px; background: var(--soft); text-align: center; }
+.cure-text { margin: 0; font-weight: 700; }
+.cure-dots { margin: 8px 0 12px; font-size: 22px; letter-spacing: 4px; }
+.cure-btn { padding: 16px; font-size: 18px; }
+
+.event-banner { display: block; width: fit-content; margin: 0 0 10px; padding: 8px 12px; border-radius: 12px; background: #fff7d6; color: #5f4300; font-weight: 700; }
+
+.letter-title { margin-top: 26px; }
+.letter-grid { display: grid; grid-template-columns: repeat(auto-fill,minmax(210px,1fr)); gap: 14px; }
+.letter-card { padding: 12px; border: 2px dashed #f0c96a; border-radius: 14px; background: #fffdf3; color: #4a3b16; text-align: center; transform: rotate(-1deg); }
+.letter-card:nth-child(even) { transform: rotate(1.2deg); }
+.letter-card p { margin: 6px 0; font-style: italic; }
+.letter-face { width: 64px; margin: 0 auto; }
+
+.look-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin: 4px 0 10px; }
+.look-btn { width: 44px; height: 44px; padding: 0; overflow: hidden; border: 3px solid transparent; border-radius: 50%; background: var(--soft); box-shadow: 0 0 0 1px rgba(0,0,0,.14); }
+.look-btn.active { border-color: var(--primary); box-shadow: 0 0 0 3px rgba(79,140,255,.3); }
+.look-btn .face { width: 100%; }
+.look-btn .face * { animation: none !important; }
+
+.art { display: inline-block; width: 1.25em; height: 1.25em; vertical-align: middle; }
+
+/* Robot asistan */
+
+.robot-card { margin-bottom: 18px; }
+.robot-head { display: flex; align-items: center; gap: 12px; }
+.robot-head h3 { margin: 0 0 4px; }
+.robot-face { font-size: 46px; line-height: 1; flex: none; }
+.robot-bubble { margin: 10px 0; padding: 12px 14px; border-radius: 14px; border: 2px solid #b9d4ff; background: #eef5ff; color: #17324d; font-weight: 600; }
+.robot-form { display: flex; gap: 8px; margin-top: 10px; }
+.robot-form input { flex: 1; min-width: 0; }
+.robot-row { margin: 10px 0; }

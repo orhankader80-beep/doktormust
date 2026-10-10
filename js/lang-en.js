@@ -47,6 +47,294 @@ translations.en = {
         "✅ Create My Account",
     "Hesaplar ve ilerleme bu tarayıcıda tutulur. Misafir ilerlemesi kalıcı kaydedilmez. Oyun için ayrı bir parola kullan.":
         "Accounts and progress are stored in this browser. Guest progress is not saved permanently. Use a separate password for the game.",
+    "Hastanı dinle, sonra parlayan yerlere dokun.":
+        "Listen to your patient, then tap the glowing spots.",
+    "👋 Merhaba Doktor! İlk hastan {0}. Parlayan alete dokun ve muayene et.":
+        "👋 Hello Doctor! Your first patient is {0}. Tap the glowing tool to examine.",
+    "🔎 Bulguyu gördün! ❗ işaretli bulgular önemli ipucudur. Şimdi parlayan düğmeye dokun.":
+        "🔎 You found a sign! Findings marked ❗ are important clues. Now tap the glowing button.",
+    "Olsun! Bulgular parlayan karta uyuyor, onu dene.":
+        "That's okay! The findings match the glowing card, try that one.",
+    "💊 Bulgular parlayan karta uyuyor. Ona dokun!":
+        "💊 The findings match the glowing card. Tap it!",
+    "🎓 İlk hastanı iyileştirdin! Artık kendi başına devam edebilirsin.\n\n":
+        "🎓 You healed your first patient! Now you can carry on by yourself.\n\n",
+    "🎬 Canlandırmalar":
+        "🎬 Animations",
+    "✨ Doğru kart! Şimdi parlayan düğmeye dokunarak tedaviyi uygula.":
+        "✨ Right card! Now tap the glowing button to give the treatment.",
+    "🥄 Şurubu ver":
+        "🥄 Give the syrup",
+    "🍵 Ihlamur içir ve dinlendir":
+        "🍵 Give warm tea and rest",
+    "🧊 Soğuk kompres yap":
+        "🧊 Apply a cold pack",
+    "🥄 Mide şurubunu ver":
+        "🥄 Give the tummy syrup",
+    "🍎 Meyve tabağını ver":
+        "🍎 Give the fruit plate",
+    "🩹 Alçıyı sar":
+        "🩹 Wrap the cast",
+    "{0} Tedaviyi uygula":
+        "{0} Give the treatment",
+    "✅ Doğru kart! Şimdi tedaviyi sen uygula.":
+        "✅ Right card! Now give the treatment yourself.",
+    "Düğmeye {0} kez dokun.":
+        "Tap the button {0} times.",
+    "Okul gezisi günü":
+        "School trip day",
+    "Bugün her vakada +10 coin!":
+        "+10 coins for every case today!",
+    "Yıldız günü":
+        "Star day",
+    "Bugün her vakada +10 XP!":
+        "+10 XP for every case today!",
+    "Çıkartma şenliği":
+        "Sticker festival",
+    "Bugün her vakadan çıkartma çıkar!":
+        "Every case gives a sticker today!",
+    "Hediye günü":
+        "Gift day",
+    "Bugün hastalar daha sık hediye bırakır!":
+        "Patients leave gifts more often today!",
+    "Mektup günü":
+        "Letter day",
+    "Bugün hastalar daha çok teşekkür mektubu yazar!":
+        "Patients write more thank-you letters today!",
+    "Usta doktor günü":
+        "Master doctor day",
+    "Bugün 3 yıldızlı vakalarda +20 coin!":
+        "+20 coins for 3-star cases today!",
+    "Pati günü":
+        "Paw day",
+    "Bugün Pati Kliniği vakalarında 2 kat coin!":
+        "Double coins for Paw Clinic cases today!",
+    "Bugünün olayı":
+        "Today's event",
+    "Sevgili doktorum, beni iyileştirdiğin için çok teşekkür ederim. Sen dünyanın en iyi doktorusun!":
+        "Dear doctor, thank you so much for making me better. You are the best doctor in the world!",
+    "Artık hiç korkmuyorum. Büyüyünce ben de senin gibi doktor olacağım!":
+        "I'm not scared anymore. When I grow up I'll be a doctor just like you!",
+    "Bugün okula gidebildim ve arkadaşlarımla oynadım. Hepsi senin sayende!":
+        "I went to school today and played with my friends. All thanks to you!",
+    "Sana bir resim çizdim: sen, ben ve kliniğin. Çok güzel oldu!":
+        "I drew you a picture: you, me and your clinic. It looks great!",
+    "Annem senin çok iyi bir doktor olduğunu söyledi. Bence de öyle!":
+        "My mum said you are a very good doctor. I think so too!",
+    "İlacımı hiç ağlamadan içtim. Bana cesaret verdiğin için teşekkürler!":
+        "I took my medicine without crying. Thank you for making me brave!",
+    "Kliniğini çok sevdim. Hasta olmasam da seni görmeye geleceğim!":
+        "I love your clinic. I'll come and see you even when I'm not ill!",
+    "Hav hav! Miyav! (Çeviri: Seni çok seviyoruz, doktor!)":
+        "Woof woof! Meow! (Translation: We love you, doctor!)",
+    "\n💌 {0} sana bir teşekkür mektubu bıraktı! Dosyalar ekranındaki panoya asıldı.":
+        "\n💌 {0} left you a thank-you letter! It is pinned to the board on the Files screen.",
+    "{0} iyileşti!":
+        "{0} is all better!",
+    "Doktor: {0}":
+        "Doctor: {0}",
+    "📸 Fotoğraf indirildi.":
+        "📸 Photo downloaded.",
+    "⚠️ Fotoğraf hazırlanamadı.":
+        "⚠️ The photo could not be made.",
+    "🖼️ Resim kaydedildi.":
+        "🖼️ Picture saved.",
+    "⚠️ Resim kaydedilemedi.":
+        "⚠️ The picture could not be saved.",
+    "📸 Hatıra Fotoğrafını Kaydet":
+        "📸 Save the Souvenir Photo",
+    "💌 Teşekkür Panosu":
+        "💌 Thank-You Board",
+    "İyileştirdiğin hastalar bazen mektup bırakır. Mektuplar burada toplanır.":
+        "Patients you heal sometimes leave a letter. The letters are collected here.",
+    "Henüz mektup yok. Bir hastayı iyileştir, belki ilk mektubun gelir!":
+        "No letters yet. Heal a patient and your first letter may arrive!",
+    "Ten rengi":
+        "Skin tone",
+    "Saç rengi":
+        "Hair colour",
+    "Saç biçimi":
+        "Hairstyle",
+    "Aksesuar":
+        "Accessory",
+    "Pati Dostu":
+        "Paw Friend",
+    "Pati Kliniği'nde 5 vaka tamamla.":
+        "Complete 5 cases in the Paw Clinic.",
+    "Pati Kliniği":
+        "Paw Clinic",
+    "Kediler, köpekler ve tavşanlar da hastalanır! Patilerine, tüylerine ve karınlarına bak, minik dostlarını iyileştir.":
+        "Cats, dogs and rabbits get ill too! Check their paws, fur and tummies and heal your little friends.",
+    "Pati Kontrolü":
+        "Paw Check",
+    "Tüy Büyüteci":
+        "Fur Magnifier",
+    "Karın Dinleme":
+        "Tummy Listening",
+    "🩹 Pati Sargısı Kartı":
+        "🩹 Paw Bandage Card",
+    "🐾 Patide kesik ya da diken vardır. Tüyler temizdir, karın sesleri normaldir.":
+        "🐾 There is a cut or a thorn in the paw. The fur is clean and the tummy sounds are normal.",
+    "Patisinde küçük bir kesik var, basınca çekiyor!":
+        "There is a small cut on the paw; it pulls away when pressed!",
+    "Tüyleri parlak ve temiz; pire yok.":
+        "The fur is shiny and clean; no fleas.",
+    "Karnından normal sesler geliyor.":
+        "The tummy sounds normal.",
+    "🧴 Pire Şampuanı Kartı":
+        "🧴 Flea Shampoo Card",
+    "🔍 Tüylerin arasında pire görünür ve hayvan durmadan kaşınır. Patiler ve karın normaldir.":
+        "🔍 Fleas can be seen in the fur and the pet keeps scratching. The paws and tummy are normal.",
+    "Patileri sağlam, kesik yok.":
+        "The paws are fine, no cuts.",
+    "Tüylerinin arasında minik pireler zıplıyor!":
+        "Tiny fleas are jumping in the fur!",
+    "🥣 Özel Mama Kartı":
+        "🥣 Special Food Card",
+    "🩺 Karın guruldar ve şiştir, tüyler matlaşmıştır. Patiler sağlamdır, pire yoktur.":
+        "🩺 The tummy rumbles and is swollen, and the fur is dull. The paws are fine and there are no fleas.",
+    "Tüyleri mat görünüyor ama pire yok.":
+        "The fur looks dull but there are no fleas.",
+    "Karnı gurulduyor ve şiş!":
+        "The tummy is rumbling and swollen!",
+    "🐾 Topallayan Minik":
+        "🐾 Limping Little One",
+    "Hav… (Sahibi: Parkta koşarken birden topallamaya başladı, patisini yere basmıyor.) 🐕":
+        "Woof… (Owner: He suddenly started limping while running in the park and won't put his paw down.) 🐕",
+    "Miyav! (Sahibi: Bahçede dikenli çalıların arasına girdi, o günden beri aksıyor.) 🐈":
+        "Meow! (Owner: She went into the thorny bushes in the garden and has been limping ever since.) 🐈",
+    "🐾 Patisini Yalayan Minik":
+        "🐾 Paw-Licking Little One",
+    "Miyav… (Sahibi: Sabahtan beri hep aynı patisini yalıyor, dokununca kaçıyor.) 🐈":
+        "Meow… (Owner: She has been licking the same paw since morning and runs away when I touch it.) 🐈",
+    "(Sahibi: Kırık bir saksının yanından geçti, patisinde kırmızı bir çizik gördüm.) 🐇":
+        "(Owner: He walked past a broken flowerpot and I saw a red scratch on his paw.) 🐇",
+    "🐜 Durmadan Kaşınma":
+        "🐜 Non-Stop Scratching",
+    "Hav hav! (Sahibi: Gece gündüz kaşınıyor, hiç rahat uyuyamıyor.) 🐕":
+        "Woof woof! (Owner: He scratches day and night and can't sleep properly.) 🐕",
+    "Miyav! (Sahibi: Sokaktaki kedilerle oynadı, şimdi sürekli kaşınıp duruyor.) 🐈":
+        "Meow! (Owner: She played with the street cats and now she keeps scratching.) 🐈",
+    "🐜 Tüylerde Minik Noktalar":
+        "🐜 Tiny Dots in the Fur",
+    "(Sahibi: Tüylerini tararken zıplayan siyah minik noktalar gördüm!) 🐇":
+        "(Owner: While brushing the fur I saw tiny black dots jumping!) 🐇",
+    "Hav… (Sahibi: Sırtını halıya sürtüp duruyor, tüylerinde bir şeyler kıpırdıyor.) 🐕":
+        "Woof… (Owner: He keeps rubbing his back on the carpet and something is moving in his fur.) 🐕",
+    "🥣 İştahsızlık":
+        "🥣 No Appetite",
+    "Miyav… (Sahibi: Mamasına hiç dokunmuyor, karnından garip sesler geliyor.) 🐈":
+        "Meow… (Owner: She won't touch her food and strange sounds come from her tummy.) 🐈",
+    "(Sahibi: Çok havuç yedi, şimdi köşesinde kıpırdamadan yatıyor.) 🐇":
+        "(Owner: He ate too many carrots and now he is lying still in his corner.) 🐇",
+    "🥣 Şiş Karın":
+        "🥣 Swollen Tummy",
+    "Hav… (Sahibi: Çöpten bir şeyler yemiş, karnı davul gibi şişti.) 🐕":
+        "Woof… (Owner: He ate something from the bin and his tummy is swollen like a drum.) 🐕",
+    "Miyav… (Sahibi: Sofradan düşen yemekleri yedi, karnı gurulduyor.) 🐈":
+        "Meow… (Owner: She ate the food that fell from the table and her tummy is rumbling.) 🐈",
+    "İskelet neden kavga etmez? Çünkü cesareti yok, yüreği de yok! 💀":
+        "Why didn't the skeleton go to the party? Because he had no body to go with! 💀",
+    "Doktor: \"Günde 8 bardak su iç.\" Robot: \"Ben içersem paslanırım!\" 🤖":
+        "Doctor: \"Drink 8 glasses of water a day.\" Robot: \"If I do, I'll rust!\" 🤖",
+    "Termometre neden çok havalı? Çünkü derecesi var! 🌡️":
+        "Why is the thermometer so clever? Because it has lots of degrees! 🌡️",
+    "Gerçekten kendini iyi hissetmiyorsan lütfen hemen bir büyüğüne söyle. Ben yalnızca bir oyun robotuyum; gerçek hastalıklara doktorlar bakar. 💙":
+        "If you really don't feel well, please tell a grown-up right away. I'm only a game robot; real illnesses are looked after by doctors. 💙",
+    "Ben Robi, kliniğinin yardımcı robotuyum. Gerçek bir yapay zekâ değilim; yalnızca bana öğretilen cevapları bilirim. 🤖":
+        "I'm Robi, your clinic's helper robot. I'm not a real AI; I only know the answers I was taught. 🤖",
+    "Bu oyunu Mustafa yaptı! 🎉":
+        "This game was made by Mustafa! 🎉",
+    "Bugünün olayı: {0} {1}. {2}":
+        "Today's event: {0} {1}. {2}",
+    "Hastalar ekranından bir hasta seç. Önce derdini dinle, sonra aletlerle muayene et. ❗ işaretli bulgulara bak, ipucu tablosuyla karşılaştır ve doğru kartı seç. Sonra tedaviyi kendin uygula!":
+        "Pick a patient on the Patients screen. Listen first, then examine with the tools. Look at the findings marked ❗, compare them with the hint table and choose the right card. Then give the treatment yourself!",
+    "Doğru kartı ilk denemede bulursan 3 yıldız alırsın. Bir kez yanılırsan ya da görüntüleme raporu kullanırsan en fazla 2 yıldız olur.":
+        "Find the right card on your first try and you get 3 stars. One mistake, or using the imaging report, means 2 stars at most.",
+    "Hasta iyileştirerek, mini oyun oynayarak ve günlük ödülü alarak coin kazanırsın. Coinlerle mağazadan eşya ve klinik ekibi alabilirsin.":
+        "You earn coins by healing patients, playing mini games and taking the daily reward. Use coins in the store for items and clinic staff.",
+    "Elmaslar seviye atlayınca, rozet kazanınca ve haftanın özel hastasını iyileştirince gelir. Onlarla özel eşyalar alınır.":
+        "Gems come from levelling up, earning badges and healing the special patient of the week. They buy special items.",
+    "Vakalardan ve mini oyunlardan çıkartma çıkar. Albümdeki bir çıkartmaya dokunursan hakkında bilgi okursun. Bazıları Vücut Haritası'ndaki organları açar!":
+        "Stickers come from cases and mini games. Tap a sticker in the album to read about it. Some of them unlock organs on the Body Map!",
+    "Pati Kliniği 3. seviyede açılır. Orada kedilere, köpeklere ve tavşanlara bakarsın: patilerini, tüylerini ve karınlarını kontrol et.":
+        "The Paw Clinic opens at level 3. There you look after cats, dogs and rabbits: check their paws, fur and tummies.",
+    "Uzmanlık bölümleri seviye atladıkça açılır: Diş Kliniği 2, Göz ve Pati Kliniği 3, Cilt 4, Çocuk Acil 5. seviyede. Her bölümün kendi aletleri ve kartları var.":
+        "Specialty wards open as you level up: Dental at 2, Eye and Paw Clinic at 3, Skin at 4, Children's ER at 5. Each ward has its own tools and cards.",
+    "Her yanlış kart hastanın bir sabır kalbini götürür. Kalpler biterse hasta gider. Acele etme, önce muayene et!":
+        "Every wrong card costs the patient one patience heart. When the hearts run out, the patient leaves. Don't rush, examine first!",
+    "Tahlil raporu vakanın kodunu verir; kodun anlamını Rehber'de bulursun. Görüntüleme raporu kartı doğrudan gösterir ama o vakada en fazla 2 yıldız alırsın.":
+        "The lab report gives the case code; look it up in the Guide. The imaging report shows the card directly, but then you get 2 stars at most for that case.",
+    "Şu an {0}. seviyedesin. Hasta iyileştirdikçe ve mini oyun oynadıkça XP kazanır, seviye atlarsın.":
+        "You are at level {0}. Healing patients and playing mini games earns XP and levels you up.",
+    "Hikâye Modu'nda 6 bölüm var. Her bölümün sonunda bir baş vaka gelir; bölümü bitirince diplomanı alırsın.":
+        "Story Mode has 6 chapters. Each ends with a boss case; finish the chapter to get your diploma.",
+    "İyileşen hastalar bazen teşekkür mektubu bırakır; mektuplar Dosyalar ekranındaki panoda durur. Vaka bitince hatıra fotoğrafı da kaydedebilirsin.":
+        "Healed patients sometimes leave a thank-you letter; letters are kept on the board on the Files screen. You can also save a souvenir photo when a case ends.",
+    "Sağlık bilgisi: {0}":
+        "Health tip: {0}",
+    "Rica ederim, Doktor! Yardım etmek benim işim. 🤖💙":
+        "You're welcome, Doctor! Helping is my job. 🤖💙",
+    "Merhaba Doktor! Ben Robi. Bana oyun ve sağlık hakkında soru sorabilirsin.":
+        "Hello Doctor! I'm Robi. You can ask me about the game and about health.",
+    "Nasıl oynanır?":
+        "How do I play?",
+    "Bugün ne var?":
+        "What's on today?",
+    "Şimdi ne yapayım?":
+        "What should I do now?",
+    "Sağlık bilgisi ver":
+        "Give me a health tip",
+    "Şaka yap":
+        "Tell a joke",
+    "Sen kimsin?":
+        "Who are you?",
+    "Hastalar ekranına git ve bekleyen bir hastayı muayene et. İlk üç hastadan sonra oyun iyice açılır!":
+        "Go to the Patients screen and examine a waiting patient. After your first three patients the game really opens up!",
+    "Hikâye Modu'na bak; her bölümün sonunda bir diploma seni bekliyor.":
+        "Take a look at Story Mode; a diploma is waiting at the end of each chapter.",
+    "Mini Oyunlar'da rekorunu kırmayı dene; oradan da çıkartma çıkıyor.":
+        "Try to beat your record in the Mini Games; they give stickers too.",
+    "Kliniğini süsle: farklı eşya yerleştirdikçe her vakadan daha çok coin kazanırsın.":
+        "Decorate your clinic: the more different items you place, the more coins each case gives.",
+    "Albümüne bak; eksik çıkartmaların hangi setten olduğunu görürsün.":
+        "Check your album; you'll see which sets your missing stickers belong to.",
+    "Pati Kliniği'ne uğra; minik dostların seni bekliyor!":
+        "Drop by the Paw Clinic; your little friends are waiting!",
+    "Birkaç hasta daha iyileştir: 2. seviyede Diş Kliniği, 3. seviyede Pati Kliniği açılır.":
+        "Heal a few more patients: the Dental Clinic opens at level 2 and the Paw Clinic at level 3.",
+    "Bir şey yaz ya da aşağıdaki sorulardan birine dokun.":
+        "Type something or tap one of the questions below.",
+    "Bunu henüz bilmiyorum. 🤖 Bana oyun, yıldızlar, çıkartmalar, bölümler ya da sağlık hakkında soru sorabilirsin.":
+        "I don't know that yet. 🤖 You can ask me about the game, stars, stickers, wards or health.",
+    "Önce hastanı dinle, sonra bir aletle başla. \"{0}\" iyi bir ilk adım!":
+        "Listen to your patient first, then start with a tool. \"{0}\" is a good first step!",
+    "Henüz \"{0}\" aletini denemedin. Ne kadar çok muayene edersen o kadar çok ipucu bulursun!":
+        "You haven't tried \"{0}\" yet. The more you examine, the more clues you find!",
+    "Bu özel bir vaka; burada kartı ben söyleyemem. ❗ işaretli bulgulara ve ipucu tablosuna dikkatle bak!":
+        "This is a special case; I can't tell you the card here. Look carefully at the findings marked ❗ and at the hint table!",
+    "En önemli ipuçları şu aletlerde: {0}. İpucu tablosunda bu işaretleri ara!":
+        "The most important clues come from: {0}. Look for those signs in the hint table!",
+    "Bulguların hepsi sakin görünüyor. İpucu tablosunda her şeyi normal olan kartı ara!":
+        "All the findings look calm. Look in the hint table for the card where everything is normal!",
+    "Bir ipucu daha istersen seçenekleri iki karta indiririm, ama o zaman en fazla 2 yıldız alırsın.":
+        "If you want one more hint I'll narrow it down to two cards, but then you get 2 stars at most.",
+    "Bence doğru kart şu ikisinden biri: \"{0}\" ya da \"{1}\".":
+        "I think the right card is one of these two: \"{0}\" or \"{1}\".",
+    "🤖 Robi'ye Sor":
+        "🤖 Ask Robi",
+    "Robi kliniğinin yardımcı robotu. Oyun ve sağlık hakkında bildiklerini anlatır.":
+        "Robi is your clinic's helper robot. It tells you what it knows about the game and about health.",
+    "Merhaba Doktor! Bir soru yaz ya da aşağıdakilerden birine dokun.":
+        "Hello Doctor! Type a question or tap one of those below.",
+    "Sor":
+        "Ask",
+    "🤖 Robi'den İpucu Al":
+        "🤖 Get a Hint from Robi",
+    "Robi'ye bir soru yaz…":
+        "Type a question for Robi…",
+    "Robi'ye soru":
+        "Question for Robi",
     "Bu oyunu yapan: Mustafa":
         "Made by: Mustafa",
     "Çıkış Yap":

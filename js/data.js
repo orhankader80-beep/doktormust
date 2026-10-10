@@ -8,7 +8,9 @@ const SESSION_KEY = "doktormust_v9_session";
 const defaultState = {
     doctor: {
         name: t("Doktor"), age: "küçük",
-        face: 0, accessory: 0, bg: "#bae6fd", avatar: "🦁"
+        face: 0, accessory: 0, bg: "#bae6fd", avatar: "🦁",
+        // Çizilen doktorun ten, saç rengi ve saç biçimi (faces.js'teki listelerin dizinleri).
+        skin: 1, hairColor: 1, hairStyle: 0
     },
     xp: 0,
     level: 1,
@@ -48,6 +50,10 @@ const defaultState = {
     limitMinutes: 0,
     limitExtra: { day: "", minutes: 0 },
     vibrate: true,
+    // Karakter canlandırmaları: null = cihazın "hareketi azalt" ayarına uyar.
+    motion: null,
+    // İyileşen hastaların bıraktığı teşekkür mektupları.
+    letters: [],
     diplomaSeen: false,
     // Klinik ekibi, bekleme odası ve uzmanlık bölümleri.
     staff: [],
@@ -135,6 +141,7 @@ const badges = [
     ["ward_eye", "👓", t("Göz Doktoru"), t("Göz Polikliniği'nde 5 vaka tamamla.")],
     ["ward_skin", "🧴", t("Cilt Uzmanı"), t("Cilt ve Alerji bölümünde 5 vaka tamamla.")],
     ["ward_er", "🚑", t("Acil Doktoru"), t("Çocuk Acil'de 5 vaka tamamla.")],
+    ["ward_vet", "🐾", t("Pati Dostu"), t("Pati Kliniği'nde 5 vaka tamamla.")],
     ["team", "👥", t("Ekip Lideri"), t("Klinik ekibinin tamamını işe al.")],
     ["diploma", "🎓", t("Diplomalı Doktor"), t("Bir bölüm diplomasını görüntüle.")]
 ];
@@ -433,9 +440,16 @@ const namePool = [
     "Can", "Ela", "Ali", "Ayşe", "Kerem", "Nil",
     "Burak", "Cemre", "Deniz", "Aslı", "Kaan"
 ];
+// Çizilen karakter adla uyumlu olsun diye kız adları ayrı tutulur; listede olmayan adlar erkek sayılır.
+const girlNames = ["Ece", "Zeynep", "Defne", "Ela", "Ayşe", "Nil", "Cemre", "Aslı"];
+const sharedNames = ["Deniz"];
+// Pati Kliniği'ne gelen evcil hayvanların adları.
+const petNames = ["Pamuk", "Boncuk", "Tarçın", "Minnoş", "Karabaş", "Fındık", "Zeytin", "Limon"];
 /* i18n-on */
 
 const patientEmojis = ["👦", "👧", "🧒", "🧑", "👱‍♀️", "👱‍♂️"];
+const girlEmojis = ["👧", "👱‍♀️", "🧑"];
+const boyEmojis = ["👦", "👱‍♂️", "🧒"];
 const colors = ["#dff7ff", "#e8ddff", "#ffe7cf", "#dcfce7", "#fce7f3", "#fef3c7"];
 
 const ageGroups = {
@@ -1009,6 +1023,44 @@ const wards = [
                 }
             }
         ]
+    },
+    {
+        id: "vet", emoji: "🐾", name: t("Pati Kliniği"), level: 3, pets: true,
+        intro: t("Kediler, köpekler ve tavşanlar da hastalanır! Patilerine, tüylerine ve karınlarına bak, minik dostlarını iyileştir."),
+        tools: [
+            { id: "paw", emoji: "🐾", name: t("Pati Kontrolü") },
+            { id: "fur", emoji: "🔍", name: t("Tüy Büyüteci") },
+            { id: "belly", emoji: "🩺", name: t("Karın Dinleme") }
+        ],
+        cards: [
+            {
+                id: "v_paw", label: t("🩹 Pati Sargısı Kartı"), key: "paw",
+                signs: t("🐾 Patide kesik ya da diken vardır. Tüyler temizdir, karın sesleri normaldir."),
+                findings: {
+                    paw: [t("Patisinde küçük bir kesik var, basınca çekiyor!"), true],
+                    fur: [t("Tüyleri parlak ve temiz; pire yok."), false],
+                    belly: [t("Karnından normal sesler geliyor."), false]
+                }
+            },
+            {
+                id: "v_flea", label: t("🧴 Pire Şampuanı Kartı"), key: "fur",
+                signs: t("🔍 Tüylerin arasında pire görünür ve hayvan durmadan kaşınır. Patiler ve karın normaldir."),
+                findings: {
+                    paw: [t("Patileri sağlam, kesik yok."), false],
+                    fur: [t("Tüylerinin arasında minik pireler zıplıyor!"), true],
+                    belly: [t("Karnından normal sesler geliyor."), false]
+                }
+            },
+            {
+                id: "v_tummy", label: t("🥣 Özel Mama Kartı"), key: "belly",
+                signs: t("🩺 Karın guruldar ve şiştir, tüyler matlaşmıştır. Patiler sağlamdır, pire yoktur."),
+                findings: {
+                    paw: [t("Patileri sağlam, kesik yok."), false],
+                    fur: [t("Tüyleri mat görünüyor ama pire yok."), true],
+                    belly: [t("Karnı gurulduyor ve şiş!"), true]
+                }
+            }
+        ]
     }
 ];
 
@@ -1189,6 +1241,50 @@ const wardCases = {
             says: [
                 "Kulağıma pamuk parçası sıkıştı, o taraftan duyamıyorum. 😟",
                 "Kardeşim kulağıma nohut soktu, çıkaramıyoruz! 😩"
+            ]
+        }
+    ],
+    vet: [
+        {
+            problem: "🐾 Topallayan Minik", card: "v_paw",
+            says: [
+                "Hav… (Sahibi: Parkta koşarken birden topallamaya başladı, patisini yere basmıyor.) 🐕",
+                "Miyav! (Sahibi: Bahçede dikenli çalıların arasına girdi, o günden beri aksıyor.) 🐈"
+            ]
+        },
+        {
+            problem: "🐾 Patisini Yalayan Minik", card: "v_paw",
+            says: [
+                "Miyav… (Sahibi: Sabahtan beri hep aynı patisini yalıyor, dokununca kaçıyor.) 🐈",
+                "(Sahibi: Kırık bir saksının yanından geçti, patisinde kırmızı bir çizik gördüm.) 🐇"
+            ]
+        },
+        {
+            problem: "🐜 Durmadan Kaşınma", card: "v_flea",
+            says: [
+                "Hav hav! (Sahibi: Gece gündüz kaşınıyor, hiç rahat uyuyamıyor.) 🐕",
+                "Miyav! (Sahibi: Sokaktaki kedilerle oynadı, şimdi sürekli kaşınıp duruyor.) 🐈"
+            ]
+        },
+        {
+            problem: "🐜 Tüylerde Minik Noktalar", card: "v_flea",
+            says: [
+                "(Sahibi: Tüylerini tararken zıplayan siyah minik noktalar gördüm!) 🐇",
+                "Hav… (Sahibi: Sırtını halıya sürtüp duruyor, tüylerinde bir şeyler kıpırdıyor.) 🐕"
+            ]
+        },
+        {
+            problem: "🥣 İştahsızlık", card: "v_tummy",
+            says: [
+                "Miyav… (Sahibi: Mamasına hiç dokunmuyor, karnından garip sesler geliyor.) 🐈",
+                "(Sahibi: Çok havuç yedi, şimdi köşesinde kıpırdamadan yatıyor.) 🐇"
+            ]
+        },
+        {
+            problem: "🥣 Şiş Karın", card: "v_tummy",
+            says: [
+                "Hav… (Sahibi: Çöpten bir şeyler yemiş, karnı davul gibi şişti.) 🐕",
+                "Miyav… (Sahibi: Sofradan düşen yemekleri yedi, karnı gurulduyor.) 🐈"
             ]
         }
     ]

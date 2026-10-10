@@ -40,7 +40,8 @@ function makePatient(disease, group, ward = null) {
     const card = disease.correctTreatment;
     const signs = cardSigns[card] || cardSigns.agri_kesici;
     const name = pick(namePool);
-    const emoji = pick(patientEmojis);
+    const emoji = pick(sharedNames.includes(name) ? patientEmojis
+        : girlNames.includes(name) ? girlEmojis : boyEmojis);
 
     // Dosyası olan hasta her gelişinde aynı yaşta görünür.
     const file = findFile({ name, emoji });
@@ -275,8 +276,8 @@ function renderPatients() {
         : weekly.patient ? "" : t("🌟 Haftanın özel hastası bugün gitti; yarın tekrar gelecek.");
     $("weeklyNote").hidden = !$("weeklyNote").textContent;
 
-    $("queueStrip").textContent = t("🪑 Bekleme odası: ") +
-        state.queue.map(patient => patient.emoji).join(" ");
+    $("queueLabel").textContent = t("🪑 Bekleme odası: ");
+    $("queueStrip").innerHTML = state.queue.map(patient => faceSVG(patient, { mood: "sick" })).join("");
 
     const list = weekly.patient
         ? [weekly.patient, ...state.activePatients] : state.activePatients;
@@ -304,7 +305,7 @@ function patientCard(patient) {
 
     card.innerHTML = `
         ${label ? `<div class="tag ${tone}">${escapeHTML(label)}</div>` : ""}
-        <div class="patient-emoji">${escapeHTML(patient.emoji)}</div>
+        <div class="patient-face">${patientFace(patient)}</div>
         <h3>${escapeHTML(patient.name)}, ${patient.age}</h3>
         <div class="problem">${escapeHTML(t(patient.problem))}</div>
         <div class="hearts">${patient.checkup
@@ -393,6 +394,7 @@ function setupTreatment(patient) {
 
         const button = document.createElement("button");
         button.className = "choice";
+        button.dataset.card = card.id;
         button.textContent = card.label;
         button.onclick = () => applyTreat(card.id);
         $("tmOptions").appendChild(button);
@@ -447,10 +449,11 @@ function useTool(id) {
 
     const button = $("tmTools").querySelector(`[data-tool="${id}"]`);
     const focused = document.activeElement === button;
-    const still = window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
+    const still = isStill();
 
     button.classList.add("busy");
     playSound("tap");
+    if (!still) stageExam(patient, toolsFor(patient).find(tool => tool.id === id));
 
     examTimer = setTimeout(() => {
         examTimer = null;
@@ -466,13 +469,22 @@ function useTool(id) {
                 $("treatmentChooseButton")).focus();
         }
 
-        if (state.autoRead) speak(findingFor(patient, id).text);
-    }, still ? 0 : 650);
+        const finding = findingFor(patient, id);
+        stageReact(patient, toolsFor(patient).find(tool => tool.id === id), finding.alert);
+        playSound(finding.alert ? "page" : "tap");
+
+        // Rehber, hastanın tepkisi görüldükten sonra sıradaki adıma geçer.
+        setTimeout(() => coachDone("tool"), still ? 0 : 1200);
+
+        if (state.autoRead) speak(finding.text);
+    }, still ? 0 : 1000);
 }
 
 function speakPatient() {
     const patient = currentPatient();
     if (!patient) return;
+
+    stageTalk(t(patient.speech));
 
     speak([
         t(patient.speech),
@@ -496,7 +508,7 @@ function finishCheckup(patient) {
     renderPatients();
     playSound();
 
-    showInfo(emoji, t("{0} kontrole geldi!", name),
+    showInfo({ person: { name, emoji }, mood: "happy", cheer: true }, t("{0} kontrole geldi!", name),
         t("💬 \"{0}\"\n\n+15 coin, +8 XP", speech) + regular + sticker +
         (currentUser && !saved ? t("\nİlerleme şu anda kalıcı kaydedilemedi.") : ""),
         t("Kontrol ziyaretinde kart seçilmez; iyileşen hastan sana uğrar."));
@@ -520,7 +532,9 @@ function openTreatment(id) {
     activePatientId = id;
     setupTreatment(patient);
 
-    $("tmEmoji").textContent = patient.emoji;
+    renderStage(patient);
+    stageTalk(t(patient.speech));
+    $("tmRobotText").hidden = true;
     $("tmName").textContent = t("{0}, {1} yaşında", patient.name, patient.age);
     $("tmProblem").textContent = t(patient.problem);
     $("tmSpeech").textContent = t(patient.speech);
@@ -602,6 +616,7 @@ function showTreatments() {
 
     $("tmOptions").hidden = false;
     $("treatmentChooseButton").hidden = true;
+    coachDone("choose");
 }
 
 function applyTreat(id) {
@@ -630,8 +645,18 @@ function applyTreat(id) {
         commit();
         updateTreatmentStatus();
         refreshPatientScreens();
+        stageWrong(patient);
+        coachDone("wrong");
         return;
     }
+
+    // Doğru kart: önce tedavi sahnesi oynanır, ödüller sahne bitince verilir.
+    startCure(patient);
+}
+
+function finishTreat(patient) {
+    const card = patient.correctTreatment;
+    const event = todayEvent();
 
     const stars = patient.mistakes === 0 && !patient.usedXray ? 3
         : patient.mistakes <= 1 ? 2 : 1;
@@ -641,6 +666,11 @@ function applyTreat(id) {
         (hasStaff("reception") ? 5 : 0);
     let xp = 15 + stars * 10 + (has("trophy") ? 10 : 0);
     let gems = 0;
+
+    // Günün olayı küçük bir bonus getirir.
+    coins += (event.coins || 0) + (stars === 3 ? event.perfect || 0 : 0);
+    xp += event.xp || 0;
+    if (event.vet && patient.ward === "vet") coins *= 2;
 
     if (patient.emergency) {
         coins *= 2;
@@ -663,11 +693,13 @@ function applyTreat(id) {
 
     // Hasta önce kaldırılır; aynı karttan ikinci ödül alınamaz.
     const patientName = patient.name;
+    const person = { name: patient.name, emoji: patient.emoji };
+    const coached = coach !== null;
     closeModal();
     removePatient(patient);
 
     // Hastalar bazen küçük bir hediye bırakır.
-    const gift = Math.random() < .2 ? 15 : 0;
+    const gift = Math.random() < (event.gift ? .6 : .2) ? 15 : 0;
 
     // Gösterilen sağlık bilgisi ebeveyn köşesinde listelenir.
     const tip = Math.floor(Math.random() * healthTips.length);
@@ -698,8 +730,9 @@ function applyTreat(id) {
     const regular = recordVisit(patient, stars);
     const chapter = patient.story ? advanceStory(stars) : "";
     const sticker = rollSticker(
-        patient.special || patient.boss || patient.emergency ? 1 : stars === 3 ? .7 : .5
+        patient.special || patient.boss || patient.emergency || event.sticker ? 1 : stars === 3 ? .7 : .5
     );
+    const letter = maybeLetter(person);
 
     const saved = commit();
     refreshPatientScreens();
@@ -707,16 +740,20 @@ function applyTreat(id) {
     if (stars === 3) confetti();
     playSound("win");
 
-    showInfo("🎉", t("{0} vakası tamamlandı!", patientName),
+    showInfo({ person, mood: "happy", cheer: true }, t("{0} vakası tamamlandı!", patientName),
+        (coached ? t("🎓 İlk hastanı iyileştirdin! Artık kendi başına devam edebilirsin.\n\n") : "") +
         "⭐".repeat(stars) + "☆".repeat(3 - stars) +
         t("\n+{0} coin, +{1} XP", coins, xp) + (gems ? `, +${gems} 💎` : "") +
         (gift ? t("\n🎁 {0} sana bir hediye bıraktı: +{1} coin", patientName, gift) : "") +
         regular + sticker +
         (currentUser && !saved ? t("\nİlerleme şu anda kalıcı kaydedilemedi.") : "") +
-        chapter +
+        chapter + letter +
         `\n\n💬 ${patientName}: "${pick(thanksLines)}"` +
         t("\n\n💡 Sağlık bilgisi\n") + healthTips[tip],
         t("Bu bilgiler geneldir. Merak ettiklerini bir büyüğüne veya doktoruna sor."));
+
+    offerPhoto(person, stars);
+    sfx("yay", .15);
 }
 
 /* ===== REHBER ===== */
@@ -752,7 +789,9 @@ function openGuide(index) {
 function showInfo(emoji, title, text, notice) {
     openModal("guideModal");
 
-    $("gEmoji").textContent = emoji;
+    setFigure($("gEmoji"), emoji);
+    $("gPhoto").hidden = true;
+    lastPhoto = null;
     $("gName").textContent = title;
     $("gDescription").textContent = text;
     $("gNotice").textContent = notice;

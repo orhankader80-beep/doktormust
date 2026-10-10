@@ -246,5 +246,5 @@ function printDiploma() {
 }
 
 function onImageSaved(saved) {
-    toast(saved ? t("🎓 Diploma kaydedildi.") : t("⚠️ Diploma kaydedilemedi."));
+    toast(saved ? t("🖼️ Resim kaydedildi.") : t("⚠️ Resim kaydedilemedi."));
 }

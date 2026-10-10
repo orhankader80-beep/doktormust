@@ -47,6 +47,8 @@ function recordVisit(patient, stars) {
 function renderFiles() {
     const grid = $("filesGrid");
 
+    renderLetters();
+
     grid.innerHTML = "";
     $("filesNote").hidden = state.files.length > 0;
 
@@ -57,7 +59,7 @@ function renderFiles() {
         card.className = "card patient-card" + (file.regular ? " checkup" : "");
         card.innerHTML = `
             ${file.regular ? `<div class="tag good">${escapeHTML(t("🤝 DÜZENLİ HASTA"))}</div>` : ""}
-            <div class="patient-emoji">${escapeHTML(file.emoji)}</div>
+            <div class="patient-face small">${faceSVG(file, { mood: "ok" })}</div>
             <h3>${escapeHTML(file.name)}, ${file.age}</h3>
             <div class="problem">${escapeHTML(t("Ziyaret: {0} • ⭐ {1}", file.visits, file.stars))}</div>
             <div class="small muted">${escapeHTML(last ? t("Son: {0}", t(last.problem)) : "")}</div>
@@ -78,7 +80,7 @@ function openFile(file) {
             : t(visit.problem) + (card ? " → " + card.label : "") + " " + "⭐".repeat(visit.stars));
     });
 
-    showInfo(file.emoji, `${file.name}, ${file.age}`,
+    showInfo({ person: file, mood: "ok" }, `${file.name}, ${file.age}`,
         t("Ziyaret sayısı: {0}", file.visits) + "\n" +
         t("Toplam yıldız: {0}", file.stars) + "\n" +
         (file.regular

@@ -341,6 +341,15 @@ function normalizeState(saved) {
     if (!own(ageGroups, result.doctor.age)) result.doctor.age = "küçük";
     result.doctor.face = number(result.doctor.face) % 3;
 
+    // Eski kayıtlarda ten ve saç yoktur; seçili hazır yüzden türetilir.
+    const savedDoctor = isRecord(saved.doctor) ? saved.doctor : {};
+    const preset = doctorPresets[result.doctor.face];
+
+    [["skin", faceSkins], ["hairColor", doctorHairs], ["hairStyle", doctorStyles]].forEach(([key, list], index) => {
+        result.doctor[key] = Number.isInteger(savedDoctor[key])
+            ? clamp(savedDoctor[key], 0, list.length - 1) : preset[index];
+    });
+
     result.ownedAccessories = [...new Set([
         ...defaultState.ownedAccessories,
         ...(Array.isArray(saved.ownedAccessories) ? saved.ownedAccessories : [])
@@ -362,6 +371,17 @@ function normalizeState(saved) {
     result.autoRead = saved.autoRead === true;
     result.music = saved.music === true;
     result.vibrate = saved.vibrate !== false;
+    result.motion = typeof saved.motion === "boolean" ? saved.motion : null;
+
+    result.letters = (Array.isArray(saved.letters) ? saved.letters : [])
+        .filter(letter => isRecord(letter) && typeof letter.name === "string" && typeof letter.emoji === "string")
+        .slice(-24)
+        .map(letter => ({
+            name: letter.name.slice(0,40),
+            emoji: letter.emoji.slice(0,16),
+            line: clamp(number(letter.line), 0, letterLines.length - 1),
+            day: typeof letter.day === "string" ? letter.day.slice(0,10) : ""
+        }));
     result.diplomaSeen = saved.diplomaSeen === true;
 
     result.doctor.avatar = avatars.includes(result.doctor.avatar)
@@ -854,7 +874,7 @@ function openApp() {
     rollWeek();
     refreshWeekly();
 
-    // Tanıtım turu her profilde bir kez kendiliğinden açılır.
+    // İlk hasta rehberi her profilde bir kez kendiliğinden açılır.
     const firstVisit = !state.tutorialDone;
     state.tutorialDone = true;
 
@@ -866,7 +886,7 @@ function openApp() {
     startMusic();
 
     if (limitReached()) checkLimit();
-    else if (firstVisit) startTour();
+    else if (firstVisit) startFirstCase();
 }
 
 function logout() {
@@ -894,6 +914,7 @@ function logout() {
     $("app").hidden = true;
     $("authScreen").hidden = false;
     document.body.classList.remove("dark");
+    applyMotion();
 
     for (const id of ["loginUsername","loginPassword","regUsername","regPassword","profileName"]) {
         $(id).value = "";
@@ -1078,6 +1099,11 @@ function applyTheme() {
     $("vibrateToggle").classList.toggle("on", state.vibrate);
     $("vibrateToggle").setAttribute("aria-pressed", String(state.vibrate));
 
+    $("motionToggle").textContent = isStill() ? t("Kapalı") : t("Açık");
+    $("motionToggle").classList.toggle("on", !isStill());
+    $("motionToggle").setAttribute("aria-pressed", String(!isStill()));
+    applyMotion();
+
     document.body.style.setProperty("--coat", state.decor.coat);
 
     $("clinicEditArea").style.backgroundColor = state.dark
@@ -1126,8 +1152,12 @@ function updateUI() {
     $("clinicScoreInline").textContent = t("🌟 Klinik puanı: {0}", clinicScore());
 
     for (const id of ["doctorPreview","doctorBig","clinicDoctor"]) {
-        $(id).textContent = doctorEmoji();
+        $(id).innerHTML = doctorFigure();
     }
+
+    renderDoctorLook();
+    renderEvent();
+    renderRobot();
 
     $("profileInfo").textContent =
         `${currentUser ? t("Kayıtlı profil") : t("Misafir oturumu")} • ` +
@@ -1399,6 +1429,23 @@ function toggleRead() {
     if (state.autoRead) speak(t("Sesli okuma açıldı."));
 }
 
+// Karakter canlandırmaları kapalı mı? Oyuncu seçmediyse cihazın ayarına bakılır.
+function isStill() {
+    if (typeof state.motion === "boolean") return !state.motion;
+    return window.matchMedia?.("(prefers-reduced-motion: reduce)").matches === true;
+}
+
+function applyMotion() {
+    document.body.classList.toggle("still", isStill());
+}
+
+function toggleMotion() {
+    if (!appOpen) return;
+
+    state.motion = isStill();
+    commit();
+}
+
 /* ===== TANITIM TURU ===== */
 
 function startTour() {
@@ -1533,6 +1580,9 @@ function openModal(id) {
 function closeModal(restoreFocus = true) {
     stopCaseTimer();
     stopExam();
+    stopStage();
+    endCoach();
+    resetCure();
     stopSpeech();
     stopGame();
 

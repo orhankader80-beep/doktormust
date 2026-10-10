@@ -7,12 +7,23 @@ let currentWard = "dental";
 function makeWardPatient(ward) {
     const item = pick(wardCases[ward.id]);
 
-    return makePatient({
+    const patient = makePatient({
         problem: item.problem,
         correctTreatment: item.card,
         area: "",
         says: item.says
     }, ageGroups[state.doctor.age], ward);
+
+    // Pati Kliniği'nin hastaları evcil hayvanlardır.
+    if (ward.pets) {
+        patient.name = pick(petNames);
+        // Konuşmadaki hayvan simgesi, çizilen hayvanı belirler.
+        patient.emoji = patient.speech.includes("\u{1F415}") ? "\u{1F436}"
+            : patient.speech.includes("\u{1F408}") ? "\u{1F431}" : "\u{1F430}";
+        patient.age = between([1, 9]);
+    }
+
+    return patient;
 }
 
 // Her bölümde aynı anda üç hasta bekler; hepsi bitince yenileri gelir.
