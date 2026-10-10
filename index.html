@@ -1,0 +1,932 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#4f8cff">
+<title>Doktormust — Çocuk Doktor Oyunu</title>
+<meta name="description" content="Doktormust, çocuklar için ücretsiz ve reklamsız bir doktor oyunu. Kendi kliniğini kur, hastalarını muayene et, mini oyunlar oyna ve çıkartma topla. Türkçe ve İngilizce.">
+<link rel="canonical" href="https://orhankader80-beep.github.io/doktormust/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Doktormust">
+<meta property="og:title" content="Doktormust — Çocuk Doktor Oyunu">
+<meta property="og:description" content="Kendi kliniğini kur, hastalarını muayene et, çıkartma topla. Ücretsiz ve reklamsız.">
+<meta property="og:url" content="https://orhankader80-beep.github.io/doktormust/">
+<meta property="og:image" content="https://orhankader80-beep.github.io/doktormust/onizleme.png">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Doktormust — Çocuk Doktor Oyunu">
+<meta property="og:locale" content="tr_TR">
+<meta property="og:locale:alternate" content="en_US">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "VideoGame",
+    "name": "Doktormust",
+    "alternateName": "Doktormust — Çocuk Doktor Oyunu",
+    "url": "https://orhankader80-beep.github.io/doktormust/",
+    "image": "https://orhankader80-beep.github.io/doktormust/onizleme.png",
+    "description": "Çocuklar için ücretsiz ve reklamsız doktor oyunu. Kendi kliniğini kur, hastalarını muayene et, mini oyunlar oyna ve çıkartma topla.",
+    "inLanguage": ["tr", "en"],
+    "genre": "Eğitici oyun",
+    "gamePlatform": "Web tarayıcısı",
+    "applicationCategory": "Game",
+    "operatingSystem": "Any",
+    "isFamilyFriendly": true,
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "TRY" }
+}
+</script>
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" type="image/png" href="icons/icon-192.png">
+<link rel="apple-touch-icon" href="icons/icon-192.png">
+<link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+
+<section class="auth-screen" id="authScreen">
+    <div class="auth-card">
+        <div class="auth-hero">
+            <div class="hero-logo">🩺</div>
+            <h1>Doktormust</h1>
+            <p>Kendi kliniğini kur, oyun vakalarını çöz ve başarı rozetlerini topla!</p>
+            <div class="doctor-art">👨‍⚕️</div>
+        </div>
+
+        <div class="auth-form">
+            <div id="auth-home">
+                <h2 class="welcome">Kim oynuyor? 👋</h2>
+                <p class="muted" id="profileEmpty">Henüz profil yok. Yeni bir profil oluştur ya da misafir olarak dene.</p>
+                <div class="profile-list" id="profileList"></div>
+                <button class="success-btn start-btn" onclick="switchAuthView('profile')">➕ Yeni Profil</button>
+                <button class="secondary-btn start-btn" onclick="guestLogin()">🕵️ Misafir Olarak Oyna</button>
+                <details class="auth-more">
+                    <summary>Parolalı hesap</summary>
+                    <button class="primary-btn start-btn" onclick="switchAuthView('login')">🔑 Giriş Yap</button>
+                    <button class="secondary-btn start-btn" onclick="switchAuthView('register')">📝 Yeni Hesap Aç</button>
+                </details>
+            </div>
+
+            <form id="auth-profile" hidden>
+                <div>
+                    <h2 class="welcome">Yeni Profil</h2>
+                    <p class="muted">Parola gerekmez. Adını yaz ve bir avatar seç.</p>
+
+                    <label class="input-label" for="profileName">Doktorun adı</label>
+                    <input class="input" id="profileName" maxlength="15" autocomplete="off" required>
+
+                    <p><b>Avatarını seç</b></p>
+                    <div class="avatar-pick" id="avatarPick" aria-label="Avatarlar"></div>
+
+                    <p><b>Hastalarının yaş grubunu seç</b></p>
+                    <div class="age-options" aria-label="Hasta yaş grubu">
+                        <button type="button" class="age-option active" data-age="küçük" aria-pressed="true">
+                            <span>🧒</span><small>4–7 yaş</small>
+                        </button>
+                        <button type="button" class="age-option" data-age="orta" aria-pressed="false">
+                            <span>👦</span><small>8–10 yaş</small>
+                        </button>
+                        <button type="button" class="age-option" data-age="büyük" aria-pressed="false">
+                            <span>🧑</span><small>11–14 yaş</small>
+                        </button>
+                    </div>
+
+                    <button class="success-btn start-btn" type="submit">✅ Profili Oluştur</button>
+                    <button class="secondary-btn start-btn" type="button" onclick="switchAuthView('home')">⬅️ Geri Dön</button>
+                </div>
+            </form>
+
+            <form id="auth-login" hidden>
+                <h2 class="welcome">Giriş Yap</h2>
+                <p class="muted">Kliniğine geri dön.</p>
+
+                <label class="input-label" for="loginUsername">Kullanıcı adı</label>
+                <input class="input" id="loginUsername" maxlength="15" autocomplete="username" required>
+
+                <label class="input-label" for="loginPassword">Parola</label>
+                <input class="input" type="password" id="loginPassword" autocomplete="current-password" required>
+
+                <button class="primary-btn start-btn" type="submit">🚀 Kliniği Aç</button>
+                <button class="secondary-btn start-btn" type="button" onclick="switchAuthView('home')">⬅️ Geri Dön</button>
+            </form>
+
+            <form id="auth-register" hidden>
+                <h2 class="welcome">Kayıt Ol</h2>
+                <p class="muted">Bu tarayıcıda bir oyun profili oluştur.</p>
+
+                <label class="input-label" for="regUsername">Kullanıcı adı</label>
+                <input class="input" id="regUsername" maxlength="15" autocomplete="username" required>
+
+                <label class="input-label" for="regPassword">Parola</label>
+                <input class="input" type="password" id="regPassword" autocomplete="new-password" required>
+
+                <p><b>Hastalarının yaş grubunu seç</b></p>
+                <div class="age-options" aria-label="Hasta yaş grubu">
+                    <button type="button" class="age-option active" data-age="küçük" aria-pressed="true">
+                        <span>🧒</span><small>4–7 yaş</small>
+                    </button>
+                    <button type="button" class="age-option" data-age="orta" aria-pressed="false">
+                        <span>👦</span><small>8–10 yaş</small>
+                    </button>
+                    <button type="button" class="age-option" data-age="büyük" aria-pressed="false">
+                        <span>🧑</span><small>11–14 yaş</small>
+                    </button>
+                </div>
+
+                <button class="success-btn start-btn" type="submit">✅ Hesabımı Oluştur</button>
+                <button class="secondary-btn start-btn" type="button" onclick="switchAuthView('home')">⬅️ Geri Dön</button>
+            </form>
+
+            <p class="auth-note">
+                Hesaplar ve ilerleme bu tarayıcıda tutulur.
+                Misafir ilerlemesi kalıcı kaydedilmez.
+                Oyun için ayrı bir parola kullan.
+            </p>
+            <p class="auth-note">Bu oyunu yapan: Mustafa</p>
+            <button class="toggle" id="authLang" type="button" lang="en"
+                onclick="chooseLanguage(currentLang === 'tr' ? 'en' : 'tr')">🌐 English</button>
+        </div>
+    </div>
+</section>
+
+<div id="app" hidden>
+    <div class="layout">
+        <aside class="sidebar">
+            <div class="brand">🩺 <span>Doktormust</span></div>
+            <nav class="nav" id="nav" aria-label="Ana menü"></nav>
+            <div class="side-bottom">
+                <button class="danger-btn full" onclick="logout()" aria-label="Çıkış yap">
+                    🚪 <span>Çıkış Yap</span>
+                </button>
+            </div>
+        </aside>
+
+        <main class="main">
+            <div class="topbar">
+                <h2 id="pageTitle">Doktor Paneli</h2>
+                <div class="stats">
+                    <div class="stat">🪙 <span id="coinStat">250</span></div>
+                    <div class="stat">💎 <span id="gemStat">10</span></div>
+                    <div class="stat">⭐ Seviye <span id="levelStat">1</span></div>
+                    <button class="stat music-quick" id="musicQuick" onclick="toggleMusic()" aria-label="Müziği aç ya da kapat">🎵</button>
+                </div>
+            </div>
+
+            <section id="screen-home">
+                <div class="card season-banner" id="seasonBanner" hidden>
+                    <b id="seasonText"></b>
+                </div>
+
+                <div class="card hero-card">
+                    <div>
+                        <h3>Merhaba, <span id="doctorNameText">Doktor</span>! 👋</h3>
+                        <p id="rankText"></p>
+                        <p class="small muted" id="profileInfo"></p>
+                        <p class="small" id="petLine" hidden></p>
+                        <button class="primary-btn" onclick="showScreen('patients')">🧒 Hastaları Gör</button>
+                    </div>
+                    <div class="doctor-preview coat" id="doctorPreview">👨‍⚕️</div>
+                </div>
+
+                <div class="grid">
+                    <div class="card">
+                        <h3>⭐ XP</h3>
+                        <h2 id="xpText">0 / 100</h2>
+                        <div class="progress-track"><div class="progress-fill" id="xpBar"></div></div>
+                        <p class="muted">Oyunlarla ve vakalarla XP kazan.</p>
+                    </div>
+                    <div class="card">
+                        <h3>🧒 Tamamlanan vaka</h3>
+                        <h2 id="patientText">0</h2>
+                        <p class="muted">Toplam tamamladığın hasta kartları.</p>
+                    </div>
+                    <div class="card">
+                        <h3>🏆 Rozet</h3>
+                        <h2 id="badgeText">0</h2>
+                        <p class="muted">Kazandığın başarılar.</p>
+                    </div>
+                    <div class="card">
+                        <h3>🎁 Günlük Ödül</h3>
+                        <p class="muted" id="dailyText"></p>
+                        <button class="success-btn" id="dailyButton" onclick="claimDaily()">🎁 Ödülü Al</button>
+                    </div>
+                    <div class="card wide">
+                        <h3>📋 Günlük Görevler</h3>
+                        <div class="stack" id="questList"></div>
+                    </div>
+                    <div class="card">
+                        <h3>🌟 Haftanın Özel Hastası</h3>
+                        <p class="muted" id="weeklyText"></p>
+                        <button class="primary-btn" id="weeklyButton" onclick="showScreen('patients')">🩺 Hastaya Git</button>
+                    </div>
+                    <div class="card">
+                        <h3>📒 Çıkartma Albümü</h3>
+                        <h2 id="stickerText">0 / 24</h2>
+                        <button class="secondary-btn" onclick="showScreen('album')">📒 Albümü Aç</button>
+                    </div>
+                    <div class="card">
+                        <h3>🏥 Klinik Puanı</h3>
+                        <h2 id="clinicScoreText">0</h2>
+                        <p class="muted" id="clinicBonusText"></p>
+                    </div>
+                    <div class="card">
+                        <h3>📚 Hikâye Modu</h3>
+                        <p class="muted" id="storyText"></p>
+                        <button class="primary-btn" onclick="showScreen('story')">📚 Hikâyeye Git</button>
+                    </div>
+                    <div class="card">
+                        <h3>🗂️ Hasta Dosyaları</h3>
+                        <p class="muted">Hastalarını tanı: üç kez gelen hasta düzenli hastan olur.</p>
+                        <button class="secondary-btn" onclick="showScreen('files')">🗂️ Dosyaları Aç</button>
+                    </div>
+                    <div class="card">
+                        <h3>🧍 Vücut Haritası</h3>
+                        <p class="muted">Vücudumuz çıkartmalarıyla organların kilidini aç.</p>
+                        <button class="secondary-btn" onclick="showScreen('body')">🧍 Haritayı Aç</button>
+                    </div>
+                </div>
+            </section>
+
+            <section id="screen-clinic" hidden>
+                <div class="section-title">
+                    <div>
+                        <h3>🏥 Kliniğimi Düzenle</h3>
+                        <span class="muted">Eşya seç, kliniğe tıkla ve sürükle. <b id="clinicScoreInline"></b></span>
+                    </div>
+                    <div class="row">
+                        <button class="secondary-btn" onclick="resetClinic()">🔄 Sıfırla</button>
+                        <button class="primary-btn" onclick="saveClinic()">💾 Kaydet</button>
+                    </div>
+                </div>
+
+                <div class="seg room-tabs" id="roomTabs" aria-label="Klinik odaları"></div>
+
+                <div class="clinic-editor">
+                    <div class="clinic-edit-area" id="clinicEditArea" aria-label="Klinik düzenleme alanı">
+                        <div class="clinic-floor" id="clinicFloor"></div>
+                        <div class="clinic-grid"></div>
+                        <div class="clinic-garland" id="clinicGarland" aria-hidden="true"></div>
+                        <div class="clinic-sign" id="clinicSign" aria-hidden="true"></div>
+                        <div class="clinic-window" id="clinicWindow" aria-hidden="true">🌳</div>
+                        <div class="clinic-doctor coat" id="clinicDoctor">👨‍⚕️</div>
+                    </div>
+
+                    <div class="card">
+                        <h3>🧰 Klinik Eşyaları</h3>
+                        <p class="small muted">🔒 simgeli eşyaları mağazadan alabilirsin.</p>
+                        <div class="clinic-items" id="clinicItems"></div>
+                        <div class="selected-tool" id="selectedTool">👆 Bir eşya seç</div>
+                        <div class="edit-actions">
+                            <button class="secondary-btn" onclick="rotateSelectedItem()">↻ Döndür</button>
+                            <button class="danger-btn" onclick="deleteSelectedItem()">🗑️ Sil</button>
+                        </div>
+                        <p class="small muted">Seçili eşyayı yön tuşlarıyla da taşıyabilirsin.</p>
+                        <p class="small muted">👣 İyileştirdiğin hastalar muayene odasında dolaşır.</p>
+                    </div>
+                </div>
+
+                <div class="card stack decor-card">
+                    <h3>🎨 Klinik Dekoru</h3>
+                    <div class="setting-row">
+                        <b>🧱 Duvar</b>
+                        <div class="seg" id="decor-wall"></div>
+                    </div>
+                    <div class="setting-row">
+                        <b>🟫 Zemin</b>
+                        <div class="seg" id="decor-floor"></div>
+                    </div>
+                    <div class="setting-row">
+                        <b>🪟 Pencere manzarası</b>
+                        <div class="seg" id="decor-view"></div>
+                    </div>
+                    <p class="small muted">Bazı seçenekler seviye atladıkça açılır. Duvar rengini Doktorum sayfasından seçebilirsin.</p>
+                </div>
+            </section>
+
+            <section id="screen-story" hidden>
+                <div class="section-title">
+                    <div>
+                        <h3>📚 Hikâye Modu</h3>
+                        <span class="muted">Her bölümde 5 vaka ve bir baş vaka var. Bölümü bitir, rozetini kazan ve sıradaki bölümün kilidini aç.</span>
+                    </div>
+                </div>
+                <div class="patient-grid story-current" id="storyCurrent" hidden></div>
+                <div class="grid" id="storyGrid"></div>
+            </section>
+
+            <section id="screen-wards" hidden>
+                <div class="section-title">
+                    <div>
+                        <h3>🏨 Uzmanlık Bölümleri</h3>
+                        <span class="muted">Her bölümün kendi aletleri ve kartları var. Bölümler seviye atladıkça açılır.</span>
+                    </div>
+                </div>
+                <div class="seg room-tabs" id="wardTabs" aria-label="Bölümler"></div>
+                <p class="card" id="wardIntro"></p>
+                <p class="small muted" id="wardCount"></p>
+                <div class="patient-grid" id="wardGrid"></div>
+                <h3>📖 Bu bölümün kartları</h3>
+                <div class="grid" id="wardGuide"></div>
+                <p class="notice">Bölüm vakaları da kurgusaldır; gerçek teşhis ya da tedavi bilgisi vermez.</p>
+            </section>
+
+            <section id="screen-files" hidden>
+                <div class="section-title">
+                    <div>
+                        <h3>🗂️ Hasta Dosyaları</h3>
+                        <span class="muted">İyileştirdiğin her hastanın bir dosyası olur. Üç kez gelen hasta düzenli hastan olur ve bonus kazandırır.</span>
+                    </div>
+                </div>
+                <p class="card" id="filesNote">Henüz dosya yok. İlk hastanı iyileştirince dosyası burada görünür.</p>
+                <div class="patient-grid" id="filesGrid"></div>
+            </section>
+
+            <section id="screen-body" hidden>
+                <div class="section-title">
+                    <div>
+                        <h3>🧍 Vücut Haritası</h3>
+                        <span class="muted">Albümdeki "Vücudumuz" çıkartmalarını buldukça organların kilidi açılır. Organa dokun ve onu tanı.</span>
+                    </div>
+                </div>
+                <div class="body-layout">
+                    <div class="card body-figure" id="bodyFigure">
+                        <svg viewBox="0 0 200 400" aria-hidden="true">
+                            <rect x="20" y="96" width="34" height="130" rx="17" transform="rotate(8 37 96)"/>
+                            <rect x="146" y="96" width="34" height="130" rx="17" transform="rotate(-8 163 96)"/>
+                            <rect x="62" y="232" width="34" height="158" rx="17"/>
+                            <rect x="104" y="232" width="34" height="158" rx="17"/>
+                            <rect x="88" y="74" width="24" height="26" rx="8"/>
+                            <rect x="54" y="90" width="92" height="160" rx="30"/>
+                            <circle cx="100" cy="46" r="40"/>
+                        </svg>
+                        <div id="bodySpots"></div>
+                    </div>
+                    <div class="card">
+                        <h3>🔎 Organlar</h3>
+                        <p class="small muted" id="bodyProgress"></p>
+                        <div class="organ-list" id="bodyList"></div>
+                        <p class="notice">Bu bilgiler geneldir ve gerçek tıbbi tavsiye değildir.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="screen-patients" hidden>
+                <div class="section-title">
+                    <div>
+                        <h3>🧒 Hastalar</h3>
+                        <span class="muted">Hastanı dinle, aletlerle muayene et ve doğru kartı ilk denemede bul: 3 yıldız! Yanlış kart bir sabır kalbi götürür.</span>
+                    </div>
+                </div>
+                <p class="small muted" id="weeklyNote" hidden></p>
+                <p class="small muted" id="queueStrip"></p>
+                <div class="patient-grid" id="patientGrid"></div>
+            </section>
+
+            <section id="screen-guide" hidden>
+                <div class="section-title">
+                    <div>
+                        <h3>📖 Oyun Rehberi</h3>
+                        <span class="muted">Muayene işaretleri ve oyundaki kart eşleşmeleri.</span>
+                    </div>
+                </div>
+                <p class="notice">
+                    Vakalar ve raporlar kurgusaldır. Bu oyun gerçek teşhis,
+                    ilaç seçimi veya tedavi rehberi değildir.
+                </p>
+                <div class="grid" id="guideGrid"></div>
+            </section>
+
+            <section id="screen-games" hidden>
+                <div class="section-title">
+                    <div>
+                        <h3>🎮 Mini Oyunlar</h3>
+                        <span class="muted">Puanın ne kadar yüksekse o kadar XP ve coin kazanırsın.</span>
+                    </div>
+                    <div>
+                        <b class="small">Zorluk</b>
+                        <div class="seg" id="difficultySeg"></div>
+                    </div>
+                </div>
+
+                <div class="grid">
+                    <div class="card game-card">
+                        <div class="game-big">🩺</div>
+                        <h3>Hızlı Muayene</h3>
+                        <p>5 soruluk bilgi turunu tamamla.</p>
+                        <p class="small muted" id="rec-quiz"></p>
+                        <button class="primary-btn" onclick="startGame('quiz')">Oyna</button>
+                    </div>
+                    <div class="card game-card">
+                        <div class="game-big">🦠</div>
+                        <h3>Mikrop Avı</h3>
+                        <p>20 saniyede mikroplara dokun!</p>
+                        <p class="small muted" id="rec-germ"></p>
+                        <button class="primary-btn" onclick="startGame('germ')">Oyna</button>
+                    </div>
+                    <div class="card game-card">
+                        <div class="game-big">🧠</div>
+                        <h3>Hafıza Kartları</h3>
+                        <p>Aynı kartları eşleştir.</p>
+                        <p class="small muted" id="rec-memory"></p>
+                        <button class="primary-btn" onclick="startGame('memory')">Oyna</button>
+                    </div>
+                    <div class="card game-card">
+                        <div class="game-big">❤️</div>
+                        <h3>Nabız Ritmi</h3>
+                        <p>İşaret yeşil alandayken dokun.</p>
+                        <p class="small muted" id="rec-heart"></p>
+                        <button class="primary-btn" onclick="startGame('heart')">Oyna</button>
+                    </div>
+                    <div class="card game-card">
+                        <div class="game-big">🧼</div>
+                        <h3>El Yıkama</h3>
+                        <p>Adımları doğru sıraya diz.</p>
+                        <p class="small muted" id="rec-wash"></p>
+                        <button class="primary-btn" onclick="startGame('wash')">Oyna</button>
+                    </div>
+                    <div class="card game-card">
+                        <div class="game-big">🪥</div>
+                        <h3>Diş Fırçalama</h3>
+                        <p>Lekeleri fırçalayarak temizle.</p>
+                        <p class="small muted" id="rec-teeth"></p>
+                        <button class="primary-btn" onclick="startGame('teeth')">Oyna</button>
+                    </div>
+                    <div class="card game-card">
+                        <div class="game-big">🥗</div>
+                        <h3>Sağlıklı Tabak</h3>
+                        <p>Düşen sağlıklı yiyecekleri yakala.</p>
+                        <p class="small muted" id="rec-plate"></p>
+                        <button class="primary-btn" onclick="startGame('plate')">Oyna</button>
+                    </div>
+                    <div class="card game-card">
+                        <div class="game-big">🩹</div>
+                        <h3>Yara Bandı</h3>
+                        <p>Bandı yaranın tam üstüne yerleştir.</p>
+                        <p class="small muted" id="rec-bandage"></p>
+                        <button class="primary-btn" onclick="startGame('bandage')">Oyna</button>
+                    </div>
+                    <div class="card game-card">
+                        <div class="game-big">🚑</div>
+                        <h3>Ambulans Yolu</h3>
+                        <p>Hastayı al, labirentten hastaneye ulaş.</p>
+                        <p class="small muted" id="rec-maze"></p>
+                        <button class="primary-btn" onclick="startGame('maze')">Oyna</button>
+                    </div>
+                    <div class="card game-card">
+                        <div class="game-big">🩻</div>
+                        <h3>Röntgen Yapbozu</h3>
+                        <p>Kemikleri iskeletteki yerine koy.</p>
+                        <p class="small muted" id="rec-bones"></p>
+                        <button class="primary-btn" onclick="startGame('bones')">Oyna</button>
+                    </div>
+                    <div class="card game-card">
+                        <div class="game-big">💊</div>
+                        <h3>İlaç Sayma</h3>
+                        <p>Kutuya istenen sayıda tablet koy.</p>
+                        <p class="small muted" id="rec-count"></p>
+                        <button class="primary-btn" onclick="startGame('count')">Oyna</button>
+                    </div>
+                    <div class="card game-card">
+                        <div class="game-big">🎈</div>
+                        <h3>Nefes Egzersizi</h3>
+                        <p>Balonla nefes al, ver ve sakinleş.</p>
+                        <p class="small muted">Puansız, dinlendirici oyun</p>
+                        <button class="primary-btn" onclick="startGame('breath')">Oyna</button>
+                    </div>
+                    <div class="card game-card">
+                        <div class="game-big">⚔️</div>
+                        <h3>İkili Yarışma</h3>
+                        <p>Aynı cihazda iki kişi: soruyu önce kim bilecek?</p>
+                        <p class="small muted">Cihazı ortaya koyun, karşılıklı oturun</p>
+                        <button class="primary-btn" onclick="startDuel()">Oyna</button>
+                    </div>
+                </div>
+            </section>
+
+            <section id="screen-album" hidden>
+                <div class="section-title">
+                    <div>
+                        <h3>📒 Çıkartma Albümü</h3>
+                        <span class="muted">Çıkartmalar vakalardan, kontrol ziyaretlerinden ve kazandığın mini oyunlardan çıkar. Çıkartmaya dokun, bilgisini oku.</span>
+                    </div>
+                </div>
+                <div id="albumGrid"></div>
+            </section>
+
+            <section id="screen-store" hidden>
+                <div class="section-title">
+                    <div>
+                        <h3>🛍️ Doktor Mağazası</h3>
+                        <span class="muted">Coin ve elmaslarınla kliniğini geliştir. Bazı eşyalar vakalarda işine yarar.</span>
+                    </div>
+                </div>
+                <div class="store-grid" id="storeGrid"></div>
+
+                <div class="section-title staff-title">
+                    <div>
+                        <h3>👥 Klinik Ekibi</h3>
+                        <span class="muted">Ekibini kur: her üye kliniğine kalıcı bir yardım sağlar ve muayene odasında görünür.</span>
+                    </div>
+                </div>
+                <div class="store-grid" id="staffGrid"></div>
+            </section>
+
+            <section id="screen-doctor" hidden>
+                <div class="section-title">
+                    <div><h3>👨‍⚕️ Doktorum</h3><span class="muted">Karakterini özelleştir.</span></div>
+                </div>
+
+                <div class="grid">
+                    <div class="card game-card">
+                        <div class="doctor-preview coat" id="doctorBig"></div>
+                        <h3>Doktor karakteri</h3>
+                        <div class="stack">
+                            <button class="secondary-btn" onclick="changeFace()">🔄 Yüzü Değiştir</button>
+                            <div class="acc-grid" id="accGrid" aria-label="Aksesuarlar"></div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <h3>🎨 Klinik Rengi</h3>
+                        <div class="choice-grid">
+                            <button class="choice" onclick="setBg('#bae6fd')">💙 Mavi</button>
+                            <button class="choice" onclick="setBg('#dcfce7')">💚 Yeşil</button>
+                            <button class="choice" onclick="setBg('#fce7f3')">💗 Pembe</button>
+                            <button class="choice" onclick="setBg('#fef3c7')">💛 Sarı</button>
+                        </div>
+                        <p class="small muted">Seçtiğin renk açık temada görünür.</p>
+                    </div>
+
+                    <div class="card">
+                        <h3>🥼 Önlük Rengi</h3>
+                        <div class="coat-grid" id="coatGrid" aria-label="Önlük renkleri"></div>
+                        <p class="small muted">Doktorunun arkasındaki önlük rengini seç.</p>
+                    </div>
+
+                    <div class="card">
+                        <h3>🐶 Klinik Maskotu</h3>
+                        <p class="muted" id="petNote"></p>
+                        <form class="row" id="petForm" hidden>
+                            <input class="input pet-input" id="petInput" maxlength="12" aria-label="Maskotun adı" placeholder="Örneğin Pamuk">
+                            <button class="primary-btn" type="submit">💾 Kaydet</button>
+                        </form>
+                    </div>
+
+                    <div class="card">
+                        <h3>📊 İstatistik</h3>
+                        <p>Seviye: <b id="doctorLevel">1</b></p>
+                        <p>XP: <b id="doctorXP">0</b></p>
+                        <p>Tamamlanan vaka: <b id="doctorPatients">0</b></p>
+                        <p>Toplanan yıldız: <b id="doctorStars">0</b></p>
+                        <p>3 yıldızlı vaka: <b id="doctorPerfect">0</b></p>
+                        <p>Kazanılan mini oyun: <b id="doctorGames">0</b></p>
+                        <p>Kontrol ziyareti: <b id="doctorCheckups">0</b></p>
+                        <p>Çıkartma: <b id="doctorStickers">0</b></p>
+                        <p>Günlük seri: <b id="doctorStreak">0</b></p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="screen-badges" hidden>
+                <div class="section-title">
+                    <div><h3>🏆 Rozetler</h3><span class="muted">Başarılarını topla.</span></div>
+                </div>
+                <div class="badge-grid" id="badgeGrid"></div>
+            </section>
+
+            <section id="screen-settings" hidden>
+                <div class="section-title">
+                    <div><h3>⚙️ Ayarlar</h3><span class="muted">Oyunu kendine göre ayarla.</span></div>
+                </div>
+
+                <div class="card stack">
+                    <div class="setting-row">
+                        <b>🌙 Karanlık mod</b>
+                        <button class="toggle" id="darkToggle" onclick="toggleDark()">Kapalı</button>
+                    </div>
+                    <div class="setting-row">
+                        <b>🔊 Ses</b>
+                        <button class="toggle" id="soundToggle" onclick="toggleSound()">Açık</button>
+                    </div>
+                    <div class="setting-row">
+                        <b>🎵 Arka plan müziği</b>
+                        <button class="toggle" id="musicToggle" onclick="toggleMusic()">Kapalı</button>
+                    </div>
+                    <div class="setting-row">
+                        <b>📳 Titreşim</b>
+                        <button class="toggle" id="vibrateToggle" onclick="toggleVibrate()">Açık</button>
+                    </div>
+                    <div class="setting-row">
+                        <b>🌐 Dil / Language</b>
+                        <div class="seg" id="langSeg"></div>
+                    </div>
+                    <div class="setting-row">
+                        <b>🗣️ Hastaları otomatik sesli oku</b>
+                        <button class="toggle" id="readToggle" onclick="toggleRead()">Kapalı</button>
+                    </div>
+                    <div class="setting-row">
+                        <b>🧒 Hasta yaş grubu</b>
+                        <div class="seg" id="ageSeg"></div>
+                    </div>
+                    <div class="setting-row">
+                        <b>📘 Nasıl oynanır?</b>
+                        <button class="toggle" onclick="startTour()">Turu Aç</button>
+                    </div>
+                    <div class="setting-row">
+                        <b>💾 İlerleme yedeği</b>
+                        <div class="row">
+                            <button class="toggle" onclick="exportBackup()">📤 Yedeği İndir</button>
+                            <button class="toggle" onclick="$('backupFile').click()">📥 Yedeği Yükle</button>
+                            <input type="file" id="backupFile" accept="application/json,.json" hidden onchange="importBackup(this)">
+                        </div>
+                    </div>
+                    <div class="setting-row" id="installRow">
+                        <b>📲 Uygulama olarak yükle</b>
+                        <button class="toggle" id="installButton" onclick="installApp()" disabled>📲 Yükle</button>
+                    </div>
+                    <p class="small muted" id="installNote"></p>
+                    <p class="small muted" id="saveInfo"></p>
+                    <p class="small muted">Bu oyunu yapan: Mustafa</p>
+                </div>
+            </section>
+
+            <section id="screen-parent" hidden>
+                <div class="section-title">
+                    <div>
+                        <h3>👪 Ebeveyn Köşesi</h3>
+                        <span class="muted">Çocuğunuzun bu profildeki oyun süresi ve öğrenme özeti. Veriler yalnızca bu tarayıcıda tutulur.</span>
+                    </div>
+                </div>
+
+                <div class="grid">
+                    <div class="card wide">
+                        <h3>⏱️ Oyun süresi</h3>
+                        <h2 id="parentTime"></h2>
+                        <p class="small muted">Son 7 gün (dakika)</p>
+                        <div class="play-bars" id="parentBars"></div>
+                    </div>
+
+                    <div class="card">
+                        <h3>⏳ Günlük süre sınırı</h3>
+                        <div class="seg" id="limitSeg"></div>
+                        <p class="small muted">Süre dolunca oyun dinlenme ekranına geçer. Bugün oynanan süre de sayılır. Süreyi buradan ya da dinlenme ekranındaki ebeveyn girişinden uzatabilirsiniz.</p>
+                    </div>
+
+                    <div class="card">
+                        <h3>📊 Öğrenme özeti</h3>
+                        <div class="result-box" id="parentSummary"></div>
+                    </div>
+
+                    <div class="card wide">
+                        <h3>🃏 Kart başarısı</h3>
+                        <div class="stack" id="parentCards"></div>
+                        <p class="small muted" id="parentHardest"></p>
+                    </div>
+
+                    <div class="card wide">
+                        <h3 id="parentTipsTitle"></h3>
+                        <ul class="tip-list" id="parentTips"></ul>
+                    </div>
+
+                    <div class="card wide">
+                        <h3>📅 Haftalık karne</h3>
+                        <div class="week-grid">
+                            <div>
+                                <b>Bu hafta</b>
+                                <div class="result-box" id="weekNow"></div>
+                            </div>
+                            <div>
+                                <b>Geçen hafta</b>
+                                <div class="result-box" id="weekLast"></div>
+                            </div>
+                        </div>
+                        <p class="small muted" id="weekComment"></p>
+                    </div>
+
+                    <div class="card" id="pinCard">
+                        <h3>🔒 Ebeveyn PIN'i</h3>
+                        <p class="small muted" id="pinStatus"></p>
+                        <form class="row" id="pinForm">
+                            <input class="input pet-input" id="pinInput" type="password" inputmode="numeric" maxlength="4" autocomplete="off" aria-label="Yeni PIN" placeholder="4 rakam">
+                            <button class="primary-btn" type="submit">💾 Kaydet</button>
+                        </form>
+                        <p><button class="toggle" id="pinRemove" onclick="removePin()">🔓 PIN'i Kaldır</button></p>
+                    </div>
+
+                    <div class="card" id="reminderCard">
+                        <h3>🔔 Günlük hatırlatma</h3>
+                        <div class="setting-row">
+                            <b>Bildirim</b>
+                            <button class="toggle" id="reminderToggle">Kapalı</button>
+                        </div>
+                        <div class="seg" id="reminderSeg"></div>
+                        <p class="small muted">O gün hiç oynanmadıysa seçilen saatte tek bir bildirim gelir.</p>
+                    </div>
+
+                    <div class="card">
+                        <h3>👤 Profiller</h3>
+                        <div class="stack" id="parentProfiles"></div>
+                        <p class="small muted">Silinen profilin ilerlemesi geri getirilemez; önce Ayarlar'dan yedek alabilirsiniz.</p>
+                    </div>
+
+                    <div class="card">
+                        <h3>🎉 Özel gün önizlemesi</h3>
+                        <div class="seg" id="seasonSeg"></div>
+                        <p class="small muted">Klinik süslerini ve karşılama yazısını dener. Sayfadan çıkınca da açık kalır; çıkış yapınca kapanır.</p>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+</div>
+
+<div class="limit-overlay" id="limitOverlay" hidden>
+    <div class="modal" role="alertdialog" aria-modal="true" aria-labelledby="limitTitle">
+        <div class="modal-header">
+            <div class="modal-emoji">🌙</div>
+            <h3 id="limitTitle">Bugünlük oyun süren doldu</h3>
+        </div>
+        <p class="result-box">Harika iş çıkardın, Doktor! Kliniğin yarın yine seni bekliyor olacak. Şimdi biraz dinlenme, oyun ya da kitap zamanı. 👋</p>
+        <div class="edit-actions">
+            <button class="secondary-btn" onclick="openGate('limit')">👪 Ebeveyn Girişi</button>
+            <button class="danger-btn" onclick="logout()">🚪 Çıkış Yap</button>
+        </div>
+    </div>
+</div>
+
+<div class="modal-overlay" id="gateModal" hidden>
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="gateTitle" tabindex="-1">
+        <button class="modal-close" onclick="closeModal()" aria-label="Pencereyi kapat">✕</button>
+        <div class="modal-header">
+            <div class="modal-emoji">👪</div>
+            <h3 id="gateTitle">Bu bölüm yetişkinler içindir</h3>
+        </div>
+        <p id="gateHelp">Devam etmek için işlemin sonucunu yazın.</p>
+        <form class="stack" id="gateForm">
+            <div class="game-status" id="gateQuestion"></div>
+            <input class="input" id="gateInput" type="text" inputmode="numeric" autocomplete="off" maxlength="4" aria-label="Yanıt" required>
+            <button class="primary-btn" type="submit">✅ Onayla</button>
+            <button class="toggle" type="button" id="gateForgot" onclick="forgotPin()" hidden>PIN'i unuttum</button>
+        </form>
+    </div>
+</div>
+
+<div class="modal-overlay" id="limitModal" hidden>
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="limitModalTitle" tabindex="-1">
+        <button class="modal-close" onclick="closeModal()" aria-label="Pencereyi kapat">✕</button>
+        <div class="modal-header">
+            <div class="modal-emoji">⏳</div>
+            <h3 id="limitModalTitle">Süreyi uzat</h3>
+        </div>
+        <div class="stack">
+            <button class="primary-btn" onclick="extendLimit(10)">⏱️ 10 dakika ekle</button>
+            <button class="secondary-btn" onclick="extendLimit(30)">⏱️ 30 dakika ekle</button>
+            <button class="secondary-btn" onclick="extendLimit(1440)">🔓 Bugünlük sınırı kaldır</button>
+        </div>
+        <p class="notice">Kalıcı ayar için Ebeveyn Köşesi'ndeki günlük süre sınırını değiştirin.</p>
+    </div>
+</div>
+
+<div class="modal-overlay" id="treatmentModal" hidden>
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="tmName" tabindex="-1">
+        <button class="modal-close" onclick="closeModal()" aria-label="Muayeneyi kapat">✕</button>
+        <div class="modal-header">
+            <div class="modal-emoji" id="tmEmoji"></div>
+            <h3 id="tmName"></h3>
+            <div class="problem" id="tmProblem"></div>
+        </div>
+
+        <div class="speech-row">
+            <p class="speech-bubble" id="tmSpeech"></p>
+            <button class="secondary-btn speak-btn" id="tmSpeak" onclick="speakPatient()" aria-label="Hastayı sesli dinle">🔊</button>
+        </div>
+
+        <div class="game-status" id="tmStatus" aria-live="off"></div>
+
+        <h4 class="exam-title">🧰 Muayene aletleri</h4>
+        <div class="exam-tools" id="tmTools"></div>
+        <ul class="finding-list" id="tmFindings" aria-live="polite"></ul>
+
+        <details class="cheat" id="tmCheatBox">
+            <summary>📖 İpucu tablosu</summary>
+            <div id="tmCheat"></div>
+        </details>
+
+        <div class="row" id="tmReports">
+            <button class="secondary-btn" id="testButton" onclick="reqTest()">🩸 Tahlil Raporu</button>
+            <button class="secondary-btn" id="xrayButton" onclick="reqXray()">🩻 Görüntüleme Raporu</button>
+        </div>
+
+        <div class="result-box" id="tmResult" aria-live="polite"></div>
+        <button class="primary-btn full" id="treatmentChooseButton" onclick="showTreatments()">💊 Oyun Kartı Seç</button>
+        <div class="treatment-options" id="tmOptions" hidden></div>
+
+        <p class="notice">
+            Bu kurgusal oyundaki kart eşleşmeleri gerçek tedavi önerisi değildir.
+        </p>
+    </div>
+</div>
+
+<div class="modal-overlay" id="guideModal" hidden>
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="gName" tabindex="-1">
+        <button class="modal-close" onclick="closeModal()" aria-label="Rehberi kapat">✕</button>
+        <div class="modal-header">
+            <div class="modal-emoji" id="gEmoji"></div>
+            <h3 id="gName"></h3>
+        </div>
+        <div class="result-box" id="gDescription"></div>
+        <p class="notice" id="gNotice"></p>
+    </div>
+</div>
+
+<div class="modal-overlay" id="gameModal" hidden>
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="gameTitle" tabindex="-1">
+        <button class="modal-close" onclick="closeModal()" aria-label="Oyunu kapat">✕</button>
+        <div class="modal-header">
+            <div class="modal-emoji" id="gameEmoji"></div>
+            <h3 id="gameTitle"></h3>
+        </div>
+        <p id="gameQuestion"></p>
+        <div class="game-status" id="gameStatus"></div>
+        <div class="game-board" id="gameBoard"></div>
+        <div class="game-options" id="gameOptions"></div>
+        <div class="result-box" id="gameResult" aria-live="polite" hidden></div>
+        <button class="primary-btn full" id="gameAgain" onclick="repeatGame()" hidden>🔄 Tekrar Oyna</button>
+    </div>
+</div>
+
+<div class="modal-overlay" id="tourModal" hidden>
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="tourTitle" tabindex="-1">
+        <button class="modal-close" onclick="closeModal()" aria-label="Turu kapat">✕</button>
+        <div class="modal-header">
+            <div class="modal-emoji" id="tourEmoji"></div>
+            <h3 id="tourTitle"></h3>
+        </div>
+        <div class="result-box" id="tourText" aria-live="polite"></div>
+        <div class="tour-dots" id="tourDots" aria-hidden="true"></div>
+        <div class="edit-actions">
+            <button class="secondary-btn" id="tourBack" onclick="tourStep(-1)">⬅️ Geri</button>
+            <button class="primary-btn" id="tourNext" onclick="tourStep(1)">İleri ➡️</button>
+        </div>
+    </div>
+</div>
+
+<div class="modal-overlay" id="duelModal" hidden>
+    <div class="modal duel" role="dialog" aria-modal="true" aria-labelledby="duelTitle" tabindex="-1">
+        <section class="duel-side flip">
+            <p class="duel-q" id="duelQ1"></p>
+            <div class="game-options" id="duelA1"></div>
+            <p class="game-status" id="duelNote1"></p>
+        </section>
+        <div class="duel-mid">
+            <b id="duelTitle">⚔️ İkili Yarışma</b>
+            <span id="duelScore"></span>
+            <button class="toggle" id="duelAgain" onclick="startDuel()" hidden>🔄 Tekrar</button>
+            <button class="toggle" onclick="closeModal()">✕ Kapat</button>
+        </div>
+        <section class="duel-side">
+            <p class="duel-q" id="duelQ0"></p>
+            <div class="game-options" id="duelA0"></div>
+            <p class="game-status" id="duelNote0"></p>
+        </section>
+    </div>
+</div>
+
+<div class="modal-overlay" id="diplomaModal" hidden>
+    <div class="modal diploma" role="dialog" aria-modal="true" aria-labelledby="diplomaTitle" tabindex="-1">
+        <button class="modal-close" onclick="closeModal()" aria-label="Pencereyi kapat">✕</button>
+        <div class="modal-header">
+            <h3 id="diplomaTitle">🎓 Diploman hazır!</h3>
+        </div>
+        <canvas id="diplomaCanvas" width="1200" height="850"></canvas>
+        <div class="edit-actions">
+            <button class="primary-btn" onclick="saveDiploma()">💾 Resim Olarak Kaydet</button>
+            <button class="secondary-btn" id="diplomaPrint" onclick="printDiploma()">🖨️ Yazdır</button>
+        </div>
+    </div>
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+
+<script src="js/i18n.js"></script>
+<script src="js/lang-en.js"></script>
+<script src="js/core.js"></script>
+<script src="js/icons.js"></script>
+<script src="js/data.js"></script>
+<script src="js/app.js"></script>
+<script src="js/profiles.js"></script>
+<script src="js/music.js"></script>
+<script src="js/patients.js"></script>
+<script src="js/wards.js"></script>
+<script src="js/story.js"></script>
+<script src="js/games.js"></script>
+<script src="js/games2.js"></script>
+<script src="js/social.js"></script>
+<script src="js/clinic.js"></script>
+<script src="js/extras.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>
