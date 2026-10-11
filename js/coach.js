@@ -24,7 +24,7 @@ function startFirstCase() {
     // İlk vaka süresizdir.
     patient.emergency = false;
 
-    showScreen("patients");
+    showScreen("home");
     openTreatment(patient.id);
 
     coach = { id: patient.id, step: "tool", tool: keyTool(patient), retry: false };

@@ -1354,5 +1354,163 @@ body.still .coach-target { animation: none !important; }
 .robot-face { font-size: 46px; line-height: 1; flex: none; }
 .robot-bubble { margin: 10px 0; padding: 12px 14px; border-radius: 14px; border: 2px solid #b9d4ff; background: #eef5ff; color: #17324d; font-weight: 600; }
 .robot-form { display: flex; gap: 8px; margin-top: 10px; }
-.robot-form input { flex: 1; min-width: 0; }
+.robot-form input { flex: 1; min-width: 0; padding: 10px 12px; border: 2px solid transparent; border-radius: 12px; background: var(--soft); color: var(--text); font: inherit; }
+.robot-form input:focus { outline: none; border-color: var(--primary); }
 .robot-row { margin: 10px 0; }
+
+/* Tarayicinin otomatik koyu modu sayfayi yeniden boyamasin. */
+:root { color-scheme: only light; }
+
+/* ===== v8: klinik sahnesi, alt düğmeler ve tam ekran menü ===== */
+
+/* Sol menü yerine içerik bütün ekranı kullanır. */
+.layout { display: block; min-height: 100vh; min-height: 100dvh; }
+.main { max-width: 1100px; margin: 0 auto; padding-bottom: calc(96px + env(safe-area-inset-bottom)); }
+
+.sidebar {
+    position: fixed;
+    inset: 0;
+    z-index: 140;
+    height: auto;
+    display: none;
+    padding: 18px;
+    border: 0;
+    overflow-y: auto;
+}
+
+body.menu-open .sidebar { display: flex; }
+body.menu-open { overflow: hidden; }
+.sidebar .brand { display: flex; align-items: center; gap: 8px; text-align: left; }
+.sidebar .brand span { display: inline; }
+.menu-close { margin-left: auto; width: 44px; height: 44px; border-radius: 50%; background: var(--soft); color: var(--text); font-size: 18px; }
+.sidebar .nav { grid-template-columns: repeat(auto-fill,minmax(104px,1fr)); gap: 10px; }
+.sidebar .nav button { display: grid; gap: 4px; justify-items: center; padding: 14px 6px; background: var(--soft); color: var(--text); text-align: center; font-size: 26px; }
+.sidebar .nav button span { display: block; font-size: 13px; }
+.sidebar .nav button.active { color: var(--primary); box-shadow: inset 0 0 0 2px var(--primary); }
+.sidebar .side-bottom span { display: inline; }
+
+.dock {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 120;
+    display: grid;
+    grid-template-columns: repeat(5,minmax(0,1fr));
+    gap: 4px;
+    padding: 6px 8px calc(6px + env(safe-area-inset-bottom));
+    background: var(--card);
+    border-top: 1px solid var(--border);
+    box-shadow: 0 -6px 18px rgba(0,0,0,.08);
+}
+
+.dock button { display: grid; justify-items: center; gap: 1px; padding: 6px 2px; border-radius: 14px; background: transparent; color: var(--muted); font-weight: 700; touch-action: manipulation; }
+.dock button span { font-size: 25px; line-height: 1.15; }
+.dock button small { font-size: 11px; }
+.dock button.active { background: var(--soft); color: var(--primary); }
+
+.toast { bottom: calc(92px + env(safe-area-inset-bottom)); }
+.wide-modal { width: min(900px,100%); }
+.home-panel .hero-card { box-shadow: none; }
+
+/* Sahne */
+
+.scene.clinic-edit-area { max-width: 780px; margin: 0 auto; height: clamp(430px,66vh,620px); touch-action: manipulation; }
+.scene .clinic-window { top: 7%; z-index: 1; }
+.scene .floor-none { background: rgba(255,255,255,.4); border-top: 3px solid rgba(255,255,255,.55); }
+
+.scene-item { position: absolute; z-index: 2; font-size: clamp(30px,6vw,46px); line-height: 1; pointer-events: none; opacity: .95; }
+
+.scene-spot {
+    position: absolute;
+    z-index: 5;
+    transform: translate(-50%,-50%);
+    display: grid;
+    justify-items: center;
+    gap: 2px;
+    padding: 0;
+    background: transparent;
+    color: var(--text);
+    touch-action: manipulation;
+}
+
+.spot-icon {
+    display: grid;
+    place-items: center;
+    width: clamp(46px,11vw,62px);
+    height: clamp(46px,11vw,62px);
+    border-radius: 18px;
+    background: rgba(255,255,255,.92);
+    box-shadow: 0 4px 10px rgba(0,0,0,.16);
+    font-size: clamp(24px,6vw,32px);
+    line-height: 1;
+}
+
+.scene-spot small { padding: 1px 7px; border-radius: 999px; background: rgba(255,255,255,.88); color: #17324d; font-size: 11px; font-weight: 800; white-space: nowrap; }
+.scene-spot:active .spot-icon { transform: scale(.92); }
+.scene-spot.ready .spot-icon { background: #fff3c4; box-shadow: 0 0 0 3px #f5b301, 0 4px 10px rgba(0,0,0,.16); animation: spot-bounce .7s ease-in-out infinite alternate; }
+@keyframes spot-bounce { to { transform: translateY(-7px); } }
+
+.scene-doctor { position: absolute; left: 50%; top: 58%; z-index: 4; transform: translate(-50%,-50%); width: clamp(76px,17vw,112px); padding: 0; background: transparent; touch-action: manipulation; }
+
+.scene-patient {
+    position: absolute;
+    transform: translate(-50%,-100%);
+    width: clamp(46px,12vw,74px);
+    padding: 0;
+    background: transparent;
+    touch-action: manipulation;
+}
+
+.scene-patient .face { filter: drop-shadow(0 4px 3px rgba(0,0,0,.18)); }
+.scene-patient:active { transform: translate(-50%,-100%) scale(.95); }
+
+.sp-sign {
+    position: absolute;
+    left: 50%;
+    top: -18px;
+    transform: translateX(-50%);
+    display: grid;
+    place-items: center;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: #fff;
+    box-shadow: 0 2px 6px rgba(0,0,0,.2);
+    font-size: 17px;
+    line-height: 1;
+    z-index: 1;
+}
+
+.sp-name { display: block; margin: -4px auto 0; padding: 1px 6px; width: fit-content; max-width: 100%; border-radius: 999px; background: rgba(255,255,255,.9); color: #17324d; font-size: 11px; font-weight: 800; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.scene-patient.special .sp-sign { background: #fef3c7; box-shadow: 0 0 0 3px #f5b301; }
+.scene-patient.emergency .sp-sign { background: #ffe1e6; box-shadow: 0 0 0 3px #ff6b81; }
+.scene-patient.checkup .sp-sign { background: #c9f5e5; }
+.scene-patient.walk-in { animation: walk-in .9s ease-out both; }
+@keyframes walk-in { from { transform: translate(-340%,-100%); opacity: 0; } 30% { opacity: 1; } }
+
+.scene-line { max-width: 780px; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 8px; margin: 10px auto 0; padding: 0 4px; }
+.scene-wait { color: var(--muted); font-size: 14px; }
+
+/* Telefonlarda akıcılık: sahnedeki karakterler yalnızca göz kırpar; bir pencere açıkken ve
+   menü açıkken arkadaki canlandırmalar durur. */
+.scene .face .f-body, .scene .face .f-head, .scene .face .f-heart, .scene .face .f-pain,
+.scene .face .f-sweat, .scene .face .f-drip, .scene .face .f-puff { animation: none; }
+#app[inert] .face *, #app[inert] .scene-spot .spot-icon, body.menu-open .scene .face * { animation-play-state: paused; }
+button, .choice, .toggle { touch-action: manipulation; }
+
+body.still .scene-spot.ready .spot-icon, body.still .scene-patient.walk-in { animation: none !important; }
+
+@media(max-width:600px) {
+    .scene.clinic-edit-area { height: clamp(400px,64vh,560px); }
+    .topbar h2 { font-size: 21px; }
+    .scene-spot small { font-size: 10px; padding: 1px 5px; }
+}
+
+/* Mesai bitince sahne */
+
+.scene-night { position: absolute; inset: 0; z-index: 30; display: grid; place-items: center; background: rgba(22,27,66,.5); pointer-events: none; }
+.night-card { pointer-events: auto; margin-top: 30%; padding: 16px 22px; border-radius: 20px; background: var(--card); color: var(--text); text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,.3); }
+.night-card p { margin: 4px 0 12px; }
+.night-moon { font-size: 42px; line-height: 1; }
+#clockStat { white-space: nowrap; }

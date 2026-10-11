@@ -104,6 +104,14 @@ const robotTopics = [
         answer: () => pick(robotJokes)
     },
     {
+        keys: ["mesai", "saat", "kapandi", "kapali", "yeni gun", "clock", "closed", "shift", "new day"],
+        answer: () => state.shift.closed
+            ? shiftWait() > 0
+                ? t("Klinik şu an dinleniyor. Yeni gün {0} sonra başlayabilir; bu arada mini oyun oynayabilirsin.", waitText())
+                : t("Klinik şu an kapalı. Klinik ekranındaki \"Yeni Güne Başla\" düğmesine basınca hastalar yeniden gelir.")
+            : t("Kliniğin saati {0}. Baktığın her hasta saati yarım saat ilerletir; 17:00'de mesai biter, gün sonu primini alırsın ve klinik 15 dakika dinlenir.", clockText())
+    },
+    {
         keys: ["tesekkur", "sagol", "sag ol", "thank"],
         answer: t("Rica ederim, Doktor! Yardım etmek benim işim. 🤖💙")
     },
@@ -120,6 +128,12 @@ const robotChips = [
 
 // Oyuncunun durumuna göre sıradaki iş önerisi.
 function robotNextStep() {
+    if (state.shift.closed) {
+        return shiftWait() > 0
+            ? t("Mesai bitti ve klinik dinleniyor. Bu arada mini oyun oyna, hikâyeye bak ya da kliniğini süsle!")
+            : t("Mesai bitti! Klinik ekranından yeni güne başlayabilirsin.");
+    }
+
     if (state.patients < 3) {
         return t("Hastalar ekranına git ve bekleyen bir hastayı muayene et. İlk üç hastadan sonra oyun iyice açılır!");
     }

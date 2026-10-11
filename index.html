@@ -4,6 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#4f8cff">
+<!-- Oyunun kendi koyu modu vardir; tarayicinin ya da eklentilerin sayfayi zorla karartmasi renkleri bozar. -->
+<meta name="color-scheme" content="only light">
+<meta name="darkreader-lock">
 <title>Doktormust — Çocuk Doktor Oyunu</title>
 <meta name="description" content="Doktormust, çocuklar için ücretsiz ve reklamsız bir doktor oyunu. Kendi kliniğini kur, hastalarını muayene et, mini oyunlar oyna ve çıkartma topla. Türkçe ve İngilizce.">
 <link rel="canonical" href="https://orhankader80-beep.github.io/doktormust/">
@@ -155,7 +158,9 @@
 <div id="app" hidden>
     <div class="layout">
         <aside class="sidebar">
-            <div class="brand">🩺 <span>Doktormust</span></div>
+            <div class="brand">🩺 <span>Doktormust</span>
+                <button class="menu-close" type="button" onclick="toggleMenu(false)" aria-label="Menüyü kapat">✕</button>
+            </div>
             <nav class="nav" id="nav" aria-label="Ana menü"></nav>
             <div class="side-bottom">
                 <button class="danger-btn full" onclick="logout()" aria-label="Çıkış yap">
@@ -171,6 +176,7 @@
                     <div class="stat">🪙 <span id="coinStat">250</span></div>
                     <div class="stat">💎 <span id="gemStat">10</span></div>
                     <div class="stat">⭐ Seviye <span id="levelStat">1</span></div>
+                    <div class="stat" id="clockStat"></div>
                     <button class="stat music-quick" id="musicQuick" onclick="toggleMusic()" aria-label="Müziği aç ya da kapat">🎵</button>
                 </div>
             </div>
@@ -180,6 +186,13 @@
                     <b id="seasonText"></b>
                 </div>
 
+                <div class="scene" id="scene"></div>
+                <p class="scene-line">
+                    <b id="sceneHint"></b>
+                    <span class="scene-wait">🪑 <span class="queue-faces" id="sceneQueue"></span></span>
+                </p>
+
+                <div class="home-panel" id="homePanel" hidden>
                 <div class="card hero-card">
                     <div>
                         <h3>Merhaba, <span id="doctorNameText">Doktor</span>! 👋</h3>
@@ -265,6 +278,7 @@
                         <p class="muted">Vücudumuz çıkartmalarıyla organların kilidini aç.</p>
                         <button class="secondary-btn" onclick="showScreen('body')">🧍 Haritayı Aç</button>
                     </div>
+                </div>
                 </div>
             </section>
 
@@ -772,6 +786,7 @@
             </section>
         </main>
     </div>
+    <nav class="dock" id="dock" aria-label="Hızlı menü"></nav>
 </div>
 
 <div class="limit-overlay" id="limitOverlay" hidden>
@@ -873,6 +888,20 @@
     </div>
 </div>
 
+<div class="modal-overlay" id="panelModal" hidden>
+    <div class="modal wide-modal" role="dialog" aria-modal="true" aria-label="Görevler ve ödüller" tabindex="-1">
+        <button class="modal-close" onclick="closeModal()" aria-label="Pencereyi kapat">✕</button>
+        <div id="panelBody"></div>
+    </div>
+</div>
+
+<div class="modal-overlay" id="robotModal" hidden>
+    <div class="modal" role="dialog" aria-modal="true" aria-label="Robi" tabindex="-1">
+        <button class="modal-close" onclick="closeModal()" aria-label="Pencereyi kapat">✕</button>
+        <div id="robotBody"></div>
+    </div>
+</div>
+
 <div class="modal-overlay" id="guideModal" hidden>
     <div class="modal" role="dialog" aria-modal="true" aria-labelledby="gName" tabindex="-1">
         <button class="modal-close" onclick="closeModal()" aria-label="Rehberi kapat">✕</button>
@@ -964,6 +993,8 @@
 <script src="js/faces.js"></script>
 <script src="js/plus.js"></script>
 <script src="js/robot.js"></script>
+<script src="js/scene.js"></script>
+<script src="js/shift.js"></script>
 <script src="js/profiles.js"></script>
 <script src="js/music.js"></script>
 <script src="js/patients.js"></script>

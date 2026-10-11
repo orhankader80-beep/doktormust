@@ -335,6 +335,70 @@ translations.en = {
         "Type a question for Robi…",
     "Robi'ye soru":
         "Question for Robi",
+    "Süsle":
+        "Decorate",
+    "Kliniğimi Süsle":
+        "Decorate My Clinic",
+    "Görevler":
+        "Quests",
+    "Ödül":
+        "Reward",
+    "Menü":
+        "Menu",
+    "🎁 Bugünün ödülünü aldın. Yarın yine gel!":
+        "🎁 You already took today's reward. Come back tomorrow!",
+    "Bir hastaya dokun ve muayene et!":
+        "Tap a patient to examine them!",
+    "Şu an bekleyen hasta yok.":
+        "No patients are waiting right now.",
+    "Menüyü kapat":
+        "Close the menu",
+    "Görevler ve ödüller":
+        "Quests and rewards",
+    "Hızlı menü":
+        "Quick menu",
+    "\n\n🌙 Mesai bitti! Bugün {0} hastaya baktın ve {1} yıldız topladın. Gün sonu primi: +{2} coin. Klinik kapandı; yeni güne Klinik ekranından başlayabilirsin.":
+        "\n\n🌙 The shift is over! Today you saw {0} patients and collected {1} stars. End-of-day bonus: +{2} coins. The clinic is closed; you can start a new day from the Clinic screen.",
+    "🌅 {0}. gün başladı! Hastalar kapıda.":
+        "🌅 Day {0} has started! Patients are at the door.",
+    "🌙 Kapalı":
+        "🌙 Closed",
+    "{0}. gün":
+        "Day {0}",
+    "🌙 Klinik bugünlük kapandı. Klinik ekranından yeni güne başlayabilirsin.":
+        "🌙 The clinic is closed for today. You can start a new day from the Clinic screen.",
+    "Klinik kapandı":
+        "The clinic is closed",
+    "Bugün {0} hasta • {1} ⭐":
+        "Today: {0} patients • {1} ⭐",
+    "🌅 Yeni Güne Başla":
+        "🌅 Start a New Day",
+    "Mesai bitti. Yeni güne başla ya da mini oyun oyna!":
+        "The shift is over. Start a new day or play a mini game!",
+    "Klinik şu an kapalı. Klinik ekranındaki \"Yeni Güne Başla\" düğmesine basınca hastalar yeniden gelir.":
+        "The clinic is closed right now. Press \"Start a New Day\" on the Clinic screen and patients will come again.",
+    "Kliniğin saati {0}. Baktığın her hasta saati yarım saat ilerletir; 17:00'de mesai biter ve gün sonu primini alırsın.":
+        "The clinic clock says {0}. Each patient you see moves it on by half an hour; at 17:00 the shift ends and you get your end-of-day bonus.",
+    "Mesai bitti! Klinik ekranından yeni güne başlayabilir ya da mini oyun oynayabilirsin.":
+        "The shift is over! You can start a new day from the Clinic screen or play a mini game.",
+    "\n\n🌙 Mesai bitti! Bugün {0} hastaya baktın ve {1} yıldız topladın. Gün sonu primi: +{2} coin. Klinik kapandı; 15 dakika dinlendikten sonra yeni güne Klinik ekranından başlayabilirsin.":
+        "\n\n🌙 The shift is over! Today you saw {0} patients and collected {1} stars. End-of-day bonus: +{2} coins. The clinic is closed; after a 15-minute rest you can start a new day from the Clinic screen.",
+    "⏳ Klinik dinleniyor. Yeni gün {0} sonra başlayabilir.":
+        "⏳ The clinic is resting. A new day can start in {0}.",
+    "Mesai bitti. Klinik dinleniyor; bu arada mini oyun oynayabilirsin!":
+        "The shift is over. The clinic is resting; meanwhile you can play a mini game!",
+    "Mesai bitti. Yeni güne başlayabilirsin!":
+        "The shift is over. You can start a new day!",
+    "🌙 Klinik kapandı. 15 dakika dinlendikten sonra Klinik ekranından yeni güne başlayabilirsin.":
+        "🌙 The clinic is closed. After a 15-minute rest you can start a new day from the Clinic screen.",
+    "Klinik şu an dinleniyor. Yeni gün {0} sonra başlayabilir; bu arada mini oyun oynayabilirsin.":
+        "The clinic is resting right now. A new day can start in {0}; meanwhile you can play a mini game.",
+    "Kliniğin saati {0}. Baktığın her hasta saati yarım saat ilerletir; 17:00'de mesai biter, gün sonu primini alırsın ve klinik 15 dakika dinlenir.":
+        "The clinic clock says {0}. Each patient you see moves it on by half an hour; at 17:00 the shift ends, you get your end-of-day bonus and the clinic rests for 15 minutes.",
+    "Mesai bitti ve klinik dinleniyor. Bu arada mini oyun oyna, hikâyeye bak ya da kliniğini süsle!":
+        "The shift is over and the clinic is resting. Meanwhile play a mini game, check the story or decorate your clinic!",
+    "Mesai bitti! Klinik ekranından yeni güne başlayabilirsin.":
+        "The shift is over! You can start a new day from the Clinic screen.",
     "Bu oyunu yapan: Mustafa":
         "Made by: Mustafa",
     "Çıkış Yap":

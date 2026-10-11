@@ -115,6 +115,11 @@ function handleBack() {
         return true;
     }
 
+    if (document.body.classList.contains("menu-open")) {
+        toggleMenu(false);
+        return true;
+    }
+
     if (!appOpen) {
         if (authBusy || !$("auth-home").hidden) return false;
         switchAuthView("home");
@@ -146,6 +151,7 @@ function initialize() {
         $("nav").appendChild(button);
     });
 
+    setupScene();
     switchAuthView("home");
 
     try {

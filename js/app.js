@@ -373,6 +373,17 @@ function normalizeState(saved) {
     result.vibrate = saved.vibrate !== false;
     result.motion = typeof saved.motion === "boolean" ? saved.motion : null;
 
+    const shift = isRecord(saved.shift) ? saved.shift : {};
+    result.shift = {
+        minute: clamp(number(shift.minute) || SHIFT_OPEN, SHIFT_OPEN, SHIFT_CLOSE),
+        day: Math.max(1, number(shift.day) || 1),
+        cases: number(shift.cases),
+        stars: number(shift.stars),
+        closed: shift.closed === true,
+        // Kliniğin kapandığı an (gerçek zaman); yeni gün bundan 15 dakika sonra başlatılabilir.
+        closedAt: shift.closed === true ? number(shift.closedAt) : 0
+    };
+
     result.letters = (Array.isArray(saved.letters) ? saved.letters : [])
         .filter(letter => isRecord(letter) && typeof letter.name === "string" && typeof letter.emoji === "string")
         .slice(-24)
@@ -913,7 +924,9 @@ function logout() {
 
     $("app").hidden = true;
     $("authScreen").hidden = false;
-    document.body.classList.remove("dark");
+    document.body.classList.remove("dark", "menu-open");
+    sceneSeen = new Set();
+    sceneKey = "";
     applyMotion();
 
     for (const id of ["loginUsername","loginPassword","regUsername","regPassword","profileName"]) {
@@ -1157,7 +1170,11 @@ function updateUI() {
 
     renderDoctorLook();
     renderEvent();
+    renderShift();
     renderRobot();
+
+    // Sahne, açık bir pencere yokken güncellenir (pencere kapanınca da yenilenir).
+    if (!activeModal) renderScene();
 
     $("profileInfo").textContent =
         `${currentUser ? t("Kayıtlı profil") : t("Misafir oturumu")} • ` +
@@ -1352,6 +1369,8 @@ function showScreen(name) {
     });
 
     $("pageTitle").textContent = info[3];
+    document.body.classList.remove("menu-open");
+    renderDock();
     updateUI();
 
     if (name === "clinic") renderClinic();
@@ -1601,4 +1620,6 @@ function closeModal(restoreFocus = true) {
 
     if (restoreFocus && returnFocus?.isConnected) returnFocus.focus();
     returnFocus = null;
+
+    if (appOpen) renderScene();
 }

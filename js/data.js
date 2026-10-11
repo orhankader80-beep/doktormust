@@ -54,6 +54,8 @@ const defaultState = {
     motion: null,
     // İyileşen hastaların bıraktığı teşekkür mektupları.
     letters: [],
+    // Mesai saati: dakika olarak oyun saati, kaçıncı gün olduğu ve o günün sayıları.
+    shift: { minute: 540, day: 1, cases: 0, stars: 0, closed: false, closedAt: 0 },
     diplomaSeen: false,
     // Klinik ekibi, bekleme odası ve uzmanlık bölümleri.
     staff: [],
@@ -1303,8 +1305,8 @@ for (const ward of wards) {
 }
 
 const screenData = [
-    ["home", "🏠", t("Panel"), t("Doktor Paneli")],
-    ["clinic", "🏥", t("Klinik"), t("Kliniğim")],
+    ["home", "🏥", t("Klinik"), t("Doktormust Kliniği")],
+    ["clinic", "🎨", t("Süsle"), t("Kliniğimi Süsle")],
     ["patients", "🧒", t("Hastalar"), t("Hastalarım")],
     ["story", "📚", t("Hikâye"), t("Hikâye Modu")],
     ["wards", "🏨", t("Bölümler"), t("Uzmanlık Bölümleri")],

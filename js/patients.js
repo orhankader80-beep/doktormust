@@ -147,11 +147,19 @@ function newArrival() {
 }
 
 function refillQueue() {
+    // Mesai bittiyse yeni hasta gelmez.
+    if (state.shift.closed) {
+        state.queue = [];
+        return;
+    }
+
     state.queue = state.queue.slice(0, queueSize());
     while (state.queue.length < queueSize()) state.queue.push(newArrival());
 }
 
 function generatePatients() {
+    if (state.shift.closed) return;
+
     state.activePatients = Array.from({ length: 6 }, newArrival);
     state.queue = [];
     refillQueue();
@@ -200,6 +208,7 @@ function losePatient(patient, message) {
     closeModal();
     if (patient.special) state.weekly.failDay = dayKey();
     removePatient(patient);
+    const shiftNote = patient.ward || patient.story ? "" : advanceShift(30, 0);
 
     // Hikâyede giden hastanın yerine aynı sıradaki yeni hasta gelir.
     if (patient.story) ensureStoryPatient();
@@ -208,11 +217,13 @@ function losePatient(patient, message) {
     refreshPatientScreens();
     playSound("lose");
     toast(message);
+    if (shiftNote) toast(shiftNote.trim());
 }
 
 // Hasta listesi değişince açık olan ekranı (hastalar, hikâye ya da bölümler) yeniler.
 function refreshPatientScreens() {
     renderPatients();
+    if (!activeModal) renderScene();
     if (currentScreen === "story") renderStory();
     if (currentScreen === "wards") renderWards();
 }
@@ -278,6 +289,10 @@ function renderPatients() {
 
     $("queueLabel").textContent = t("🪑 Bekleme odası: ");
     $("queueStrip").innerHTML = state.queue.map(patient => faceSVG(patient, { mood: "sick" })).join("");
+
+    if (state.shift.closed) {
+        $("queueLabel").textContent = t("🌙 Klinik kapandı. 15 dakika dinlendikten sonra Klinik ekranından yeni güne başlayabilirsin.");
+    }
 
     const list = weekly.patient
         ? [weekly.patient, ...state.activePatients] : state.activePatients;
@@ -504,6 +519,7 @@ function finishCheckup(patient) {
 
     const regular = recordVisit(patient, 0);
     const sticker = rollSticker(.4);
+    const shiftNote = advanceShift(15, 0);
     const saved = commit();
     renderPatients();
     playSound();
@@ -512,6 +528,8 @@ function finishCheckup(patient) {
         t("💬 \"{0}\"\n\n+15 coin, +8 XP", speech) + regular + sticker +
         (currentUser && !saved ? t("\nİlerleme şu anda kalıcı kaydedilemedi.") : ""),
         t("Kontrol ziyaretinde kart seçilmez; iyileşen hastan sana uğrar."));
+
+    if (shiftNote) toast(shiftNote.trim());
 
     if (state.autoRead) speak(speech);
 }
@@ -733,6 +751,7 @@ function finishTreat(patient) {
         patient.special || patient.boss || patient.emergency || event.sticker ? 1 : stars === 3 ? .7 : .5
     );
     const letter = maybeLetter(person);
+    const shiftNote = patient.ward || patient.story ? "" : advanceShift(30, stars);
 
     const saved = commit();
     refreshPatientScreens();
@@ -747,7 +766,7 @@ function finishTreat(patient) {
         (gift ? t("\n🎁 {0} sana bir hediye bıraktı: +{1} coin", patientName, gift) : "") +
         regular + sticker +
         (currentUser && !saved ? t("\nİlerleme şu anda kalıcı kaydedilemedi.") : "") +
-        chapter + letter +
+        chapter + letter + shiftNote +
         `\n\n💬 ${patientName}: "${pick(thanksLines)}"` +
         t("\n\n💡 Sağlık bilgisi\n") + healthTips[tip],
         t("Bu bilgiler geneldir. Merak ettiklerini bir büyüğüne veya doktoruna sor."));
