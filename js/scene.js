@@ -73,7 +73,7 @@ function renderScene(force = false) {
         patients.map(patient => [patient.id, patient.patience, patient.emergency, patient.checkup]),
         state.queue.map(patient => patient.id),
         items.map(item => [item.type, item.x, item.y, item.r]),
-        state.decor, state.doctor, state.dark, giftReady(), currentLang, state.shift.closed, state.shift.day, shiftWait() > 0, shownSeason() && shownSeason().id
+        state.decor, state.doctor, state.dark, giftReady(), currentLang, state.shift.closed, state.shift.day, shiftWait() > 0, state.clinicName, shownSeason() && shownSeason().id
     ]);
 
     if (!force && key === sceneKey) return;
@@ -96,6 +96,7 @@ function renderScene(force = false) {
     };
 
     add("div", "clinic-floor floor-" + state.decor.floor);
+    add("div", "scene-sign", escapeHTML("🏥 " + clinicTitle()));
     add("div", "clinic-garland", season ? escapeHTML(season.decor.join(" ")) : "").setAttribute("aria-hidden", "true");
     add("div", "clinic-window view-" + view.id, view.emoji).setAttribute("aria-hidden", "true");
 

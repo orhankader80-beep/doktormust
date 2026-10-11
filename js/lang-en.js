@@ -399,6 +399,64 @@ translations.en = {
         "The shift is over and the clinic is resting. Meanwhile play a mini game, check the story or decorate your clinic!",
     "Mesai bitti! Klinik ekranından yeni güne başlayabilirsin.":
         "The shift is over! You can start a new day from the Clinic screen.",
+    "Dr. {0} Kliniği":
+        "Dr. {0}'s Clinic",
+    "✏️ Doktorun adı boş olamaz.":
+        "✏️ The doctor's name can't be empty.",
+    "💾 Adlar kaydedildi: {0}":
+        "💾 Names saved: {0}",
+    "Bu ad zaten listede.":
+        "That name is already on the list.",
+    "En fazla {0} oyuncu eklenebilir.":
+        "You can add up to {0} players.",
+    "🏫 Sınıf yarışması bitti.":
+        "🏫 The class contest is over.",
+    "🏫 Sıra sende, {0}!":
+        "🏫 It's your turn, {0}!",
+    "➡️ Sıradaki: {0}":
+        "➡️ Next: {0}",
+    "🏆 Sonuçları Gör":
+        "🏆 See the Results",
+    "Sırayla oynayın: her oyuncu bir hastaya bakar, en çok yıldızı toplayan kazanır!":
+        "Take turns: each player treats one patient, and whoever collects the most stars wins!",
+    "Oyuncunun adı":
+        "Player's name",
+    "➕ Ekle":
+        "➕ Add",
+    "▶️ Yarışmayı Başlat":
+        "▶️ Start the Contest",
+    "En az 2 oyuncu gerekir. Adlar yalnızca yarışma boyunca tutulur, kaydedilmez.":
+        "At least 2 players are needed. Names are kept only during the contest and are not saved.",
+    "{0} adlı oyuncuyu çıkar":
+        "Remove player {0}",
+    "{0}. tur":
+        "Round {0}",
+    "🏆 Berabere: {0}":
+        "🏆 It's a tie: {0}",
+    "🏆 Kazanan: {0}!":
+        "🏆 Winner: {0}!",
+    "🔁 Yeni Tur":
+        "🔁 New Round",
+    "▶️ Sıra: {0}":
+        "▶️ Turn: {0}",
+    "✖ Yarışmayı Bitir":
+        "✖ End the Contest",
+    "✏️ Adlar":
+        "✏️ Names",
+    "Kliniğinin adı":
+        "Your clinic's name",
+    "Örnek: Gülen Yüzler Kliniği":
+        "Example: Happy Smiles Clinic",
+    "💾 Adları Kaydet":
+        "💾 Save the Names",
+    "🌈 Oyun Rengi":
+        "🌈 Game Colour",
+    "Oyun rengi":
+        "Game colour",
+    "🏫 Sınıf Yarışması":
+        "🏫 Class Contest",
+    "Sınıf Yarışması":
+        "Class Contest",
     "Bu oyunu yapan: Mustafa":
         "Made by: Mustafa",
     "Çıkış Yap":

@@ -192,6 +192,10 @@
                     <span class="scene-wait">🪑 <span class="queue-faces" id="sceneQueue"></span></span>
                 </p>
 
+                <p class="scene-actions">
+                    <button class="secondary-btn" onclick="openClass()">🏫 Sınıf Yarışması</button>
+                </p>
+
                 <div class="home-panel" id="homePanel" hidden>
                 <div class="card hero-card">
                     <div>
@@ -591,6 +595,19 @@
                     </div>
 
                     <div class="card">
+                        <h3>✏️ Adlar</h3>
+                        <div class="stack">
+                            <label class="small" for="doctorNameInput">Doktorun adı</label>
+                            <input class="name-input" type="text" id="doctorNameInput" maxlength="20" autocomplete="off">
+                            <label class="small" for="clinicNameInput">Kliniğinin adı</label>
+                            <input class="name-input" type="text" id="clinicNameInput" maxlength="24" autocomplete="off" placeholder="Örnek: Gülen Yüzler Kliniği">
+                            <button class="primary-btn" onclick="saveNames()">💾 Adları Kaydet</button>
+                        </div>
+                        <h3>🌈 Oyun Rengi</h3>
+                        <div class="look-grid" id="themeGrid" aria-label="Oyun rengi"></div>
+                    </div>
+
+                    <div class="card">
                         <h3>🎨 Klinik Rengi</h3>
                         <div class="choice-grid">
                             <button class="choice" onclick="setBg('#bae6fd')">💙 Mavi</button>
@@ -888,6 +905,17 @@
     </div>
 </div>
 
+<div class="modal-overlay" id="classModal" hidden>
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="classTitle" tabindex="-1">
+        <button class="modal-close" onclick="closeModal()" aria-label="Pencereyi kapat">✕</button>
+        <div class="modal-header">
+            <div class="modal-emoji">🏫</div>
+            <h3 id="classTitle">Sınıf Yarışması</h3>
+        </div>
+        <div id="classBody"></div>
+    </div>
+</div>
+
 <div class="modal-overlay" id="panelModal" hidden>
     <div class="modal wide-modal" role="dialog" aria-modal="true" aria-label="Görevler ve ödüller" tabindex="-1">
         <button class="modal-close" onclick="closeModal()" aria-label="Pencereyi kapat">✕</button>
@@ -911,6 +939,7 @@
         </div>
         <div class="result-box" id="gDescription"></div>
         <p class="notice" id="gNotice"></p>
+        <button class="primary-btn full" id="gNext" onclick="classNext()" hidden></button>
         <button class="secondary-btn full" id="gPhoto" onclick="savePhoto()" hidden>📸 Hatıra Fotoğrafını Kaydet</button>
     </div>
 </div>
@@ -995,6 +1024,7 @@
 <script src="js/robot.js"></script>
 <script src="js/scene.js"></script>
 <script src="js/shift.js"></script>
+<script src="js/custom.js"></script>
 <script src="js/profiles.js"></script>
 <script src="js/music.js"></script>
 <script src="js/patients.js"></script>

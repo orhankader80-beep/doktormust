@@ -200,7 +200,7 @@ function removePatient(patient) {
     state.activePatients = state.activePatients.filter(other => other.id !== patient.id);
 
     // Boşalan yere bekleme odasındaki ilk kişi geçer, sıraya yenisi eklenir.
-    if (state.queue.length) state.activePatients.push(state.queue.shift());
+    if (!patient.klass && state.queue.length) state.activePatients.push(state.queue.shift());
     refillQueue();
 }
 
@@ -208,7 +208,7 @@ function losePatient(patient, message) {
     closeModal();
     if (patient.special) state.weekly.failDay = dayKey();
     removePatient(patient);
-    const shiftNote = patient.ward || patient.story ? "" : advanceShift(30, 0);
+    const shiftNote = patient.ward || patient.story || patient.klass ? "" : advanceShift(30, 0);
 
     // Hikâyede giden hastanın yerine aynı sıradaki yeni hasta gelir.
     if (patient.story) ensureStoryPatient();
@@ -218,6 +218,12 @@ function losePatient(patient, message) {
     playSound("lose");
     toast(message);
     if (shiftNote) toast(shiftNote.trim());
+
+    // Sınıf yarışmasında giden hasta sıfır yıldız sayılır ve tablo açılır.
+    if (patient.klass) {
+        classResult(patient, 0);
+        if (classGame) openClass();
+    }
 }
 
 // Hasta listesi değişince açık olan ekranı (hastalar, hikâye ya da bölümler) yeniler.
@@ -751,7 +757,7 @@ function finishTreat(patient) {
         patient.special || patient.boss || patient.emergency || event.sticker ? 1 : stars === 3 ? .7 : .5
     );
     const letter = maybeLetter(person);
-    const shiftNote = patient.ward || patient.story ? "" : advanceShift(30, stars);
+    const shiftNote = patient.ward || patient.story || patient.klass ? "" : advanceShift(30, stars);
 
     const saved = commit();
     refreshPatientScreens();
@@ -772,6 +778,7 @@ function finishTreat(patient) {
         t("Bu bilgiler geneldir. Merak ettiklerini bir büyüğüne veya doktoruna sor."));
 
     offerPhoto(person, stars);
+    classResult(patient, stars);
     sfx("yay", .15);
 }
 
@@ -810,6 +817,7 @@ function showInfo(emoji, title, text, notice) {
 
     setFigure($("gEmoji"), emoji);
     $("gPhoto").hidden = true;
+    $("gNext").hidden = true;
     lastPhoto = null;
     $("gName").textContent = title;
     $("gDescription").textContent = text;
