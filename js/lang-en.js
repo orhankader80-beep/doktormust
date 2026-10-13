@@ -457,6 +457,64 @@ translations.en = {
         "🏫 Class Contest",
     "Sınıf Yarışması":
         "Class Contest",
+    "✅ Eşleşti. Aile anahtarı: {0}":
+        "✅ Paired. Family key: {0}",
+    "Henüz eşleşmedi. Ebeveyn uygulamasında çocuğu ekleyince çıkan aile anahtarını buraya yazın.":
+        "Not paired yet. Type the family key shown in the parent app after adding the child.",
+    "⚠️ Aile anahtarı 8 harf ve rakamdan oluşur. Ebeveyn uygulamasındaki anahtarı aynen yazın.":
+        "⚠️ The family key has 8 letters and digits. Type it exactly as shown in the parent app.",
+    "🔗 Ebeveyn uygulamasıyla eşleşti.":
+        "🔗 Paired with the parent app.",
+    "Eşleşme kaldırılsın mı? Ebeveyn kodları artık bu profilde çalışmaz.":
+        "Remove the pairing? Parent codes will no longer work on this profile.",
+    "Doktormust raporu":
+        "Doktormust report",
+    "Doktormust raporu: {0}":
+        "Doktormust report: {0}",
+    "📋 Rapor bağlantısı kopyalandı. Kendinize gönderip ebeveyn uygulamasında açın.":
+        "📋 Report link copied. Send it to yourself and open it in the parent app.",
+    "Bağlantı aşağıdaki kutuda. Kopyalayıp kendinize gönderin.":
+        "The link is in the box below. Copy it and send it to yourself.",
+    "⚠️ Bu profil ebeveyn uygulamasıyla eşleşmemiş. Eşleştirme Ebeveyn Köşesi'nden yapılır.":
+        "⚠️ This profile is not paired with the parent app. Pairing is done in the Parent Corner.",
+    "⚠️ Kod eksik ya da yanlış yazılmış.":
+        "⚠️ The code is incomplete or mistyped.",
+    "⚠️ Bu kod geçerli değil.":
+        "⚠️ This code is not valid.",
+    "⚠️ Bu kodun süresi dolmuş. Ebeveyn kodları yalnızca üretildikleri gün geçerlidir.":
+        "⚠️ This code has expired. Parent codes only work on the day they are made.",
+    "👪 Ebeveyn kodu uygulandı: günlük süre {0} dakika.":
+        "👪 Parent code applied: daily time is {0} minutes.",
+    "👪 Ebeveyn kodu uygulandı: süre sınırı kaldırıldı.":
+        "👪 Parent code applied: the time limit is removed.",
+    "Bugün için +{0} dakika eklendi.":
+        "+{0} minutes added for today.",
+    "📱 Ebeveyn uygulaması":
+        "📱 Parent app",
+    "Ebeveyn uygulaması ayrı bir sayfadır: kendi telefonunuzdan raporu görür, süre ayarı gönderirsiniz. Hiçbir bilgi sunucuya gönderilmez; rapor ve ayarlar sizin paylaştığınız bağlantı ve kodlarla taşınır.":
+        "The parent app is a separate page: on your own phone you see the report and send time settings. Nothing is sent to a server; the report and settings travel in links and codes that you share.",
+    "📱 Ebeveyn uygulamasını aç":
+        "📱 Open the parent app",
+    "Adresi: orhankader80-beep.github.io/doktormust/ebeveyn":
+        "Address: orhankader80-beep.github.io/doktormust/ebeveyn",
+    "Aile anahtarı":
+        "Family key",
+    "🔗 Eşleştir":
+        "🔗 Pair",
+    "📤 Raporu Gönder":
+        "📤 Send the Report",
+    "Eşleşmeyi Kaldır":
+        "Remove Pairing",
+    "Rapor bağlantısı":
+        "Report link",
+    "👪 Ebeveyn kodu":
+        "👪 Parent code",
+    "Ebeveyninin verdiği kod":
+        "The code from your parent",
+    "Ebeveyn kodu":
+        "Parent code",
+    "Uygula":
+        "Apply",
     "Bu oyunu yapan: Mustafa":
         "Made by: Mustafa",
     "Çıkış Yap":

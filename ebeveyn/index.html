@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#17324d">
+<meta name="color-scheme" content="only light">
+<meta name="darkreader-lock">
+<meta name="robots" content="noindex">
+<title>Doktormust — Ebeveyn Uygulaması</title>
+<link rel="icon" type="image/png" href="../icons/icon-192.png">
+<style>
+:root { color-scheme: only light; --koyu: #17324d; --mavi: #4f8cff; --mor: #7166ff; --soluk: #61778d; --zemin: #eef4fb; --kart: #ffffff; --cizgi: #dce9f5; --iyi: #1f9d55; --kotu: #c0392b; }
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+html, body { margin: 0; min-height: 100%; }
+body { background: var(--zemin); color: var(--koyu); font-family: "Segoe UI", Arial, sans-serif; line-height: 1.5; }
+button, input, select, textarea { font: inherit; }
+button { cursor: pointer; }
+
+header { background: var(--koyu); color: #fff; padding: 14px 18px; display: flex; align-items: center; gap: 10px; }
+header h1 { margin: 0; font-size: 19px; flex: 1; }
+header button { background: rgba(255,255,255,.14); color: #fff; border: 0; border-radius: 10px; padding: 8px 12px; font-weight: 700; }
+main { max-width: 760px; margin: 0 auto; padding: 16px; display: grid; gap: 14px; }
+
+.kart { background: var(--kart); border: 1px solid var(--cizgi); border-radius: 18px; padding: 16px; box-shadow: 0 8px 22px rgba(37,85,130,.08); }
+.kart h2 { margin: 0 0 8px; font-size: 19px; }
+.kart h3 { margin: 16px 0 6px; font-size: 16px; }
+.soluk { color: var(--soluk); }
+.kucuk { font-size: 14px; }
+
+.dugme { border: 0; border-radius: 12px; padding: 11px 16px; font-weight: 700; background: #e6eef9; color: var(--koyu); }
+.dugme.ana { background: linear-gradient(135deg, var(--mavi), var(--mor)); color: #fff; }
+.dugme.tehlike { background: #fde8e8; color: var(--kotu); }
+.dugme:disabled { opacity: .5; cursor: default; }
+.sira { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+
+.girdi { width: 100%; padding: 11px 12px; border: 2px solid var(--cizgi); border-radius: 12px; background: #f7fafe; color: var(--koyu); }
+.girdi:focus { outline: none; border-color: var(--mavi); }
+.pin { max-width: 160px; text-align: center; letter-spacing: .4em; font-size: 22px; font-weight: 800; }
+label { display: grid; gap: 4px; font-weight: 700; margin: 10px 0; }
+textarea.girdi { min-height: 84px; resize: vertical; font-size: 13px; }
+.hata { color: var(--kotu); font-weight: 700; }
+
+.cocuk { width: 100%; text-align: left; display: grid; grid-template-columns: auto 1fr auto; gap: 12px; align-items: center; padding: 14px; border: 1px solid var(--cizgi); border-radius: 16px; background: #fff; color: var(--koyu); }
+.cocuk:hover { border-color: var(--mavi); }
+.cocuk i { font-style: normal; font-size: 30px; }
+.cocuk b { display: block; font-size: 18px; }
+
+.anahtar { font-family: Consolas, "Courier New", monospace; font-size: 30px; font-weight: 800; letter-spacing: .12em; text-align: center; padding: 14px; border-radius: 14px; background: #fff7d6; color: #5f4300; user-select: all; }
+.adimlar { padding-left: 22px; display: grid; gap: 6px; }
+
+.sayilar { display: grid; grid-template-columns: repeat(auto-fit, minmax(110px, 1fr)); gap: 10px; }
+.sayi { background: #f3f8ff; border-radius: 14px; padding: 10px; text-align: center; }
+.sayi b { display: block; font-size: 26px; color: var(--mavi); line-height: 1.1; }
+.sayi span { font-size: 13px; color: var(--soluk); font-weight: 700; }
+
+.cubuklar { display: grid; grid-template-columns: repeat(7, 1fr); gap: 6px; align-items: end; height: 150px; margin-top: 8px; }
+.cubuk { display: grid; grid-template-rows: auto 1fr auto; gap: 3px; height: 100%; text-align: center; font-size: 12px; color: var(--soluk); }
+.cubuk div { display: flex; align-items: flex-end; }
+.cubuk i { display: block; width: 100%; border-radius: 6px 6px 0 0; background: linear-gradient(180deg, var(--mor), var(--mavi)); min-height: 2px; }
+.cubuk b { color: var(--koyu); }
+
+.liste { margin: 6px 0 0; padding-left: 20px; }
+.not { background: #f3f8ff; border-radius: 12px; padding: 10px 12px; font-size: 14px; }
+</style>
+</head>
+<body>
+
+<header>
+    <span aria-hidden="true">👪</span>
+    <h1>Doktormust — Ebeveyn Uygulaması</h1>
+    <button id="kilitle" type="button" hidden>🔒 Kilitle</button>
+</header>
+
+<main>
+    <!-- PIN -->
+    <section class="kart" id="ekranPin" hidden>
+        <h2 id="pinBaslik"></h2>
+        <p class="soluk" id="pinAciklama"></p>
+        <form id="pinForm">
+            <label>PIN (4 rakam)
+                <input class="girdi pin" id="pinGirdi" type="password" inputmode="numeric" maxlength="4" autocomplete="off">
+            </label>
+            <p class="hata" id="pinHata" hidden></p>
+            <div class="sira">
+                <button class="dugme ana" type="submit" id="pinDugme"></button>
+                <button class="dugme tehlike" type="button" id="pinSifirla" hidden>PIN'i unuttum</button>
+            </div>
+        </form>
+    </section>
+
+    <!-- Çocuklar -->
+    <section id="ekranListe" hidden>
+        <div class="kart">
+            <h2>Çocuklarım</h2>
+            <p class="soluk" id="listeBos">Henüz kimse eklenmedi. Aşağıdan çocuğunuzu ekleyin.</p>
+            <div id="cocuklar" style="display:grid;gap:10px"></div>
+            <p class="hata" id="raporUyari" hidden></p>
+        </div>
+
+        <div class="kart">
+            <h2>➕ Çocuk ekle</h2>
+            <form id="ekleForm">
+                <label>Çocuğun adı
+                    <input class="girdi" id="ekleAd" maxlength="20" autocomplete="off" placeholder="Örnek: Elif">
+                </label>
+                <button class="dugme ana" type="submit">Ekle ve aile anahtarı üret</button>
+            </form>
+        </div>
+
+        <div class="kart">
+            <h2>Bu uygulama nasıl çalışır?</h2>
+            <ol class="adimlar">
+                <li><b>Eşleştirme:</b> Çocuğu ekleyince bir aile anahtarı çıkar. Onu çocuğun oyununda Ebeveyn Köşesi'ne bir kez yazarsınız.</li>
+                <li><b>Rapor:</b> Oyundaki "Raporu Gönder" düğmesi bir bağlantı üretir. Bağlantıyı bu telefonda açınca rapor burada görünür.</li>
+                <li><b>Süre ayarı:</b> Buradan o güne özel bir ebeveyn kodu üretirsiniz. Çocuk kodu oyunda Ayarlar'a yazınca süre sınırı değişir.</li>
+            </ol>
+            <p class="not">Hiçbir bilgi internete gönderilmez. Rapor ve kodlar yalnızca sizin paylaştığınız bağlantı ve yazılarla taşınır; bu sayfadaki kayıtlar yalnızca bu cihazda durur.</p>
+        </div>
+    </section>
+
+    <!-- Tek çocuk -->
+    <section id="ekranCocuk" hidden>
+        <div class="kart">
+            <div class="sira">
+                <button class="dugme" id="geri" type="button">← Çocuklarım</button>
+                <h2 id="cocukAd" style="margin:0;flex:1"></h2>
+            </div>
+        </div>
+
+        <div class="kart">
+            <h2>🔗 Eşleştirme</h2>
+            <p class="soluk kucuk">Bu anahtarı çocuğun oyununda bir kez yazın:</p>
+            <div class="anahtar" id="cocukAnahtar"></div>
+            <ol class="adimlar kucuk">
+                <li>Çocuğun cihazında oyunu açın: <b>Menü → Ebeveyn</b>.</li>
+                <li>"Ebeveyn uygulaması" kutusuna bu anahtarı yazıp <b>Eşleştir</b>'e basın.</li>
+            </ol>
+        </div>
+
+        <div class="kart">
+            <h2>📊 Rapor</h2>
+            <p class="soluk" id="raporYok">Henüz rapor yok. Çocuğun oyununda <b>Menü → Ebeveyn → Raporu Gönder</b> düğmesine basın ve çıkan bağlantıyı bu cihazda açın. Bağlantıyı aşağıya yapıştırabilirsiniz de.</p>
+            <div id="rapor" hidden>
+                <p class="soluk kucuk" id="raporTarih"></p>
+                <div class="sayilar" id="raporSayilar"></div>
+                <h3>Oyun süresi (son 7 gün, dakika)</h3>
+                <div class="cubuklar" id="raporCubuklar"></div>
+                <p class="kucuk soluk" id="raporToplam"></p>
+                <h3>Bu hafta</h3>
+                <div id="raporHafta"></div>
+            </div>
+            <h3>Rapor bağlantısını yapıştır</h3>
+            <textarea class="girdi" id="raporYapistir" placeholder="Oyundan kopyalanan rapor bağlantısı"></textarea>
+            <p class="hata" id="raporHata" hidden></p>
+            <button class="dugme" id="raporOku" type="button">Raporu oku</button>
+        </div>
+
+        <div class="kart">
+            <h2>⏳ Süre ayarı gönder</h2>
+            <label>Günlük süre sınırı
+                <select class="girdi" id="ayarSinir">
+                    <option value="0">Sınır yok</option>
+                    <option value="1">15 dakika</option>
+                    <option value="2">30 dakika</option>
+                    <option value="3">45 dakika</option>
+                    <option value="4">60 dakika</option>
+                </select>
+            </label>
+            <label>Yalnızca bugün için ek süre
+                <select class="girdi" id="ayarEk">
+                    <option value="0">Ek süre yok</option>
+                    <option value="1">+15 dakika</option>
+                    <option value="2">+30 dakika</option>
+                    <option value="3">+60 dakika</option>
+                </select>
+            </label>
+            <button class="dugme ana" id="kodUret" type="button">Ebeveyn kodu üret</button>
+            <div id="kodKutu" hidden>
+                <h3>Bugünün ebeveyn kodu</h3>
+                <div class="anahtar" id="kodYazi"></div>
+                <p class="kucuk soluk">Çocuk bu kodu oyunda <b>Menü → Ayarlar → Ebeveyn kodu</b> kutusuna yazıp <b>Uygula</b>'ya basar. Kod yalnızca bugün geçerlidir; ek süre aynı kodla bir kez verilir.</p>
+                <button class="dugme" id="kodKopyala" type="button">📋 Kodu kopyala</button>
+            </div>
+        </div>
+
+        <div class="kart">
+            <button class="dugme tehlike" id="cocukSil" type="button">Bu çocuğu sil</button>
+        </div>
+    </section>
+</main>
+
+<script>
+"use strict";
+
+// Ebeveyn uygulaması: sunucu yoktur. Kayıtlar bu cihazda durur; oyunla aile anahtarı,
+// rapor bağlantısı ve ebeveyn koduyla konuşur (ayrıntı için oyundaki js/aile.js).
+const DEPO = "doktormust_ebeveyn";
+const HARFLER = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
+const SINIRLAR = [0, 15, 30, 45, 60];
+const EKLER = [0, 15, 30, 60];
+const $ = id => document.getElementById(id);
+
+let kayit = oku();
+let acik = false;
+let secili = null;
+let bekleyenRapor = location.hash.startsWith("#r=") ? location.hash.slice(3) : "";
+
+function oku() {
+    try {
+        const veri = JSON.parse(localStorage.getItem(DEPO));
+        if (veri && typeof veri === "object" && Array.isArray(veri.cocuklar)) return veri;
+    } catch (hata) { /* depo boş ya da bozuk */ }
+    return { pin: null, cocuklar: [] };
+}
+
+function yaz() {
+    try { localStorage.setItem(DEPO, JSON.stringify(kayit)); } catch (hata) { /* depo kapalı olabilir */ }
+}
+
+function kacis(metin) {
+    return String(metin).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+}
+
+function gunAdi() {
+    const d = new Date();
+    return d.getFullYear() + "-" + String(d.getMonth() + 1).padStart(2, "0") + "-" + String(d.getDate()).padStart(2, "0");
+}
+
+function gunNo() {
+    return Math.floor(new Date(gunAdi() + "T12:00:00").getTime() / 86400000) % 46656;
+}
+
+async function ozet(metin) {
+    const baytlar = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(metin));
+    return [...new Uint8Array(baytlar)].map(b => b.toString(16).padStart(2, "0")).join("");
+}
+
+async function imza(anahtar, metin) {
+    return (await ozet(anahtar + "|" + metin)).slice(0, 6).toUpperCase();
+}
+
+function yeniAnahtar() {
+    const sayilar = crypto.getRandomValues(new Uint8Array(8));
+    return [...sayilar].map(sayi => HARFLER[sayi % HARFLER.length]).join("");
+}
+
+function ekran(ad) {
+    for (const id of ["ekranPin", "ekranListe", "ekranCocuk"]) $(id).hidden = id !== ad;
+    $("kilitle").hidden = ad === "ekranPin";
+    window.scrollTo(0, 0);
+}
+
+/* ---- PIN ---- */
+
+function pinEkrani() {
+    const ilk = !kayit.pin;
+    acik = false;
+    $("pinBaslik").textContent = ilk ? "Hoş geldiniz" : "Ebeveyn girişi";
+    $("pinAciklama").textContent = ilk
+        ? "Bu uygulama ebeveynler içindir. Çocuğunuzun açamaması için 4 rakamlı bir PIN belirleyin."
+        : "Devam etmek için PIN'inizi yazın.";
+    $("pinDugme").textContent = ilk ? "PIN'i kaydet" : "Giriş yap";
+    $("pinSifirla").hidden = ilk;
+    $("pinHata").hidden = true;
+    $("pinGirdi").value = "";
+    ekran("ekranPin");
+    $("pinGirdi").focus();
+}
+
+$("pinForm").addEventListener("submit", async olay => {
+    olay.preventDefault();
+    const pin = $("pinGirdi").value.trim();
+
+    if (!/^\d{4}$/.test(pin)) {
+        $("pinHata").textContent = "PIN 4 rakamdan oluşmalı.";
+        $("pinHata").hidden = false;
+        return;
+    }
+
+    if (!kayit.pin) {
+        const tuz = yeniAnahtar();
+        kayit.pin = { tuz, ozet: await ozet(tuz + ":" + pin) };
+        yaz();
+    } else if (await ozet(kayit.pin.tuz + ":" + pin) !== kayit.pin.ozet) {
+        $("pinHata").textContent = "PIN yanlış.";
+        $("pinHata").hidden = false;
+        $("pinGirdi").value = "";
+        return;
+    }
+
+    acik = true;
+    await listeEkrani();
+});
+
+$("pinSifirla").addEventListener("click", () => {
+    if (!confirm("PIN sıfırlanırsa bu cihazdaki bütün çocuk kayıtları ve raporlar silinir. Oyundaki ilerleme silinmez. Devam edilsin mi?")) return;
+    kayit = { pin: null, cocuklar: [] };
+    yaz();
+    pinEkrani();
+});
+
+$("kilitle").addEventListener("click", pinEkrani);
+
+/* ---- Rapor bağlantısı ---- */
+
+// Bağlantıdaki raporu çözer ve imzası tutan çocuğa kaydeder. Bulunan çocuğu döndürür.
+async function raporIsle(metin) {
+    const parca = String(metin).trim().split("#r=").pop();
+    const nokta = parca.lastIndexOf(".");
+    if (nokta < 1) throw new Error("Bu bir rapor bağlantısı değil.");
+
+    const veri = parca.slice(0, nokta), im = parca.slice(nokta + 1).toUpperCase();
+    let cocuk = null;
+
+    for (const aday of kayit.cocuklar) {
+        if (await imza(aday.anahtar, veri) === im) { cocuk = aday; break; }
+    }
+
+    if (!cocuk) throw new Error("Bu rapor, eşleştirdiğiniz bir çocuğa ait değil. Aile anahtarının oyuna doğru yazıldığından emin olun.");
+
+    let rapor;
+    try {
+        rapor = JSON.parse(decodeURIComponent(escape(atob(veri.replace(/-/g, "+").replace(/_/g, "/")))));
+    } catch (hata) {
+        throw new Error("Rapor okunamadı; bağlantı eksik kopyalanmış olabilir.");
+    }
+
+    if (!rapor || rapor.v !== 1 || !Array.isArray(rapor.log)) throw new Error("Bu rapor biçimi tanınmıyor.");
+
+    cocuk.rapor = rapor;
+    yaz();
+    return cocuk;
+}
+
+/* ---- Liste ---- */
+
+async function listeEkrani() {
+    secili = null;
+    $("raporUyari").hidden = true;
+
+    if (bekleyenRapor) {
+        const metin = bekleyenRapor;
+        bekleyenRapor = "";
+        history.replaceState(null, "", location.pathname);
+
+        try {
+            cocukEkrani(await raporIsle(metin));
+            return;
+        } catch (hata) {
+            $("raporUyari").textContent = hata.message;
+            $("raporUyari").hidden = false;
+        }
+    }
+
+    $("listeBos").hidden = kayit.cocuklar.length > 0;
+    $("cocuklar").innerHTML = "";
+
+    kayit.cocuklar.forEach(cocuk => {
+        const dugme = document.createElement("button");
+        dugme.type = "button";
+        dugme.className = "cocuk";
+        dugme.innerHTML = `<i>🧒</i><span><b>${kacis(cocuk.ad)}</b><span class="soluk kucuk">${cocuk.rapor
+            ? "Seviye " + Number(cocuk.rapor.sev) + " • son rapor: " + kacis(tarihYazi(cocuk.rapor.tarih))
+            : "Henüz rapor yok"}</span></span><span aria-hidden="true">→</span>`;
+        dugme.addEventListener("click", () => cocukEkrani(cocuk));
+        $("cocuklar").appendChild(dugme);
+    });
+
+    ekran("ekranListe");
+}
+
+$("ekleForm").addEventListener("submit", olay => {
+    olay.preventDefault();
+    const ad = $("ekleAd").value.trim().slice(0, 20);
+    if (!ad) return;
+
+    const cocuk = { id: yeniAnahtar(), ad, anahtar: yeniAnahtar(), rapor: null };
+    kayit.cocuklar.push(cocuk);
+    yaz();
+    $("ekleAd").value = "";
+    cocukEkrani(cocuk);
+});
+
+/* ---- Tek çocuk ---- */
+
+function tarihYazi(iso) {
+    const d = new Date(iso);
+    return isNaN(d) ? "" : d.toLocaleString("tr-TR", { day: "numeric", month: "long", hour: "2-digit", minute: "2-digit" });
+}
+
+function cocukEkrani(cocuk) {
+    secili = cocuk;
+    $("cocukAd").textContent = cocuk.ad;
+    $("cocukAnahtar").textContent = cocuk.anahtar.slice(0, 4) + "-" + cocuk.anahtar.slice(4);
+    $("raporHata").hidden = true;
+    $("raporYapistir").value = "";
+    $("kodKutu").hidden = true;
+
+    const r = cocuk.rapor;
+    $("rapor").hidden = !r;
+    $("raporYok").hidden = Boolean(r);
+
+    if (r) {
+        $("raporTarih").textContent = "Rapor: " + tarihYazi(r.tarih) + (r.klinik ? " • " + r.klinik : "");
+        $("ayarSinir").value = String(Math.max(0, SINIRLAR.indexOf(Number(r.sinir))));
+
+        const sayilar = [
+            [Number(r.sev) || 1, "Seviye"], [Number(r.vaka) || 0, "İyileşen hasta"], [Number(r.yildiz) || 0, "Yıldız"],
+            [Number(r.tam) || 0, "3 yıldızlı vaka"], [Number(r.rozet) || 0, "Rozet"], [Number(r.cikartma) || 0, "Çıkartma"],
+            [Number(r.gun) || 1, "Klinik günü"], [Number(r.sinir) ? r.sinir + " dk" : "Yok", "Süre sınırı"]
+        ];
+        $("raporSayilar").innerHTML = sayilar.map(([sayi, ad]) => `<div class="sayi"><b>${kacis(sayi)}</b><span>${ad}</span></div>`).join("");
+
+        const dakikalar = r.log.map(([gun, saniye]) => [String(gun), Math.round((Number(saniye) || 0) / 60)]);
+        const enCok = Math.max(10, ...dakikalar.map(cift => cift[1]));
+        $("raporCubuklar").innerHTML = dakikalar.map(([gun, dk]) => {
+            const ad = new Date(gun + "T12:00:00").toLocaleDateString("tr-TR", { weekday: "short" });
+            return `<div class="cubuk"><b>${dk}</b><div><i style="height:${Math.round(dk / enCok * 100)}%"></i></div><span>${kacis(ad)}</span></div>`;
+        }).join("");
+        const toplam = dakikalar.reduce((t, cift) => t + cift[1], 0);
+        $("raporToplam").textContent = "7 günde toplam " + toplam + " dakika; günde ortalama " + Math.round(toplam / 7) + " dakika.";
+
+        const h = r.hafta || {};
+        const yanlis = Array.isArray(h.yanlis) ? h.yanlis : [];
+        $("raporHafta").innerHTML =
+            `<ul class="liste"><li>${Number(h.vaka) || 0} vaka tamamladı; ${Number(h.tam) || 0} tanesi ilk denemede (3 yıldız).</li>` +
+            `<li>${Number(h.oyun) || 0} mini oyun kazandı.</li></ul>` +
+            (yanlis.length
+                ? `<p class="kucuk"><b>En çok zorlandığı kartlar:</b></p><ul class="liste">` +
+                  yanlis.map(([kart, kez]) => `<li>${kacis(kart)} — ${Number(kez) || 0} kez yanlış</li>`).join("") + `</ul>`
+                : `<p class="kucuk soluk">Bu hafta yanlış kart seçmedi.</p>`);
+    }
+
+    ekran("ekranCocuk");
+}
+
+$("geri").addEventListener("click", () => listeEkrani());
+
+$("raporOku").addEventListener("click", async () => {
+    $("raporHata").hidden = true;
+    try {
+        const cocuk = await raporIsle($("raporYapistir").value);
+        cocukEkrani(cocuk);
+    } catch (hata) {
+        $("raporHata").textContent = hata.message;
+        $("raporHata").hidden = false;
+    }
+});
+
+$("kodUret").addEventListener("click", async () => {
+    if (!secili) return;
+    const govde = "S" + $("ayarSinir").value + $("ayarEk").value + gunNo().toString(36).toUpperCase().padStart(3, "0");
+    const kod = govde + "-" + await imza(secili.anahtar, govde);
+    $("kodYazi").textContent = kod;
+    $("kodKutu").hidden = false;
+    $("kodKutu").scrollIntoView({ block: "nearest" });
+});
+
+$("kodKopyala").addEventListener("click", async () => {
+    try {
+        await navigator.clipboard.writeText($("kodYazi").textContent);
+        $("kodKopyala").textContent = "✅ Kopyalandı";
+    } catch (hata) {
+        $("kodKopyala").textContent = "Kopyalanamadı; kodu elle yazın";
+    }
+    setTimeout(() => { $("kodKopyala").textContent = "📋 Kodu kopyala"; }, 2000);
+});
+
+$("cocukSil").addEventListener("click", () => {
+    if (!secili || !confirm(secili.ad + " silinsin mi? Oyundaki ilerlemesi silinmez; yalnızca bu uygulamadaki kaydı ve raporu silinir.")) return;
+    kayit.cocuklar = kayit.cocuklar.filter(cocuk => cocuk !== secili);
+    yaz();
+    listeEkrani();
+});
+
+if (!(window.crypto && crypto.subtle)) {
+    document.querySelector("main").innerHTML = '<section class="kart"><h2>Bu sayfa güvenli bağlantı ister</h2><p>Ebeveyn uygulamasını internet adresinden (https) açın.</p></section>';
+} else {
+    pinEkrani();
+}
+</script>
+</body>
+</html>

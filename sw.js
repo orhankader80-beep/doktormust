@@ -2,7 +2,7 @@
 
 // Çevrimdışı destek. Dosyalar önce ağdan istenir (çevrimiçiyken hep güncel sürüm),
 // ağ yoksa önbellekten verilir. Dosya listesi değişince CACHE adını da değiştir.
-const CACHE = "doktormust-v8-4";
+const CACHE = "doktormust-v8-5";
 
 const FILES = [
     "./",
@@ -21,6 +21,8 @@ const FILES = [
     "js/scene.js",
     "js/shift.js",
     "js/custom.js",
+    "js/aile.js",
+    "ebeveyn/index.html",
     "js/profiles.js",
     "js/music.js",
     "js/patients.js",

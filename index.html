@@ -678,6 +678,13 @@
                         <button class="toggle" id="vibrateToggle" onclick="toggleVibrate()">Açık</button>
                     </div>
                     <div class="setting-row">
+                        <b>👪 Ebeveyn kodu</b>
+                        <form class="row" id="familyCodeForm">
+                            <input class="input pet-input" id="familyCode" maxlength="14" autocomplete="off" autocapitalize="characters" spellcheck="false" placeholder="Ebeveyninin verdiği kod" aria-label="Ebeveyn kodu">
+                            <button class="toggle" type="submit">Uygula</button>
+                        </form>
+                    </div>
+                    <div class="setting-row">
                         <b>🎬 Canlandırmalar</b>
                         <button class="toggle" id="motionToggle" onclick="toggleMotion()">Açık</button>
                     </div>
@@ -766,6 +773,23 @@
                             </div>
                         </div>
                         <p class="small muted" id="weekComment"></p>
+                    </div>
+
+                    <div class="card wide" id="familyCard">
+                        <h3>📱 Ebeveyn uygulaması</h3>
+                        <p class="small muted">Ebeveyn uygulaması ayrı bir sayfadır: kendi telefonunuzdan raporu görür, süre ayarı gönderirsiniz. Hiçbir bilgi sunucuya gönderilmez; rapor ve ayarlar sizin paylaştığınız bağlantı ve kodlarla taşınır.</p>
+                        <p id="familyOpen"><a class="secondary-btn family-open" href="ebeveyn/" target="_blank" rel="noopener">📱 Ebeveyn uygulamasını aç</a></p>
+                        <p class="small muted">Adresi: orhankader80-beep.github.io/doktormust/ebeveyn</p>
+                        <p class="small" id="familyStatus"></p>
+                        <form class="row" id="familyForm">
+                            <input class="input pet-input" id="familyInput" maxlength="9" autocomplete="off" autocapitalize="characters" spellcheck="false" placeholder="XXXX-XXXX" aria-label="Aile anahtarı">
+                            <button class="primary-btn" type="submit">🔗 Eşleştir</button>
+                        </form>
+                        <div class="row">
+                            <button class="primary-btn" id="familySend" onclick="sendFamilyReport()">📤 Raporu Gönder</button>
+                            <button class="toggle" id="familyRemove" onclick="unpairFamily()">Eşleşmeyi Kaldır</button>
+                        </div>
+                        <textarea class="family-link" id="familyLink" readonly hidden aria-label="Rapor bağlantısı"></textarea>
                     </div>
 
                     <div class="card" id="pinCard">
@@ -1025,6 +1049,7 @@
 <script src="js/scene.js"></script>
 <script src="js/shift.js"></script>
 <script src="js/custom.js"></script>
+<script src="js/aile.js"></script>
 <script src="js/profiles.js"></script>
 <script src="js/music.js"></script>
 <script src="js/patients.js"></script>

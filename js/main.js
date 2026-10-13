@@ -152,6 +152,7 @@ function initialize() {
     });
 
     setupScene();
+    setupFamily();
     switchAuthView("home");
 
     try {

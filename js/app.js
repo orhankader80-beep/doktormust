@@ -373,6 +373,13 @@ function normalizeState(saved) {
     result.vibrate = saved.vibrate !== false;
     result.motion = typeof saved.motion === "boolean" ? saved.motion : null;
     result.clinicName = typeof saved.clinicName === "string" ? saved.clinicName.trim().slice(0,24) : "";
+    result.familyKey = typeof saved.familyKey === "string" && validFamilyKey(saved.familyKey) ? saved.familyKey : "";
+
+    const codes = isRecord(saved.familyCodes) ? saved.familyCodes : {};
+    result.familyCodes = {
+        day: typeof codes.day === "string" ? codes.day.slice(0,10) : "",
+        list: (Array.isArray(codes.list) ? codes.list : []).filter(code => typeof code === "string").slice(-20).map(code => code.slice(0,8))
+    };
     result.theme = themes.some(theme => theme[0] === saved.theme) ? saved.theme : "blue";
 
     const shift = isRecord(saved.shift) ? saved.shift : {};

@@ -1550,3 +1550,10 @@ body.still .scene-spot.ready .spot-icon, body.still .scene-patient.walk-in { ani
 .class-board li { display: grid; grid-template-columns: 34px 1fr auto; align-items: center; gap: 8px; padding: 10px 12px; border-radius: 12px; background: var(--soft); font-size: 17px; }
 .class-board li.turn { box-shadow: inset 0 0 0 2px var(--primary); }
 .class-winner { margin: 0 0 14px; padding: 12px; border-radius: 14px; background: #fff7d6; color: #5f4300; font-size: 19px; font-weight: 800; text-align: center; }
+
+/* Ebeveyn uygulamasıyla eşleşme */
+
+.family-link { width: 100%; min-height: 80px; margin-top: 10px; padding: 10px; border: 2px solid var(--border); border-radius: 12px; background: var(--soft); color: var(--text); font: 12px Consolas, "Courier New", monospace; resize: vertical; }
+.family-open { display: inline-block; text-decoration: none; }
+#familyCodeForm { flex-wrap: nowrap; }
+#familyCodeForm input { min-width: 0; width: 190px; }

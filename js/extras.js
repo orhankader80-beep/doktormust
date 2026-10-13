@@ -370,6 +370,7 @@ function setLimit(minutes) {
 /* ===== EBEVEYN KÖŞESİ ===== */
 
 function renderParent() {
+    renderFamily();
     const minutes = seconds => Math.round(seconds / 60);
     const limit = limitSeconds();
 
