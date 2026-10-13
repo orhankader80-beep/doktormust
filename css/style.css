@@ -1557,3 +1557,7 @@ body.still .scene-spot.ready .spot-icon, body.still .scene-patient.walk-in { ani
 .family-open { display: inline-block; text-decoration: none; }
 #familyCodeForm { flex-wrap: nowrap; }
 #familyCodeForm input { min-width: 0; width: 190px; }
+
+/* Kalabalik sinif yarismasinda ad listesi ve tablo kendi icinde kayar. */
+.class-chips { max-height: 190px; overflow-y: auto; }
+.class-board { max-height: 46vh; overflow-y: auto; padding-right: 4px; }

@@ -515,6 +515,8 @@ translations.en = {
         "Parent code",
     "Uygula":
         "Apply",
+    "🏆 {0} kişi {1} yıldızla birinci!":
+        "🏆 {0} players are first with {1} stars!",
     "Bu oyunu yapan: Mustafa":
         "Made by: Mustafa",
     "Çıkış Yap":

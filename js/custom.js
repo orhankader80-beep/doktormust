@@ -84,7 +84,7 @@ function saveNames() {
 // classGame: { players: [{ name, stars, played }], started, turn, round, patientId, cheered }
 let classGame = null;
 
-const CLASS_MAX = 12;
+const CLASS_MAX = 50;
 
 function openClass() {
     if (!appOpen) return;
@@ -247,7 +247,9 @@ function renderClass() {
     body.innerHTML = `
         <p class="muted">${escapeHTML(t("{0}. tur", classGame.round))}</p>
         <ol class="class-board">${rows}</ol>
-        ${done ? `<p class="class-winner">${escapeHTML(winners.length > 1
+        ${done ? `<p class="class-winner">${escapeHTML(winners.length > 5
+            ? t("🏆 {0} kişi {1} yıldızla birinci!", winners.length, best)
+            : winners.length > 1
             ? t("🏆 Berabere: {0}", winners.join(", "))
             : t("🏆 Kazanan: {0}!", winners[0]))}</p>` : ""}
         <div class="stack">
