@@ -61,7 +61,7 @@ const defaultState = {
     familyCodes: { day: "", list: [] },
     theme: "blue",
     // Mesai saati: dakika olarak oyun saati, kaçıncı gün olduğu ve o günün sayıları.
-    shift: { minute: 540, day: 1, cases: 0, stars: 0, closed: false, closedAt: 0 },
+    shift: { minute: 540, day: 1, cases: 0, stars: 0, closed: false, closedAt: 0, reports: 0 },
     diplomaSeen: false,
     // Klinik ekibi, bekleme odası ve uzmanlık bölümleri.
     staff: [],

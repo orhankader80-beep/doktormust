@@ -65,6 +65,7 @@ function makePatient(disease, group, ward = null) {
         patience: has("pet") ? 4 : 3,
         mistakes: 0,
         usedXray: false,
+        usedTest: false,
         testPaid: false,
         xrayPaid: false,
         emergency: ward ? ward.timed === true : has("ambulance") && Math.random() < .25,
@@ -249,10 +250,22 @@ function reportCost(kind) {
     return has("xray") ? 10 : 20;
 }
 
+// Bir klinik gününde istenebilecek rapor sayısı (tahlil ve görüntüleme birlikte).
+const REPORT_LIMIT = 3;
+
+function reportsLeft() {
+    return Math.max(0, REPORT_LIMIT - state.shift.reports);
+}
+
 function payReport(patient, kind) {
     const key = kind + "Paid";
     if (patient.special || patient.boss) return false;
     if (patient[key]) return true;
+
+    if (!reportsLeft()) {
+        toast(t("📋 Bugünlük rapor hakkın bitti. Yeni klinik gününde {0} hak daha gelir.", REPORT_LIMIT));
+        return false;
+    }
 
     const cost = reportCost(kind);
     if (state.coins < cost) {
@@ -261,6 +274,7 @@ function payReport(patient, kind) {
     }
 
     state.coins -= cost;
+    state.shift.reports++;
     patient[key] = true;
     return true;
 }
@@ -279,6 +293,7 @@ function updateTreatmentStatus() {
         (testCost ? ` (🪙 ${testCost})` : "");
     $("xrayButton").textContent = t("🩻 Görüntüleme Raporu") +
         (xrayCost ? ` (🪙 ${xrayCost})` : "");
+    $("reportsLeft").textContent = t("Bugün kalan rapor hakkı: {0} / {1}", reportsLeft(), REPORT_LIMIT);
 }
 
 function renderPatients() {
@@ -569,8 +584,8 @@ function openTreatment(id) {
         ? t("🌟 Özel vaka: rapor istenemez ve bulgulardan biri seni yanıltabilir. ") +
           t("Dört aletle de muayene et, en belirgin işarete göre kartını seç.")
         : t("Önce aletlerle muayene et, sonra bulgulara uyan kartı seç.\n\n") +
-          t("Tahlil raporu vakanın kodunu verir. Görüntüleme raporu kartı doğrudan ") +
-          t("gösterir ama o vakada en fazla 2 yıldız alırsın.")) +
+          t("Tahlil raporu vakanın kodunu verir; görüntüleme raporu seçenekleri iki karta indirir. ") +
+          t("Her rapor o vakadan bir yıldız götürür ve bir klinik gününde 3 rapor hakkın var.")) +
         (patient.emergency ? t("\n\n🚑 Acil vaka: süre dolmadan doğru kartı seç!") : "");
     $("tmOptions").hidden = true;
     $("treatmentChooseButton").hidden = false;
@@ -607,6 +622,8 @@ function reqTest() {
     const ward = wardOf(patient);
     const key = ward && ward.tools.find(tool => tool.id === cardInfo(patient.correctTreatment).key);
 
+    patient.usedTest = true;
+
     $("tmResult").textContent = t("🩸 Kurgusal tahlil raporu\n\n") + (ward
         ? t("Bu vakada en çok ipucunu \"{0}\" verir.", key.name)
         : patient.hint + t("\n\nKodun karşılığını Oyun Rehberi'nde bulabilirsin."));
@@ -621,9 +638,14 @@ function reqXray() {
 
     patient.usedXray = true;
 
+    // İkinci kart her açılışta aynı kalsın diye hastanın kimliğinden seçilir.
+    const others = cardsFor(patient).filter(card => card.id !== patient.correctTreatment);
+    const other = others[faceHash(patient.id) % others.length];
+    const pair = [patient.correctTreatment, other.id].sort().map(id => cardInfo(id).label);
+
     $("tmResult").textContent =
         t("🩻 Kurgusal görüntüleme raporu\n\n") +
-        t("Bu oyun vakasıyla eşleşen kart: {0}", cardInfo(patient.correctTreatment).label);
+        t("Görüntü şu iki karttan birine uyuyor:\n• {0}\n• {1}\n\nHangisi olduğunu muayene bulgularına bakarak sen bul.", pair[0], pair[1]);
 
     commit();
     updateTreatmentStatus();
@@ -682,8 +704,9 @@ function finishTreat(patient) {
     const card = patient.correctTreatment;
     const event = todayEvent();
 
-    const stars = patient.mistakes === 0 && !patient.usedXray ? 3
-        : patient.mistakes <= 1 ? 2 : 1;
+    // Her yanlış kart ve istenen her rapor bir yıldız götürür.
+    const slips = patient.mistakes + (patient.usedXray ? 1 : 0) + (patient.usedTest ? 1 : 0);
+    const stars = slips === 0 ? 3 : slips === 1 ? 2 : 1;
 
     let coins = 20 + stars * 15 + (has("robot") ? 10 : 0) +
         (stars === 3 && has("bed") ? 10 : 0) + clinicBonus() +

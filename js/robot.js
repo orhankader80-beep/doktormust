@@ -53,7 +53,7 @@ const robotTopics = [
     },
     {
         keys: ["yildiz", "star"],
-        answer: t("Doğru kartı ilk denemede bulursan 3 yıldız alırsın. Bir kez yanılırsan ya da görüntüleme raporu kullanırsan en fazla 2 yıldız olur.")
+        answer: t("Doğru kartı ilk denemede ve rapor istemeden bulursan 3 yıldız alırsın. Her yanlış kart ve istediğin her rapor bir yıldız götürür.")
     },
     {
         keys: ["coin", "para", "altin", "money"],
@@ -81,7 +81,7 @@ const robotTopics = [
     },
     {
         keys: ["tahlil", "rapor", "rontgen", "report", "x-ray", "xray"],
-        answer: t("Tahlil raporu vakanın kodunu verir; kodun anlamını Rehber'de bulursun. Görüntüleme raporu kartı doğrudan gösterir ama o vakada en fazla 2 yıldız alırsın.")
+        answer: t("Tahlil raporu vakanın kodunu verir; kodun anlamını Rehber'de bulursun. Görüntüleme raporu seçenekleri iki karta indirir. Her rapor bir yıldız götürür ve bir klinik gününde 3 rapor hakkın var.")
     },
     {
         keys: ["seviye", "xp", "level"],

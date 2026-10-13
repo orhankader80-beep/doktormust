@@ -313,6 +313,7 @@ function normalizePatient(p, group) {
         patience: clamp(number(p.patience,3), 1, 4),
         mistakes: number(p.mistakes),
         usedXray: p.usedXray === true,
+        usedTest: p.usedTest === true,
         testPaid: p.testPaid === true,
         xrayPaid: p.xrayPaid === true,
         emergency: ward ? ward.timed === true : p.emergency === true && !checkup,
@@ -389,6 +390,7 @@ function normalizeState(saved) {
         cases: number(shift.cases),
         stars: number(shift.stars),
         closed: shift.closed === true,
+        reports: clamp(number(shift.reports), 0, 99),
         // Kliniğin kapandığı an (gerçek zaman); yeni gün bundan 15 dakika sonra başlatılabilir.
         closedAt: shift.closed === true ? number(shift.closedAt) : 0
     };

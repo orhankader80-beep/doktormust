@@ -517,6 +517,20 @@ translations.en = {
         "Apply",
     "🏆 {0} kişi {1} yıldızla birinci!":
         "🏆 {0} players are first with {1} stars!",
+    "📋 Bugünlük rapor hakkın bitti. Yeni klinik gününde {0} hak daha gelir.":
+        "📋 You have no reports left for today. You get {0} more on the next clinic day.",
+    "Bugün kalan rapor hakkı: {0} / {1}":
+        "Reports left today: {0} / {1}",
+    "Görüntü şu iki karttan birine uyuyor:\n• {0}\n• {1}\n\nHangisi olduğunu muayene bulgularına bakarak sen bul.":
+        "The image matches one of these two cards:\n• {0}\n• {1}\n\nWork out which one from the exam findings.",
+    "Tahlil raporu vakanın kodunu verir; görüntüleme raporu seçenekleri iki karta indirir. ":
+        "The lab report gives the case code; the imaging report narrows it down to two cards. ",
+    "Her rapor o vakadan bir yıldız götürür ve bir klinik gününde 3 rapor hakkın var.":
+        "Each report costs one star on that case, and you get 3 reports per clinic day.",
+    "Doğru kartı ilk denemede ve rapor istemeden bulursan 3 yıldız alırsın. Her yanlış kart ve istediğin her rapor bir yıldız götürür.":
+        "Find the right card on your first try without asking for a report and you get 3 stars. Each wrong card and each report costs one star.",
+    "Tahlil raporu vakanın kodunu verir; kodun anlamını Rehber'de bulursun. Görüntüleme raporu seçenekleri iki karta indirir. Her rapor bir yıldız götürür ve bir klinik gününde 3 rapor hakkın var.":
+        "The lab report gives the case code; look it up in the Guide. The imaging report narrows it down to two cards. Each report costs one star, and you get 3 reports per clinic day.",
     "Bu oyunu yapan: Mustafa":
         "Made by: Mustafa",
     "Çıkış Yap":

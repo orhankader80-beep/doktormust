@@ -59,7 +59,7 @@ function startDay() {
         return;
     }
 
-    state.shift = { minute: SHIFT_OPEN, day: state.shift.day + 1, cases: 0, stars: 0, closed: false, closedAt: 0 };
+    state.shift = { minute: SHIFT_OPEN, day: state.shift.day + 1, cases: 0, stars: 0, closed: false, closedAt: 0, reports: 0 };
     generatePatients();
     commit();
     showScreen("home");
