@@ -101,10 +101,10 @@ function showLeaver() {
     figure.style.left = x + "%";
     figure.style.top = y + "%";
     figure.innerHTML = `<span class="sp-sign">👋</span>` +
-        faceSVG(person, { mood: "happy", cheer: true, full: true });
+        `<span class="walker">${faceSVG(person, { mood: "happy", cheer: true, full: true })}</span>`;
 
     $("scene").appendChild(figure);
-    setTimeout(() => figure.remove(), 2200);
+    setTimeout(() => figure.remove(), 3400);
 }
 
 /* ===== GÜNÜN VAKASI ===== */
