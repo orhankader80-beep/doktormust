@@ -59,7 +59,7 @@ function startDay() {
         return;
     }
 
-    state.shift = { minute: SHIFT_OPEN, day: state.shift.day + 1, cases: 0, stars: 0, closed: false, closedAt: 0, reports: 0 };
+    state.shift = { minute: SHIFT_OPEN, day: state.shift.day + 1, cases: 0, stars: 0, closed: false, closedAt: 0, reports: 0, home: false };
     generatePatients();
     commit();
     showScreen("home");
@@ -69,27 +69,32 @@ function startDay() {
 
 // Sahnedeki "yeni gün" düğmesi: süre dolana kadar geri sayım gösterir.
 function renderDayButton() {
-    const button = document.querySelector(".scene-night button");
+    // Uyanma düğmesi yalnızca evdeyken vardır.
+    const button = document.querySelector(".scene-night .day-btn");
     const waiting = shiftWait() > 0;
 
     if (button) {
         button.disabled = waiting;
-        button.textContent = waiting ? "⏳ " + waitText() : t("🌅 Yeni Güne Başla");
+        button.textContent = waiting ? "😴 " + waitText() : t("⏰ Uyan ve Kliniğe Git");
     }
 
-    $("sceneHint").textContent = waiting
-        ? t("Mesai bitti. Klinik dinleniyor; bu arada mini oyun oynayabilirsin!")
-        : t("Mesai bitti. Yeni güne başlayabilirsin!");
+    $("sceneHint").textContent = !state.shift.home
+        ? t("Mesai bitti. Eve gidip dinlenme zamanı!")
+        : waiting
+            ? t("Evde uyuyorsun. Klinik dinleniyor; bu arada mini oyun oynayabilirsin!")
+            : t("Günaydın! Uyanıp yeni güne başlayabilirsin.");
 
     // Geri sayım yalnızca gerekirken çalışır.
     if (waiting && button && shiftTimer === null) {
         shiftTimer = setInterval(() => {
-            if (!appOpen || !state.shift.closed || !document.querySelector(".scene-night button") || shiftWait() <= 0) {
+            const shown = document.querySelector(".scene-night .day-btn");
+
+            if (!appOpen || !state.shift.closed || !shown || shiftWait() <= 0) {
                 clearInterval(shiftTimer);
                 shiftTimer = null;
             }
 
-            if (appOpen && state.shift.closed && document.querySelector(".scene-night button")) renderDayButton();
+            if (appOpen && state.shift.closed && shown) renderDayButton();
         }, 1000);
     }
 }

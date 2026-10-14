@@ -1590,3 +1590,35 @@ body.still .scene-spot.ready .spot-icon, body.still .scene-patient.walk-in { ani
 
 body.still .cure-token { animation: none !important; }
 .privacy-frame { display: block; width: 100%; height: min(72vh, 640px); margin-top: 34px; border: 0; border-radius: 12px; background: #f7fbff; }
+
+/* ===== v10: ev, kariyer, çağrı, depo, eczane, reklam, hayvanlar ===== */
+.scene-actions { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
+.scene-actions .secondary-btn { margin: 0; padding: 10px 6px; font-size: 14px; line-height: 1.2; }
+.scene-actions .secondary-btn.warn { box-shadow: inset 0 0 0 2px #ff6b81; }
+.scene-patient.referral .sp-sign { background: #dbeafe; box-shadow: 0 0 0 3px #3b82f6; }
+
+.scene-night.at-home { background: rgba(20, 24, 58, .78); }
+.home-room { position: relative; margin: 0 auto 6px; width: 120px; height: 90px; }
+.home-bed { font-size: 76px; line-height: 1; }
+.home-zzz { position: absolute; right: 4px; top: -6px; font-size: 30px; animation: zzz 2s ease-in-out infinite; }
+@keyframes zzz { 0% { transform: translate(0, 8px) scale(.7); opacity: 0; } 40% { opacity: 1; } 100% { transform: translate(14px, -16px) scale(1.1); opacity: 0; } }
+
+.career-card { margin-bottom: 14px; }
+.career-list li.done { opacity: .75; }
+
+.stock-list { list-style: none; margin: 10px 0 14px; padding: 0; display: grid; gap: 6px; }
+.stock-list li { display: grid; grid-template-columns: 34px 1fr auto; align-items: center; gap: 8px; padding: 10px 12px; border-radius: 12px; background: var(--soft); font-size: 17px; }
+.stock-list li > span:first-child { font-size: 24px; }
+.stock-list li.low { box-shadow: inset 0 0 0 2px #ff6b81; }
+.stock-list b small { display: block; font-weight: 600; font-size: 13px; color: var(--muted); }
+.stock-list .buy { display: flex; gap: 6px; }
+
+.pet-list { display: grid; gap: 10px; margin: 10px 0; }
+.pet-card { display: grid; grid-template-columns: 84px 1fr; gap: 12px; align-items: center; padding: 10px; border-radius: 14px; background: var(--soft); }
+.pet-figure { width: 84px; }
+.pet-figure svg { display: block; width: 100%; height: auto; }
+.pet-joy { height: 10px; margin: 6px 0; border-radius: 999px; background: #e2e8f0; overflow: hidden; }
+.pet-joy span { display: block; height: 100%; border-radius: inherit; background: linear-gradient(90deg, #f472b6, #fb7185); }
+.pet-card .row { gap: 6px; }
+
+body.still .home-zzz { animation: none !important; }

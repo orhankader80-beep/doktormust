@@ -75,7 +75,7 @@ function renderScene(force = false) {
         patients.map(patient => [patient.id, patient.patience, patient.emergency, patient.checkup]),
         state.queue.map(patient => patient.id),
         items.map(item => [item.type, item.x, item.y, item.r]),
-        state.decor, state.doctor, state.dark, giftReady(), currentLang, state.shift.closed, state.shift.day, shiftWait() > 0, state.clinicName, shownSeason() && shownSeason().id
+        state.decor, state.doctor, state.dark, giftReady(), currentLang, state.shift.closed, state.shift.day, state.shift.home, shiftWait() > 0, state.clinicName, shownSeason() && shownSeason().id
     ]);
 
     if (!force && key === sceneKey) return;
@@ -138,8 +138,8 @@ function renderScene(force = false) {
     patients.forEach((patient, index) => {
         const [x, y] = sceneSlots[index];
         const fresh = !sceneSeen.has(patient.id);
-        const kind = patient.special ? " special" : patient.checkup ? " checkup" : patient.emergency ? " emergency" : patient.tricky ? " tricky" : "";
-        const sign = patient.special ? "🌟" : patient.checkup ? "💚" : patient.emergency ? "🚑" : t(patient.problem).split(" ")[0];
+        const kind = patient.special ? " special" : patient.checkup ? " checkup" : patient.emergency ? " emergency" : patient.referral ? " referral" : patient.tricky ? " tricky" : "";
+        const sign = patient.special ? "🌟" : patient.checkup ? "💚" : patient.referral ? "📞" : patient.emergency ? "🚑" : t(patient.problem).split(" ")[0];
 
         const button = add("button", "scene-patient" + kind + (fresh ? " walk-in" : ""),
             `<span class="sp-sign">${escapeHTML(sign)}</span>` +
@@ -158,11 +158,19 @@ function renderScene(force = false) {
 
     // Mesai bitince oda kararır ve yeni günü başlatan düğme çıkar.
     if (state.shift.closed) {
-        const night = add("div", "scene-night",
-            `<div class="night-card"><div class="night-moon">🌙</div><b>${escapeHTML(t("Klinik kapandı"))}</b>` +
+        // Önce eve gidilir; evde uyurken klinik dinlenir, sonra uyanıp yeni güne başlanır.
+        const home = state.shift.home;
+        const night = add("div", "scene-night" + (home ? " at-home" : ""),
+            `<div class="night-card">` +
+            (home
+                ? `<div class="home-room" aria-hidden="true"><span class="home-bed">🛏️</span><span class="home-zzz">💤</span></div><b>${escapeHTML(t("Evde uyuyorsun"))}</b>`
+                : `<div class="night-moon">🌙</div><b>${escapeHTML(t("Klinik kapandı"))}</b>`) +
             `<p>${escapeHTML(t("Bugün {0} hasta • {1} ⭐", state.shift.cases, state.shift.stars))}</p>` +
-            `<button class="primary-btn" type="button">${escapeHTML(t("🌅 Yeni Güne Başla"))}</button></div>`);
-        night.querySelector("button").onclick = startDay;
+            (home
+                ? `<button class="primary-btn day-btn" type="button">${escapeHTML(t("⏰ Uyan ve Kliniğe Git"))}</button>`
+                : `<button class="primary-btn" type="button">${escapeHTML(t("🏠 Eve Git ve Uyu"))}</button>`) +
+            `</div>`);
+        night.querySelector("button").onclick = home ? startDay : goHome;
     }
 
     $("sceneQueue").innerHTML = state.queue.map(patient => faceSVG(patient, { mood: "sick" })).join("");

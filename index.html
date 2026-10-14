@@ -196,6 +196,9 @@
                     <button class="secondary-btn" id="dayCaseButton" onclick="openDayCase()">🗓️ Günün Vakası</button>
                     <button class="secondary-btn" onclick="openClass()">🏫 Sınıf Yarışması</button>
                     <button class="secondary-btn" onclick="openFriends()">🤝 Arkadaş Skorları</button>
+                    <button class="secondary-btn" id="depotButton" onclick="openDepot()">📦 Depo</button>
+                    <button class="secondary-btn" onclick="openAds()">📣 Reklam</button>
+                    <button class="secondary-btn" onclick="openPets()">🐾 Hayvanlarım</button>
                 </p>
 
                 <div class="home-panel" id="homePanel" hidden>
@@ -594,6 +597,12 @@
                     <div><h3>👨‍⚕️ Doktorum</h3><span class="muted">Karakterini özelleştir.</span></div>
                 </div>
 
+                <div class="card career-card">
+                    <h3>🎓 Kariyerim</h3>
+                    <ol class="class-board career-list" id="careerList"></ol>
+                    <p class="small muted" id="careerNext"></p>
+                </div>
+
                 <div class="grid">
                     <div class="card game-card">
                         <div class="doctor-preview doc-holder" id="doctorBig"></div>
@@ -959,6 +968,17 @@
     </div>
 </div>
 
+<div class="modal-overlay" id="v10Modal" hidden>
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="v10Title" tabindex="-1">
+        <button class="modal-close" onclick="closeModal()" aria-label="Pencereyi kapat">✕</button>
+        <div class="modal-header">
+            <div class="modal-emoji" id="v10Emoji"></div>
+            <h3 id="v10Title"></h3>
+        </div>
+        <div id="v10Body"></div>
+    </div>
+</div>
+
 <div class="modal-overlay" id="privacyModal" hidden>
     <div class="modal" role="dialog" aria-modal="true" aria-label="Gizlilik politikası" tabindex="-1">
         <button class="modal-close" onclick="closeModal()" aria-label="Pencereyi kapat">✕</button>
@@ -1012,6 +1032,7 @@
         <p class="notice" id="gNotice"></p>
         <button class="primary-btn full" id="gNext" onclick="classNext()" hidden></button>
         <button class="secondary-btn full" id="gPhoto" onclick="savePhoto()" hidden>📸 Hatıra Fotoğrafını Kaydet</button>
+        <button class="primary-btn full" id="gAdopt" type="button" hidden></button>
     </div>
 </div>
 
@@ -1109,6 +1130,7 @@
 <script src="js/clinic.js"></script>
 <script src="js/extras.js"></script>
 <script src="js/v9.js"></script>
+<script src="js/v10.js"></script>
 <script src="js/main.js"></script>
 </body>
 </html>

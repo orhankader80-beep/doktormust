@@ -108,7 +108,7 @@ const robotTopics = [
         answer: () => state.shift.closed
             ? shiftWait() > 0
                 ? t("Klinik şu an dinleniyor. Yeni gün {0} sonra başlayabilir; bu arada mini oyun oynayabilirsin.", waitText())
-                : t("Klinik şu an kapalı. Klinik ekranındaki \"Yeni Güne Başla\" düğmesine basınca hastalar yeniden gelir.")
+                : t("Klinik şu an kapalı. Klinik ekranında önce \"🏠 Eve Git\", sonra \"⏰ Uyan\" düğmesine basınca hastalar yeniden gelir.")
             : t("Kliniğin saati {0}. Baktığın her hasta saati yarım saat ilerletir; 17:00'de mesai biter, gün sonu primini alırsın ve klinik 15 dakika dinlenir.", clockText())
     },
     {

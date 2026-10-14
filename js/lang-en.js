@@ -917,6 +917,160 @@ translations.en = {
         "🔒 Privacy policy",
     "Gizlilik politikası":
         "Privacy policy",
+    "🎓 Terfi! Artık {0} {1} oldun!":
+        "🎓 Promotion! You are now {0} {1}!",
+    "\n\n📞 Dr. {0} bu hastayı sana gönderdi. Zor bir vaka ama 2 kat coin kazandırır!":
+        "\n\n📞 Dr. {0} sent you this patient. It's a tricky case, but it pays double coins!",
+    "\n\n💰 Bu vaka {0} coin değerinde; her yıldız +15 coin daha.":
+        "\n\n💰 This case is worth {0} coins; each star adds 15 more.",
+    "\n📞 Dr. {0} çok teşekkür etti: \"Sen olmasan bu hastayı iyileştiremezdim!\"":
+        "\n📞 Dr. {0} thanked you: \"I couldn't have healed this patient without you!\"",
+    "Klinik şu an kapalı. Klinik ekranında önce \"🏠 Eve Git\", sonra \"⏰ Uyan\" düğmesine basınca hastalar yeniden gelir.":
+        "The clinic is closed right now. On the clinic screen, press \"🏠 Go Home\" and then \"⏰ Wake Up\" and the patients come back.",
+    "Evde uyuyorsun":
+        "You're asleep at home",
+    "⏰ Uyan ve Kliniğe Git":
+        "⏰ Wake Up and Go to the Clinic",
+    "🏠 Eve Git ve Uyu":
+        "🏠 Go Home and Sleep",
+    "Mesai bitti. Eve gidip dinlenme zamanı!":
+        "The shift is over. Time to go home and rest!",
+    "Evde uyuyorsun. Klinik dinleniyor; bu arada mini oyun oynayabilirsin!":
+        "You're asleep at home. The clinic is resting; you can play mini games meanwhile!",
+    "Günaydın! Uyanıp yeni güne başlayabilirsin.":
+        "Good morning! You can wake up and start a new day.",
+    "Asistan Doktor":
+        "Assistant Doctor",
+    "Klinikler Başkanı":
+        "Head of All Clinics",
+    "Şu an":
+        "Now",
+    "Sıradaki ünvan: {0} ({1}. seviyede)":
+        "Next title: {0} (at level {1})",
+    "👑 Kariyerin zirvesindesin! Bütün kliniklerin başkanı sensin.":
+        "👑 You're at the top of your career! You're the head of all the clinics.",
+    "\n\n📞 Dr. {0} aradı: \"{1} adlı hastamı iyileştiremedim, bana yardım eder misin?\" Hasta kliniğinde seni bekliyor.":
+        "\n\n📞 Dr. {0} called: \"I couldn't heal my patient {1}. Can you help me?\" The patient is waiting at your clinic.",
+    "🏠 Eve geldin. İyi uykular, Doktor! 😴":
+        "🏠 You're home. Sleep well, Doctor! 😴",
+    "Şurup":
+        "Syrup",
+    "Ihlamur":
+        "Linden Tea",
+    "Soğuk Kompres":
+        "Cold Pack",
+    "Meyve Tabağı":
+        "Fruit Plate",
+    "Alçı Sargısı":
+        "Cast Bandage",
+    "Bölüm Malzemesi":
+        "Ward Supplies",
+    "📦 Depoda {0} {1} kalmadı! Klinik ekranındaki \"📦 Depo\" düğmesinden eczaneye gidip almalısın. Hasta seni bekleyecek.":
+        "📦 There's no {0} {1} left in the storeroom! Use the \"📦 Storeroom\" button on the clinic screen to go to the pharmacy. The patient will wait for you.",
+    "📦 {0} {1} azaldı: depoda 2 tane kaldı.":
+        "📦 {0} {1} is running low: only 2 left.",
+    "Klinik Deposu":
+        "Clinic Storeroom",
+    "Her tedavi depodan bir malzeme harcar. Biten malzemeyi eczaneden alırsın.":
+        "Every treatment uses one item from the storeroom. Buy what runs out at the pharmacy.",
+    "🚗 Arabaya Bin, Eczaneye Git":
+        "🚗 Drive to the Pharmacy",
+    "Eczaneye giden yol bir labirent: hızlı varırsan eczacı indirim yapar!":
+        "The road to the pharmacy is a maze: get there fast and the pharmacist gives you a discount!",
+    "Eczane Yolu":
+        "Pharmacy Road",
+    "Eczane":
+        "Pharmacy",
+    "🎉 Eczacı: \"Çok hızlı geldin! Bugün her şey %20 indirimli.\"":
+        "🎉 Pharmacist: \"You got here so fast! Everything is 20% off today.\"",
+    "💊 Eczacı: \"Hoş geldin Doktor! Ne lazım?\"":
+        "💊 Pharmacist: \"Welcome, Doctor! What do you need?\"",
+    "Coin: {0}":
+        "Coins: {0}",
+    "Depoda: {0} • Tanesi {1} coin":
+        "In stock: {0} • {1} coins each",
+    "🧺 Hepsini Doldur":
+        "🧺 Fill Everything",
+    "{0} rafı dolu.":
+        "The {0} shelf is full.",
+    "🪙 Coinin yetmiyor.":
+        "🪙 You don't have enough coins.",
+    "Raflar zaten dolu ya da coinin yetmiyor.":
+        "The shelves are already full, or you don't have enough coins.",
+    "Afiş":
+        "Poster",
+    "Radyo Reklamı":
+        "Radio Advert",
+    "Televizyon Reklamı":
+        "TV Advert",
+    "Kliniğinin Reklamı":
+        "Advertise Your Clinic",
+    "Reklam verirsen bugün bekleme odasına daha çok hasta gelir ve her vakadan ek coin kazanırsın.":
+        "If you advertise, more patients come to the waiting room today and every case earns extra coins.",
+    "{0} Bugün {1} yayında!":
+        "{0} Your {1} is running today!",
+    "+{0} bekleyen hasta • her vakada +{1} coin":
+        "+{0} waiting patients • +{1} coins per case",
+    "Klinik kapalıyken reklam verilemez.":
+        "You can't advertise while the clinic is closed.",
+    "Reklam bu klinik günü bitene kadar sürer.":
+        "The advert lasts until this clinic day ends.",
+    "📣 {0} yayında! Hastalar kliniğini duydu.":
+        "📣 Your {0} is running! Patients have heard about your clinic.",
+    "🏠 {0} adlı dostu sahiplen":
+        "🏠 Adopt {0}",
+    "🐾 {0} artık senin! Klinik ekranındaki \"🐾 Hayvanlarım\" düğmesinden ona bakabilirsin.":
+        "🐾 {0} is yours now! Look after them with the \"🐾 My Pets\" button on the clinic screen.",
+    "Hayvanlarım":
+        "My Pets",
+    "Henüz hayvanın yok. Pati Kliniği'nde (3. seviye) iyileştirdiğin bir dostu sahiplenebilirsin!":
+        "You don't have a pet yet. You can adopt a friend you heal in the Pet Clinic (level 3)!",
+    "Hayvanlarını her gün besle ve onlarla oyna. Mutlu her hayvan, her vakada +5 coin şans getirir!":
+        "Feed your pets and play with them every day. Every happy pet brings +5 lucky coins per case!",
+    "Mutluluk: {0}":
+        "Happiness: {0}",
+    "Çok mutlu! 💖":
+        "Very happy! 💖",
+    "Mutlu 🙂":
+        "Happy 🙂",
+    "Seni özledi 🥺":
+        "Missed you 🥺",
+    "✅ Karnı tok":
+        "✅ Full tummy",
+    "🍖 Besle (5 coin)":
+        "🍖 Feed (5 coins)",
+    "✅ Oynadınız":
+        "✅ Played today",
+    "🎾 Oyna":
+        "🎾 Play",
+    "🏡 Yeni yuva bul":
+        "🏡 Find a new home",
+    "En fazla {0} hayvan sahiplenebilirsin.":
+        "You can adopt up to {0} pets.",
+    "{0} için sevgi dolu yeni bir yuva bulunsun mu? Bu geri alınamaz.":
+        "Find a loving new home for {0}? This can't be undone.",
+    "🏡 {0} yeni ailesine kavuştu. Teşekkürler, Doktor!":
+        "🏡 {0} has a new family now. Thank you, Doctor!",
+    "Mesai 17:00'de bitince \"🏠 Eve Git\" düğmesine bas. Evde uyurken klinik 15 dakika dinlenir; sonra \"⏰ Uyan\" deyip yeni güne başlarsın.":
+        "When the shift ends at 17:00, press \"🏠 Go Home\". While you sleep, the clinic rests for 15 minutes; then press \"⏰ Wake Up\" to start a new day.",
+    "Şu anki ünvanın: {0}. Seviye atladıkça Stajyer → Asistan → Doktor → Uzman → Başhekim → Klinikler Başkanı olursun. Kariyer basamaklarını Doktorum ekranında görebilirsin.":
+        "Your title now: {0}. As you level up you go from Intern → Assistant → Doctor → Specialist → Chief Physician → Head of All Clinics. See your career steps on the My Doctor screen.",
+    "3. seviyeden sonra başka doktorlar bazen seni arar ve çözemedikleri hastayı gönderir. 📞 işaretli bu hastalar zordur ama 2 kat coin verir!":
+        "After level 3, other doctors sometimes call you and send a patient they couldn't help. These 📞 patients are tricky but pay double coins!",
+    "Her tedavi depodan bir malzeme harcar. Klinik ekranındaki \"📦 Depo\" düğmesinden stoklarına bak; biten malzeme için arabana binip eczaneye git. Hızlı varırsan indirim var!":
+        "Every treatment uses one item from the storeroom. Check your stock with the \"📦 Storeroom\" button on the clinic screen, and drive to the pharmacy for anything that runs out. Get there fast for a discount!",
+    "\"📣 Reklam\" düğmesinden afiş, radyo ya da televizyon reklamı verebilirsin. O gün daha çok hasta gelir ve her vakadan ek coin kazanırsın.":
+        "With the \"📣 Advert\" button you can put up a poster or run a radio or TV advert. More patients come that day and every case earns extra coins.",
+    "Pati Kliniği'nde iyileştirdiğin bir hayvanı sahiplenebilirsin. \"🐾 Hayvanlarım\" düğmesinden onu her gün besle ve onunla oyna; mutlu hayvanlar sana şans getirir!":
+        "You can adopt an animal you heal in the Pet Clinic. Feed it and play with it every day with the \"🐾 My Pets\" button; happy pets bring you luck!",
+    "📦 Depo":
+        "📦 Storeroom",
+    "📣 Reklam":
+        "📣 Advert",
+    "🐾 Hayvanlarım":
+        "🐾 My Pets",
+    "🎓 Kariyerim":
+        "🎓 My Career",
     "Bu oyunu yapan: Mustafa":
         "Made by: Mustafa",
     "Çıkış Yap":

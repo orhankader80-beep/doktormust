@@ -64,8 +64,13 @@ const defaultState = {
     dailyCase: { day: "", done: false, stars: 0, mistakes: 0 },
     friends: [],
     farm: { day: "", games: 0, duels: 0 },
+    // Depo (malzeme sayıları), sahiplenilen hayvanlar, günün reklamı ve kutlanan kariyer basamağı.
+    stock: { syrup: 15, tea: 15, cold: 15, fruit: 15, cast: 15, kit: 15 },
+    pets: [],
+    ad: { kind: "", day: 0 },
+    career: 0,
     // Mesai saati: dakika olarak oyun saati, kaçıncı gün olduğu ve o günün sayıları.
-    shift: { minute: 540, day: 1, cases: 0, stars: 0, closed: false, closedAt: 0, reports: 0 },
+    shift: { minute: 540, day: 1, cases: 0, stars: 0, closed: false, closedAt: 0, reports: 0, home: false },
     diplomaSeen: false,
     // Klinik ekibi, bekleme odası ve uzmanlık bölümleri.
     staff: [],

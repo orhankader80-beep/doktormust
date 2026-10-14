@@ -125,7 +125,7 @@ function makeTricky(patient) {
 /* ---- Bekleme odası: muayene edilen hastanın yerine sıradaki gelir ---- */
 
 function queueSize() {
-    return hasStaff("reception") ? 4 : 2;
+    return (hasStaff("reception") ? 4 : 2) + adExtra();
 }
 
 // Kliniğe yeni gelen kişi: çoğunlukla yeni bir vaka, bazen kontrole gelen eski hasta.
@@ -212,7 +212,7 @@ function removePatient(patient) {
     state.activePatients = state.activePatients.filter(other => other.id !== patient.id);
 
     // Boşalan yere bekleme odasındaki ilk kişi geçer, sıraya yenisi eklenir.
-    if (!patient.klass && state.queue.length) state.activePatients.push(state.queue.shift());
+    if (!patient.klass && !patient.referral && state.queue.length) state.activePatients.push(state.queue.shift());
     refillQueue();
 }
 
@@ -601,7 +601,9 @@ function openTreatment(id) {
           t("Her rapor o vakadan bir yıldız götürür ve bir klinik gününde 3 rapor hakkın var.")) +
         (patient.emergency ? t("\n\n🚑 Acil vaka: süre dolmadan doğru kartı seç!") : "") +
         (patient.tricky ? t("\n\n🧩 Zor vaka: sabrı az ve bulgulardan biri seni yanıltabilir. Ödülü daha büyük!") : "") +
-        (patient.daily ? t("\n\n🗓️ Günün vakası: bugün herkese aynı vaka geldi. Yalnızca bir kez oynanır!") : "");
+        (patient.daily ? t("\n\n🗓️ Günün vakası: bugün herkese aynı vaka geldi. Yalnızca bir kez oynanır!") : "") +
+        (patient.referral ? t("\n\n📞 Dr. {0} bu hastayı sana gönderdi. Zor bir vaka ama 2 kat coin kazandırır!", patient.referral) : "") +
+        (patient.klass ? "" : t("\n\n💰 Bu vaka {0} coin değerinde; her yıldız +15 coin daha.", caseValue(patient)));
     $("tmOptions").hidden = true;
     $("treatmentChooseButton").hidden = false;
     renderExam();
@@ -710,6 +712,9 @@ function applyTreat(id) {
     }
 
     // Doğru kart: önce tedavi sahnesi oynanır, ödüller sahne bitince verilir.
+    // Tedavi için depoda malzeme olmalı (yoksa hasta bekler, sabrı gitmez).
+    if (!useSupply(patient)) return;
+    commit();
     startCure(patient);
 }
 
@@ -721,7 +726,7 @@ function finishTreat(patient) {
     const slips = patient.mistakes + (patient.usedXray ? 1 : 0) + (patient.usedTest ? 1 : 0);
     const stars = slips === 0 ? 3 : slips === 1 ? 2 : 1;
 
-    let coins = 20 + stars * 15 + (has("robot") ? 10 : 0) +
+    let coins = caseValue(patient) + stars * 15 + (has("robot") ? 10 : 0) +
         (stars === 3 && has("bed") ? 10 : 0) + clinicBonus() +
         (hasStaff("reception") ? 5 : 0);
     let xp = 15 + stars * 10 + (has("trophy") ? 10 : 0);
@@ -741,6 +746,15 @@ function finishTreat(patient) {
         coins += 30;
         gems = 1;
     }
+
+    // Başka doktorun gönderdiği hasta 2 kat coin verir.
+    if (patient.referral) {
+        coins *= 2;
+        xp += 20;
+    }
+
+    // Mutlu hayvanlar ve günün reklamı küçük bir ek getirir.
+    coins += happyPets() * 5 + (activeAd() ? activeAd().bonus : 0);
 
     if (patient.emergency) {
         coins *= 2;
@@ -812,6 +826,7 @@ function finishTreat(patient) {
     const letter = maybeLetter(person);
     const shiftNote = patient.ward || patient.story || patient.klass || patient.daily ? "" : advanceShift(30, stars);
     if (patient.daily) dayCaseResult(stars);
+    const call = maybeReferral(patient);
 
     const saved = commit();
     refreshPatientScreens();
@@ -827,7 +842,8 @@ function finishTreat(patient) {
         regular + sticker +
         (patient.daily ? t("\n🗓️ Günün vakası tamamlandı! Arkadaşlarına kaç yıldız aldığını söyle.") : "") +
         (currentUser && !saved ? t("\nİlerleme şu anda kalıcı kaydedilemedi.") : "") +
-        chapter + letter + shiftNote +
+        chapter + letter + shiftNote + call +
+        (patient.referral ? t("\n📞 Dr. {0} çok teşekkür etti: \"Sen olmasan bu hastayı iyileştiremezdim!\"", patient.referral) : "") +
         `\n\n💬 ${patientName}: "${pick(thanksLines)}"` +
         t("\n\n💡 Sağlık bilgisi\n") + healthTips[tip],
         t("Bu bilgiler geneldir. Merak ettiklerini bir büyüğüne veya doktoruna sor."));
@@ -836,6 +852,7 @@ function finishTreat(patient) {
     if (slot >= 0) sceneLeaver = { person, slot };
 
     offerPhoto(person, stars);
+    offerAdopt(patient);
     classResult(patient, stars);
     sfx("yay", .15);
 }
@@ -876,6 +893,7 @@ function showInfo(emoji, title, text, notice) {
     setFigure($("gEmoji"), emoji);
     $("gPhoto").hidden = true;
     $("gNext").hidden = true;
+    $("gAdopt").hidden = true;
     lastPhoto = null;
     $("gName").textContent = title;
     $("gDescription").textContent = text;

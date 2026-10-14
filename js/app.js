@@ -314,6 +314,7 @@ function normalizePatient(p, group) {
         mistakes: number(p.mistakes),
         usedXray: p.usedXray === true,
         usedTest: p.usedTest === true,
+        referral: typeof p.referral === "string" && !ward && !checkup ? p.referral.slice(0,20) : "",
         tricky: p.tricky === true && !ward && !checkup,
         testPaid: p.testPaid === true,
         xrayPaid: p.xrayPaid === true,
@@ -409,6 +410,30 @@ function normalizeState(saved) {
         duels: number(farm.duels)
     };
 
+    // v10: depo, sahiplenilen hayvanlar, reklam ve kariyer basamağı.
+    const stock = isRecord(saved.stock) ? saved.stock : {};
+    result.stock = {};
+    for (const item of supplies) result.stock[item.id] = clamp(number(stock[item.id], STOCK_START), 0, STOCK_MAX);
+
+    result.pets = (Array.isArray(saved.pets) ? saved.pets : [])
+        .filter(pet => isRecord(pet) && typeof pet.name === "string" && own(petKinds, pet.emoji))
+        .slice(0, PET_MAX)
+        .map(pet => ({
+            name: pet.name.slice(0,12),
+            emoji: pet.emoji,
+            joy: clamp(number(pet.joy, 60), 0, 100),
+            care: typeof pet.care === "string" && /^\d{4}-\d{2}-\d{2}$/.test(pet.care) ? pet.care : dayKey(),
+            fed: typeof pet.fed === "string" ? pet.fed.slice(0,10) : "",
+            played: typeof pet.played === "string" ? pet.played.slice(0,10) : ""
+        }));
+
+    const ad = isRecord(saved.ad) ? saved.ad : {};
+    result.ad = { kind: adOptions.some(option => option.id === ad.kind) ? ad.kind : "", day: number(ad.day) };
+
+    // Eski kayıtlarda kariyer yoktur; şimdiki ünvan kutlanmış sayılır.
+    result.career = Number.isInteger(saved.career)
+        ? clamp(saved.career, 0, careerSteps.length - 1) : careerIndex(Math.max(1, number(saved.level) || 1));
+
     const shift = isRecord(saved.shift) ? saved.shift : {};
     result.shift = {
         minute: clamp(number(shift.minute) || SHIFT_OPEN, SHIFT_OPEN, SHIFT_CLOSE),
@@ -416,6 +441,7 @@ function normalizeState(saved) {
         cases: number(shift.cases),
         stars: number(shift.stars),
         closed: shift.closed === true,
+        home: shift.closed === true && shift.home === true,
         reports: clamp(number(shift.reports), 0, 99),
         // Kliniğin kapandığı an (gerçek zaman); yeni gün bundan 15 dakika sonra başlatılabilir.
         closedAt: shift.closed === true ? number(shift.closedAt) : 0
@@ -980,10 +1006,7 @@ function logout() {
 /* ===== ARAYÜZ VE BAŞARILAR ===== */
 
 function rank() {
-    if (state.level < 3) return t("Stajyer Doktor");
-    if (state.level < 6) return t("Genç Doktor");
-    if (state.level < 10) return t("Uzman Doktor");
-    return t("Başhekim");
+    return careerSteps[careerIndex()].name;
 }
 
 function doctorEmoji() {
@@ -1213,6 +1236,7 @@ function updateUI() {
     renderShift();
     renderCustom();
     renderV9();
+    renderV10();
     renderRobot();
 
     // Sahne, açık bir pencere yokken güncellenir (pencere kapanınca da yenilenir).
@@ -1358,6 +1382,7 @@ function commit() {
     const levels = pendingLevelUps;
     pendingLevelUps = 0;
     state.gems += levels * 2;
+    const promotion = checkPromotion();
 
     const pages = checkAlbum();
     const fresh = checkBadges();
@@ -1376,6 +1401,8 @@ function commit() {
 
         if (currentScreen === "store") renderStore();
     }
+
+    if (promotion) toast(t("🎓 Terfi! Artık {0} {1} oldun!", promotion.emoji, promotion.name), true);
 
     pages.forEach(name => toast(t("📒 \"{0}\" sayfası tamamlandı! +5 💎, +100 coin", name)));
     fresh.forEach(name => toast(t("🏆 Yeni rozet: {0} (+1 💎)", name)));
