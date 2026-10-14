@@ -1071,6 +1071,292 @@ translations.en = {
         "🐾 My Pets",
     "🎓 Kariyerim":
         "🎓 My Career",
+    "Kasket":
+        "Cap",
+    "Çiçek Tacı":
+        "Flower Crown",
+    "Kulaklık":
+        "Headphones",
+    "Tavşan Kulakları":
+        "Bunny Ears",
+    "Yıldız Gözlük":
+        "Star Glasses",
+    "Kış":
+        "Winter",
+    "Kış geldi: nezle ve kaygan buz vakaları arttı!":
+        "Winter is here: more colds and slippery-ice cases!",
+    "İlkbahar":
+        "Spring",
+    "İlkbahar: çiçekler açtı, hapşıranlar ve bisikletten düşenler geliyor!":
+        "Spring: the flowers are out, and sneezers and bike tumbles are coming in!",
+    "Yaz":
+        "Summer",
+    "Yaz: güneş yanığı ve böcek ısırığı vakalarına dikkat!":
+        "Summer: watch out for sunburn and insect bites!",
+    "Sonbahar":
+        "Autumn",
+    "Sonbahar: okullar açıldı, yorgunluk ve yağmur nezlesi vakaları arttı!":
+        "Autumn: school has started, with more tiredness and rainy-day colds!",
+    "\n\n🚑 ACİL ÇAĞRI! Parkta bir çocuk düştü. Klinik ekranındaki \"🚑 Acil Çağrı\" düğmesine bas ve ambulansla git!":
+        "\n\n🚑 EMERGENCY CALL! A child fell in the park. Press the \"🚑 Emergency Call\" button on the clinic screen and drive the ambulance!",
+    "🌙 Klinik kapalı; çağrıya başka bir ambulans gitti.":
+        "🌙 The clinic is closed; another ambulance took the call.",
+    "Acil Çağrı":
+        "Emergency Call",
+    "🚑 Zamanında yetiştin! {0} kliniğe geldi; hemen tedavi et!":
+        "🚑 You made it in time! {0} is at the clinic; treat them right away!",
+    "🚑 Biraz geç kaldın ama {0} kliniğe geldi. Hemen tedavi et!":
+        "🚑 You were a little late, but {0} is at the clinic. Treat them right away!",
+    "Bu hafta {0} vaka tamamla":
+        "Complete {0} cases this week",
+    "Bu hafta {0} vakayı 3 yıldızla bitir":
+        "Finish {0} cases with 3 stars this week",
+    "Bu hafta bölümlerde {0} vaka çöz":
+        "Solve {0} ward cases this week",
+    "Bu hafta {0} mini oyun kazan":
+        "Win {0} mini games this week",
+    "Bu hafta {0} zor, acil ya da çağrı vakası çöz":
+        "Solve {0} tricky, emergency or referral cases this week",
+    "🏆 Haftanın turnuvasını kazandın! +200 coin, +5 💎":
+        "🏆 You won this week's tournament! +200 coins, +5 💎",
+    "Haftanın Turnuvası":
+        "Weekly Tournament",
+    "✅ Bu haftanın kupası senin! Yeni turnuva pazartesi başlar.":
+        "✅ This week's cup is yours! A new tournament starts on Monday.",
+    "{0} / {1} • Ödül: 200 coin, 5 💎 ve bir kupa":
+        "{0} / {1} • Prize: 200 coins, 5 💎 and a cup",
+    "Toplam kupa: {0} 🏆":
+        "Cups won: {0} 🏆",
+    "Mikrop 🦠 konan dişe hemen dokun ve onu temizle!":
+        "Tap the tooth with a germ 🦠 on it right away to clean it!",
+    "⏱️ {0} sn • Temizlenen: {1}":
+        "⏱️ {0} s • Cleaned: {1}",
+    "{0} mikrobu temizledin! Dişler parlıyor. ✨":
+        "You cleaned {0} germs! The teeth are sparkling. ✨",
+    "🤒 Yüksek ateş ve boğazda 🦠":
+        "🤒 High fever and 🦠 in the throat",
+    "🤧 Hafif ateş ve hırıltı":
+        "🤧 Slight fever and wheezing",
+    "🤕 Dokununca acıyor, şişlik yok":
+        "🤕 Hurts when touched, no swelling",
+    "🫃 Karından guruldama sesi":
+        "🫃 Rumbling tummy sounds",
+    "😴 Solgun, halsiz, nabız yavaş":
+        "😴 Pale, tired, slow pulse",
+    "🦴 Şişlik var, oynatınca acıyor":
+        "🦴 Swollen, hurts when moved",
+    "Soldan bir bulgu, sağdan ona uyan oyun kartını seç.":
+        "Pick a finding on the left, then the game card that matches it on the right.",
+    "Eşleşen: {0} / 6 • Hata: {1}":
+        "Matched: {0} / 6 • Mistakes: {1}",
+    "Önce soldan bir bulgu seç.":
+        "Pick a finding on the left first.",
+    "Hepsini eşleştirdin! Hata: {0}. Puanın: {1} / 6.":
+        "You matched them all! Mistakes: {0}. Your score: {1} / 6.",
+    "📝 {0} reçeteyle geldi: {1}":
+        "📝 {0} brought a prescription: {1}",
+    "Poşet boş":
+        "The bag is empty",
+    "🧺 Poşeti boşalt":
+        "🧺 Empty the bag",
+    "✅ Müşteriye ver":
+        "✅ Hand it over",
+    "Müşteri: {0} / {1} • Doğru: {2}":
+        "Customer: {0} / {1} • Correct: {2}",
+    "✅ {0}: \"Teşekkürler, tam istediğim gibi!\"":
+        "✅ {0}: \"Thank you, just what I needed!\"",
+    "❌ {0}: \"Bu reçetedekiyle aynı değil.\"":
+        "❌ {0}: \"That's not what the prescription says.\"",
+    "{0} müşterinin {1} tanesini doğru hazırladın.":
+        "You got {1} of {0} customers' orders right.",
+    "Diş Avı":
+        "Tooth Hunt",
+    "İlaç Eşleştir":
+        "Card Match",
+    "Eczacılık":
+        "Pharmacist",
+    "Okul Gezisi":
+        "School Trip",
+    "Sınıf müzeye geziye çıktı ve sen de gezinin doktorusun! Otobüste midesi bulananlar, yürürken ayağını burkanlar, kahvaltı etmeden gelenler… Herkese yetişmelisin.":
+        "The class is on a museum trip and you're the trip doctor! Carsick kids, twisted ankles, kids who skipped breakfast… You have to help everyone.",
+    "Gezi harika geçti! Öğretmen \"Bir dahaki geziye de seni çağıracağız\" dedi.":
+        "The trip was great! The teacher said, \"We'll invite you on the next trip too.\"",
+    "Kış Kampı":
+        "Winter Camp",
+    "Karlı dağlarda kış kampı başladı! Kayak, kızak, kartopu… Üşüyenler, ateşlenenler ve kayarken düşenler kliniğinin kapısında.":
+        "Winter camp has started in the snowy mountains! Skiing, sledging, snowball fights… Chilly, feverish and tumbling campers are at your clinic door.",
+    "Kamp bitti ve herkes sıcacık evine döndü. Kampçılar sana kardan bir madalya yaptı!":
+        "Camp is over and everyone is home and cosy. The campers made you a snow medal!",
+    "Büyük Hastane Açılışı":
+        "Grand Hospital Opening",
+    "Kasabanın yeni hastanesi açılıyor ve açılışı sen yapacaksın! Bütün kasaba orada; her türlü vaka gelebilir. Bu, kariyerinin en büyük günü!":
+        "The town's new hospital is opening and you're cutting the ribbon! The whole town is there, so any kind of case can come in. It's the biggest day of your career!",
+    "Kurdele kesildi, hastane açıldı! Kasaba halkı seni alkışlıyor: Doktormust'un en iyi doktoru sensin!":
+        "The ribbon is cut and the hospital is open! The town is cheering: you're Doktormust's best doctor!",
+    "Gezi Doktoru":
+        "Trip Doctor",
+    "\"Okul Gezisi\" bölümünü tamamla.":
+        "Finish the \"School Trip\" chapter.",
+    "Kar Doktoru":
+        "Snow Doctor",
+    "\"Kış Kampı\" bölümünü tamamla.":
+        "Finish the \"Winter Camp\" chapter.",
+    "Hastane Kurucusu":
+        "Hospital Founder",
+    "\"Büyük Hastane Açılışı\" bölümünü tamamla.":
+        "Finish the \"Grand Hospital Opening\" chapter.",
+    "Turnuva Şampiyonu":
+        "Tournament Champion",
+    "Bir haftalık turnuvayı kazan.":
+        "Win a weekly tournament.",
+    "Şehir Şehir Doktor":
+        "City Hopper Doctor",
+    "Üç şehirde şube aç.":
+        "Open branches in three cities.",
+    "Emekli Doktor":
+        "Retired Doctor",
+    "Kariyerinin sonunda emekli ol.":
+        "Retire at the end of your career.",
+    "Şehirler":
+        "Cities",
+    "💰 Bugünün şube gelirini topladın. Yarın yine gel!":
+        "💰 You've collected today's branch income. Come back tomorrow!",
+    "💰 Şubelerinden {0} coin geldi!":
+        "💰 Your branches earned {0} coins!",
+    "Başka şehirlerde şube aç ve oraya bir doktor görevlendir. Şubeler her gün kendi kendine coin kazanır.":
+        "Open branches in other cities and put a doctor in charge. Branches earn coins on their own every day.",
+    "💰 Günlük Geliri Topla ({0} coin)":
+        "💰 Collect Daily Income ({0} coins)",
+    "✅ Bugünün geliri toplandı":
+        "✅ Today's income collected",
+    "Dr. {0} • {1}. kademe • günde {2} coin":
+        "Dr. {0} • tier {1} • {2} coins a day",
+    "{0}. seviyede açılır":
+        "Opens at level {0}",
+    "Günde {0} coin kazandırır":
+        "Earns {0} coins a day",
+    "Şube gelirini her gün topla; toplamayı unutursan en fazla 3 günlük gelir birikir.":
+        "Collect branch income every day; if you forget, up to 3 days' income is saved.",
+    "⬆️ {0} şuben büyüdü! Artık daha çok coin kazandırır.":
+        "⬆️ Your {0} branch has grown! It earns more coins now.",
+    "🏥 {0} şubesi açıldı! Dr. {1} orada hastalara bakıyor.":
+        "🏥 The {0} branch is open! Dr. {1} is looking after patients there.",
+    "Emekli olursan kariyerin Stajyer Doktor olarak yeniden başlar (eşyaların, coinlerin, çıkartmaların ve rozetlerin kalır). Her emeklilik kazancını kalıcı olarak %10 artırır ve 7 klinik gününde bir {0} coin emekli maaşı alırsın. Emekli olunsun mu?":
+        "If you retire, your career starts again as an Intern (you keep your items, coins, stickers and badges). Each retirement permanently adds 10% to your earnings, and you get a {0}-coin pension every 7 clinic days. Retire?",
+    "Mutlu emeklilikler, Doktor!":
+        "Happy retirement, Doctor!",
+    "Uzun ve başarılı bir kariyeri geride bıraktın. Veda hediyesi: +1000 coin.\n\nŞimdi kliniğe yeni nesil bir doktor geliyor: yine Stajyer Doktor olarak başlıyorsun, ama artık her vakada %{0} daha fazla coin kazanıyorsun ve 7 klinik gününde bir {1} coin emekli maaşı alıyorsun.":
+        "You've had a long and successful career. Farewell gift: +1000 coins.\n\nNow a new generation of doctor comes to the clinic: you start again as an Intern, but you now earn {0}% more coins per case and get a {1}-coin pension every 7 clinic days.",
+    "Emeklilik sayısı: {0}":
+        "Retirements: {0}",
+    "👴 Emekli maaşın yattı: +{0} coin!":
+        "👴 Your pension has arrived: +{0} coins!",
+    "👴 {0} kez emekli oldun • Kazanç bonusu: %{1}":
+        "👴 Retired {0} times • Earnings bonus: {1}%",
+    "👴 Emekli Ol":
+        "👴 Retire",
+    "🔘 Büyük düğmeler: Açık":
+        "🔘 Big buttons: On",
+    "🔘 Büyük düğmeler: Kapalı":
+        "🔘 Big buttons: Off",
+    "2. seviyeden sonra bazen acil çağrı gelir. Klinik ekranındaki \"🚑 Acil Çağrı\" düğmesine bas, labirentte ambulansı sür ve yaralı çocuğu kliniğe getir. Hızlı gidersen kurtarma ödülü kazanırsın!":
+        "After level 2, emergency calls sometimes come in. Press \"🚑 Emergency Call\" on the clinic screen, drive the ambulance through the maze and bring the hurt child to the clinic. Get there fast for a rescue reward!",
+    "Şu an {0} {1}. {2}":
+        "It's {0} {1} now. {2}",
+    "Bu haftanın turnuvası: {0}. Görevler ekranında ilerlemeni görebilirsin; kazanırsan 200 coin, 5 elmas ve bir kupa alırsın!":
+        "This week's tournament: {0}. See your progress on the Tasks screen; win it for 200 coins, 5 gems and a cup!",
+    "6. seviyeden sonra \"🗺️ Şehirler\" düğmesinden Ankara, İzmir, İstanbul gibi şehirlerde şube açabilirsin. Şubeler her gün coin kazandırır; geliri toplamayı unutma!":
+        "After level 6, use the \"🗺️ Cities\" button to open branches in cities like Ankara, İzmir and İstanbul. Branches earn coins every day; don't forget to collect!",
+    "Klinikler Başkanı olunca Doktorum ekranından emekli olabilirsin. Kariyer baştan başlar ama her vakada daha çok coin kazanır ve 7 klinik gününde bir emekli maaşı alırsın.":
+        "Once you're Head of All Clinics, you can retire from the My Doctor screen. Your career starts over, but you earn more coins per case and get a pension every 7 clinic days.",
+    "Mini Oyunlar'daki \"Eczacılık\" oyununda müşterilerin reçetelerini okur, doğru ürünleri poşete koyarsın. Beş müşteriye de doğru hazırlarsan rekor senin!":
+        "In the \"Pharmacist\" mini game you read customers' prescriptions and put the right items in the bag. Get all five right for a record!",
+    "Doktorum ekranında doktoruna kasket, çiçek tacı, kulaklık, tavşan kulakları ya da yıldız gözlük takabilirsin. Önlüğünün rengini de değiştirebilirsin!":
+        "On the My Doctor screen you can give your doctor a cap, flower crown, headphones, bunny ears or star glasses. You can change your coat colour too!",
+    "{0} mikrop":
+        "{0} germs",
+    "🥶 Kış Nezlesi":
+        "🥶 Winter Cold",
+    "Kar topu oynadım, şimdi burnum akıyor ve biraz sıcağım var. ⛄":
+        "I had a snowball fight and now my nose is runny and I'm a bit warm. ⛄",
+    "Okulda herkes nezle, ben de hapşırıp duruyorum. 🤧":
+        "Everyone at school has a cold and I keep sneezing. 🤧",
+    "🤒 Kış Ateşi":
+        "🤒 Winter Fever",
+    "Soğukta atkısız gezdim, şimdi boğazım yanıyor ve ateşim var. 🧣":
+        "I went out in the cold without a scarf; now my throat burns and I have a fever. 🧣",
+    "Yutkunamıyorum, alnım da yanıyor. ❄️":
+        "I can't swallow, and my forehead is burning. ❄️",
+    "⛸️ Buzda Kayma":
+        "⛸️ Slipped on Ice",
+    "Buzda kaydım, bileğim şişti ve basamıyorum! 😣":
+        "I slipped on the ice; my ankle is swollen and I can't stand on it! 😣",
+    "Kızakla düştüm, bileğim çok acıyor. 🛷":
+        "I fell off my sledge and my ankle really hurts. 🛷",
+    "🌸 Bahar Hapşırığı":
+        "🌸 Spring Sneezes",
+    "Parkta çiçekler açtı, ben de durmadan hapşırıyorum. 🌼":
+        "The flowers are out in the park and I can't stop sneezing. 🌼",
+    "Gözlerim sulanıyor, burnum akıyor, biraz da sıcağım var. 🌷":
+        "My eyes are watering, my nose is runny and I'm a bit warm. 🌷",
+    "🚲 Bisiklet Düşmesi":
+        "🚲 Bike Tumble",
+    "Bisikletten düştüm, bacağım acıyor ama şişmedi. 🚲":
+        "I fell off my bike; my leg hurts but it isn't swollen. 🚲",
+    "Bahçede koşarken dizimi çarptım. 🌱":
+        "I bumped my knee running in the garden. 🌱",
+    "Plajda şapkasız kaldım, kolum kıpkırmızı ve acıyor. 🏖️":
+        "I was on the beach without a hat; my arm is bright red and sore. 🏖️",
+    "Güneşte çok oynadım, kollarım yanıyor. ☀️":
+        "I played in the sun too long and my arms are burning. ☀️",
+    "🦟 Böcek Isırığı":
+        "🦟 Insect Bite",
+    "Kampta bir böcek ısırdı, bacağım kaşınıyor ve acıyor. 🦟":
+        "A bug bit me at camp; my leg itches and hurts. 🦟",
+    "Bahçede arı soktu sandım, bacağım sızlıyor. 🐝":
+        "I think a bee stung me in the garden; my leg stings. 🐝",
+    "🍦 Yaz Karın Ağrısı":
+        "🍦 Summer Tummy Ache",
+    "Sıcakta üç dondurma yedim, karnım guruldayıp duruyor. 🍦":
+        "I ate three ice creams in the heat and my tummy keeps rumbling. 🍦",
+    "Piknikte çok yedim, karnım ağrıyor. 🧺":
+        "I ate too much at the picnic and my tummy hurts. 🧺",
+    "🍂 Okul Yorgunluğu":
+        "🍂 Back-to-School Tiredness",
+    "Okullar açıldı, hep uykum var. Meyve de yemiyorum. 🍂":
+        "School has started and I'm always sleepy. I don't eat fruit either. 🍂",
+    "Derste gözlerim kapanıyor, kahvaltıda sadece kurabiye yedim. 🍪":
+        "My eyes keep closing in class; I only had biscuits for breakfast. 🍪",
+    "🌧️ Yağmur Nezlesi":
+        "🌧️ Rainy-Day Cold",
+    "Yağmurda ıslandım, şimdi burnum tıkalı ve biraz sıcağım var. ☔":
+        "I got soaked in the rain; now my nose is blocked and I'm a bit warm. ☔",
+    "Şemsiyemi unuttum, hapşırıyorum. 🌧️":
+        "I forgot my umbrella and now I'm sneezing. 🌧️",
+    "👑 Baş Vaka: Gezi Rehberi":
+        "👑 Boss Case: Trip Guide",
+    "Bütün sınıfa müzeyi ben anlatacaktım ama birden kendimi kötü hissettim. Gezi benim olmadan olmaz! 🥺":
+        "I was going to show the whole class around the museum, but suddenly I feel ill. The trip can't happen without me! 🥺",
+    "👑 Baş Vaka: Kayak Şampiyonu":
+        "👑 Boss Case: Ski Champion",
+    "Yarın kayak yarışı var ve ben şampiyonum! Ama bugün hiç iyi değilim. Yarışa yetişebilir miyim? ⛷️":
+        "The ski race is tomorrow and I'm the champion! But I feel awful today. Can I make it to the race? ⛷️",
+    "👑 Baş Vaka: Açılış Konuğu":
+        "👑 Boss Case: Guest of Honour",
+    "Kurdeleyi birlikte kesecektik ama tam açılışta rahatsızlandım. Hastanenin ilk hastası ben olayım! 🎀":
+        "We were going to cut the ribbon together, but I felt ill right at the opening. Let me be the hospital's first patient! 🎀",
+    "🚑 Acil Çağrı!":
+        "🚑 Emergency Call!",
+    "🗺️ Şehirler":
+        "🗺️ Cities",
+    "Mikrop konan dişe hemen dokun!":
+        "Tap the tooth with a germ, fast!",
+    "Bulguyu doğru oyun kartıyla eşleştir.":
+        "Match each finding to the right game card.",
+    "Reçeteyi oku, doğru ürünleri poşete koy.":
+        "Read the prescription and bag the right items.",
+    "🔘 Büyük düğmeler":
+        "🔘 Big buttons",
     "Bu oyunu yapan: Mustafa":
         "Made by: Mustafa",
     "Çıkış Yap":

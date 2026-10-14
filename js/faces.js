@@ -485,7 +485,7 @@ function doctorAccessory(index, behind) {
     const dark = "#1f2937";
 
     if (behind) {
-        return index === 6 ? `<path fill="#e11d48" d="M10 121L20 93Q50 84 80 93L90 121Z"/>` : "";
+        return index === 6 ? `<path fill="#e11d48" d="M10 121L20 93Q50 84 80 93L90 121Z"/>` : extraAccessory(index, true);
     }
 
     return [
@@ -504,7 +504,7 @@ function doctorAccessory(index, behind) {
         `<circle fill="${faceLine}" cx="39" cy="53" r="2.6"/><circle fill="${faceLine}" cx="61" cy="53" r="2.6"/>`,
         `<path fill="#f5b301" stroke="#d99a00" stroke-width="1.2" d="M30 23L32 6L42 16L50 2L58 16L68 6L70 23Z"/>` +
         `<circle fill="#ef4444" cx="50" cy="17" r="2.6"/><circle fill="#3b82f6" cx="38" cy="19" r="1.9"/><circle fill="#3b82f6" cx="62" cy="19" r="1.9"/>`
-    ][index] || "";
+    ][index] || extraAccessory(index, behind);
 }
 
 // look: { skin, hairColor, hairStyle, accessory } dizinleri; coat: önlük rengi.

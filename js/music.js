@@ -54,17 +54,20 @@ function scheduleMusic() {
 
     if (musicTime < audioContext.currentTime) musicTime = audioContext.currentTime + .05;
 
+    // Klinikte, evde ve eczanede farklı melodi çalar.
+    const track = musicTrack();
+
     while (musicTime < audioContext.currentTime + .6) {
-        const [frequency, beats] = melody[musicStep % melody.length];
+        const [frequency, beats] = track.melody[musicStep % track.melody.length];
 
         if (musicBeats % 4 === 0) {
-            musicNote(bassLine[musicBeats / 4 % bassLine.length],
-                musicTime, musicBeat * 3.6, "sine", .03);
+            musicNote(track.bass[musicBeats / 4 % track.bass.length],
+                musicTime, track.beat * 3.6, "sine", .03);
         }
 
-        musicNote(frequency, musicTime, musicBeat * beats * .92, "triangle", .028);
+        musicNote(frequency, musicTime, track.beat * beats * .92, track.wave, .028);
 
-        musicTime += musicBeat * beats;
+        musicTime += track.beat * beats;
         musicBeats += beats;
         musicStep++;
     }

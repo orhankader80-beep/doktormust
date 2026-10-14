@@ -315,6 +315,7 @@ function normalizePatient(p, group) {
         usedXray: p.usedXray === true,
         usedTest: p.usedTest === true,
         referral: typeof p.referral === "string" && !ward && !checkup ? p.referral.slice(0,20) : "",
+        rescue: p.rescue === true && !ward,
         tricky: p.tricky === true && !ward && !checkup,
         testPaid: p.testPaid === true,
         xrayPaid: p.xrayPaid === true,
@@ -433,6 +434,31 @@ function normalizeState(saved) {
     // Eski kayıtlarda kariyer yoktur; şimdiki ünvan kutlanmış sayılır.
     result.career = Number.isInteger(saved.career)
         ? clamp(saved.career, 0, careerSteps.length - 1) : careerIndex(Math.max(1, number(saved.level) || 1));
+
+    // v11: acil çağrı, haftalık turnuva, şubeler, emeklilik ve büyük düğmeler.
+    result.callPending = saved.callPending === true;
+
+    const cup = isRecord(saved.cup) ? saved.cup : {};
+    result.cup = {
+        week: typeof cup.week === "string" ? cup.week.slice(0,10) : "",
+        progress: number(cup.progress),
+        done: cup.done === true,
+        total: number(cup.total)
+    };
+
+    result.branches = (Array.isArray(saved.branches) ? saved.branches : [])
+        .filter(branch => isRecord(branch) && cityList.some(city => city.id === branch.city))
+        .filter((branch, index, list) => list.findIndex(other => other.city === branch.city) === index)
+        .map(branch => ({
+            city: branch.city,
+            level: clamp(number(branch.level, 1), 1, BRANCH_MAX),
+            doctor: typeof branch.doctor === "string" && branch.doctor ? branch.doctor.slice(0,20) : pick(helperDoctors)
+        }));
+    result.branchDay = typeof saved.branchDay === "string" && /^\d{4}-\d{2}-\d{2}$/.test(saved.branchDay) ? saved.branchDay : "";
+
+    const retired = isRecord(saved.retired) ? saved.retired : {};
+    result.retired = { count: clamp(number(retired.count), 0, 99), lastPay: number(retired.lastPay) };
+    result.bigUI = saved.bigUI === true;
 
     const shift = isRecord(saved.shift) ? saved.shift : {};
     result.shift = {
@@ -1237,6 +1263,7 @@ function updateUI() {
     renderCustom();
     renderV9();
     renderV10();
+    renderV11();
     renderRobot();
 
     // Sahne, açık bir pencere yokken güncellenir (pencere kapanınca da yenilenir).
@@ -1292,6 +1319,8 @@ function checkBadges() {
     for (const chapter of chapters) {
         conditions["ch_" + chapter.id] = state.story.done.includes(chapter.id);
     }
+
+    Object.assign(conditions, extraBadgeConditions());
 
     for (const ward of wards) {
         conditions["ward_" + ward.id] = state.wardCases[ward.id] >= 5;

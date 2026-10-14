@@ -60,6 +60,7 @@ function startDay() {
     }
 
     state.shift = { minute: SHIFT_OPEN, day: state.shift.day + 1, cases: 0, stars: 0, closed: false, closedAt: 0, reports: 0, home: false };
+    payPension();
     generatePatients();
     commit();
     showScreen("home");

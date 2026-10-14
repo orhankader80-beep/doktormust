@@ -193,15 +193,19 @@
                 </p>
 
                 <p class="scene-actions">
+                    <button class="secondary-btn call-btn" id="callButton" onclick="answerCall()" hidden>🚑 Acil Çağrı!</button>
                     <button class="secondary-btn" id="dayCaseButton" onclick="openDayCase()">🗓️ Günün Vakası</button>
                     <button class="secondary-btn" onclick="openClass()">🏫 Sınıf Yarışması</button>
                     <button class="secondary-btn" onclick="openFriends()">🤝 Arkadaş Skorları</button>
                     <button class="secondary-btn" id="depotButton" onclick="openDepot()">📦 Depo</button>
                     <button class="secondary-btn" onclick="openAds()">📣 Reklam</button>
                     <button class="secondary-btn" onclick="openPets()">🐾 Hayvanlarım</button>
+                    <button class="secondary-btn" onclick="openCities()">🗺️ Şehirler</button>
                 </p>
 
                 <div class="home-panel" id="homePanel" hidden>
+                <div class="card cup-card" id="cupCard"></div>
+
                 <div class="card hero-card">
                     <div>
                         <h3>Merhaba, <span id="doctorNameText">Doktor</span>! 👋</h3>
@@ -548,6 +552,27 @@
                         <button class="primary-btn" onclick="startGame('organ')">Oyna</button>
                     </div>
                     <div class="card game-card">
+                        <div class="game-big">🦷</div>
+                        <h3>Diş Avı</h3>
+                        <p>Mikrop konan dişe hemen dokun!</p>
+                        <p class="small muted" id="rec-teethhunt"></p>
+                        <button class="primary-btn" onclick="startGame('teethhunt')">Oyna</button>
+                    </div>
+                    <div class="card game-card">
+                        <div class="game-big">💊</div>
+                        <h3>İlaç Eşleştir</h3>
+                        <p>Bulguyu doğru oyun kartıyla eşleştir.</p>
+                        <p class="small muted" id="rec-match"></p>
+                        <button class="primary-btn" onclick="startGame('match')">Oyna</button>
+                    </div>
+                    <div class="card game-card">
+                        <div class="game-big">🏪</div>
+                        <h3>Eczacılık</h3>
+                        <p>Reçeteyi oku, doğru ürünleri poşete koy.</p>
+                        <p class="small muted" id="rec-pharma"></p>
+                        <button class="primary-btn" onclick="startGame('pharma')">Oyna</button>
+                    </div>
+                    <div class="card game-card">
                         <div class="game-big">🎈</div>
                         <h3>Nefes Egzersizi</h3>
                         <p>Balonla nefes al, ver ve sakinleş.</p>
@@ -601,6 +626,7 @@
                     <h3>🎓 Kariyerim</h3>
                     <ol class="class-board career-list" id="careerList"></ol>
                     <p class="small muted" id="careerNext"></p>
+                    <div id="retireBox"></div>
                 </div>
 
                 <div class="grid">
@@ -744,6 +770,7 @@
                     <p class="small muted" id="installNote"></p>
                     <p class="small muted" id="saveInfo"></p>
                     <p class="small muted">Bu oyunu yapan: Mustafa</p>
+                    <p><button class="toggle" type="button" id="bigUIButton" onclick="toggleBigUI()">🔘 Büyük düğmeler</button></p>
                     <p><button class="toggle" type="button" onclick="openPrivacy()">🔒 Gizlilik politikası</button></p>
                 </div>
             </section>
@@ -1131,6 +1158,7 @@
 <script src="js/extras.js"></script>
 <script src="js/v9.js"></script>
 <script src="js/v10.js"></script>
+<script src="js/v11.js"></script>
 <script src="js/main.js"></script>
 </body>
 </html>

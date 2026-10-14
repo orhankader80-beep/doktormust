@@ -144,7 +144,7 @@ function newArrival() {
     const pool = diseasePool[group.pool]
         .filter(disease => state.level >= (disease.level || 1));
 
-    const patient = makePatient(pick(pool), group);
+    const patient = makePatient(seasonalDisease(pool), group);
 
     // Usta doktorlara bazen zor vaka gelir.
     if (Math.random() < trickyChance()) {
@@ -756,6 +756,12 @@ function finishTreat(patient) {
     // Mutlu hayvanlar ve günün reklamı küçük bir ek getirir.
     coins += happyPets() * 5 + (activeAd() ? activeAd().bonus : 0);
 
+    // Ambulansla zamanında getirilen hasta kurtarma ödülü verir.
+    if (patient.rescue) coins += 25;
+
+    // Emeklilikten gelen kalıcı kazanç bonusu.
+    coins = Math.round(coins * (1 + legacyBonus()));
+
     if (patient.emergency) {
         coins *= 2;
         xp *= 2;
@@ -810,6 +816,7 @@ function finishTreat(patient) {
     if (patient.ward) state.wardCases[patient.ward]++;
     addXP(xp);
     questProgress("cases");
+    cupProgress("case", patient, stars);
     rememberVisitor(patient);
 
     if (stars === 3) {
@@ -827,6 +834,7 @@ function finishTreat(patient) {
     const shiftNote = patient.ward || patient.story || patient.klass || patient.daily ? "" : advanceShift(30, stars);
     if (patient.daily) dayCaseResult(stars);
     const call = maybeReferral(patient);
+    const siren = maybeAmbulance(patient);
 
     const saved = commit();
     refreshPatientScreens();
@@ -842,7 +850,7 @@ function finishTreat(patient) {
         regular + sticker +
         (patient.daily ? t("\n🗓️ Günün vakası tamamlandı! Arkadaşlarına kaç yıldız aldığını söyle.") : "") +
         (currentUser && !saved ? t("\nİlerleme şu anda kalıcı kaydedilemedi.") : "") +
-        chapter + letter + shiftNote + call +
+        chapter + letter + shiftNote + call + siren +
         (patient.referral ? t("\n📞 Dr. {0} çok teşekkür etti: \"Sen olmasan bu hastayı iyileştiremezdim!\"", patient.referral) : "") +
         `\n\n💬 ${patientName}: "${pick(thanksLines)}"` +
         t("\n\n💡 Sağlık bilgisi\n") + healthTips[tip],

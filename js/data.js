@@ -69,6 +69,13 @@ const defaultState = {
     pets: [],
     ad: { kind: "", day: 0 },
     career: 0,
+    // Acil çağrı, haftalık turnuva, şehirlerdeki şubeler, emeklilik ve büyük düğmeler.
+    callPending: false,
+    cup: { week: "", progress: 0, done: false, total: 0 },
+    branches: [],
+    branchDay: "",
+    retired: { count: 0, lastPay: 0 },
+    bigUI: false,
     // Mesai saati: dakika olarak oyun saati, kaçıncı gün olduğu ve o günün sayıları.
     shift: { minute: 540, day: 1, cases: 0, stars: 0, closed: false, closedAt: 0, reports: 0, home: false },
     diplomaSeen: false,

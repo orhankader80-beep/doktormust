@@ -110,6 +110,7 @@ function renderScene(force = false) {
     add("div", "scene-sign", escapeHTML("🏥 " + clinicTitle()));
     add("div", "clinic-garland", season ? escapeHTML(season.decor.join(" ")) : "").setAttribute("aria-hidden", "true");
     add("div", "clinic-window view-" + view.id, view.emoji).setAttribute("aria-hidden", "true");
+    add("div", "scene-weather", seasonInfo[seasonNow()].emoji).setAttribute("aria-hidden", "true");
 
     // Oyuncunun yerleştirdiği eşyalar odada da durur (yalnızca süs; dokunulmaz).
     items.forEach(item => {

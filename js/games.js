@@ -160,6 +160,7 @@ function gameStatus(text) {
 function startGame(kind) {
     if (!appOpen || !own(gameInfo,kind)) return;
     pharmacyTrip = false;
+    ambulanceRun = false;
 
     const info = gameInfo[kind];
 
@@ -217,6 +218,7 @@ function finishGame(result) {
     if (result.won) {
         state.gamesWon++;
         questProgress("games");
+        cupProgress("game");
         state.week.games++;
         sticker = rollSticker(.25);
     }
@@ -242,6 +244,7 @@ function finishGame(result) {
 
     // Eczane yolculuğu labirentle yapıldıysa sonunda eczane açılır.
     if (round.kind === "maze" && pharmacyTrip) afterTrip(result.won);
+    if (round.kind === "maze" && ambulanceRun) afterCall(result.won);
 }
 
 /* Hızlı Muayene: 5 soruluk tur */

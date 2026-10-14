@@ -1636,3 +1636,25 @@ body.still .home-zzz { animation: none !important; }
     .exam-side .game-status { grid-column: 1 / -1; }
     .stock-list li { grid-template-columns: 30px minmax(0, 1fr) auto; padding: 10px; }
 }
+
+/* ===== v11: acil çağrı, mevsim, turnuva, yeni oyunlar, büyük düğmeler ===== */
+.scene-actions [hidden] { display: none !important; }
+.scene-actions .call-btn { background: #ff4d6d; color: #fff; box-shadow: 0 0 0 3px rgba(255,77,109,.3); animation: call-pulse 1s ease-in-out infinite alternate; }
+@keyframes call-pulse { to { box-shadow: 0 0 0 8px rgba(255,77,109,.08); } }
+.scene-weather { position: absolute; left: 57%; top: 5%; z-index: 3; font-size: 22px; pointer-events: none; }
+
+.cup-card { margin-bottom: 14px; background: linear-gradient(135deg, #fff7d6, #ffe9a8); color: #5f4300; }
+.cup-card h3 { margin-top: 0; }
+
+.tooth-cell { font-size: 30px; }
+.game-options.match-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+.match-grid .choice { margin: 0; padding: 10px 8px; font-size: 14px; }
+.match-grid .choice.picked { box-shadow: inset 0 0 0 3px var(--primary); }
+.match-grid .choice.matched { background: #dcfce7; color: #166534; }
+.pharma-bag { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; min-height: 48px; padding: 10px; border-radius: 14px; background: var(--soft); font-size: 20px; }
+
+body.big-ui button, body.big-ui .choice, body.big-ui .secondary-btn, body.big-ui .primary-btn { font-size: 1.1em; min-height: 50px; }
+body.big-ui .scene-spot small, body.big-ui .sp-name { font-size: 13px; }
+body.big-ui .exam-tool { min-height: 92px; }
+
+body.still .scene-actions .call-btn { animation: none !important; }
