@@ -144,7 +144,15 @@ function newArrival() {
     const pool = diseasePool[group.pool]
         .filter(disease => state.level >= (disease.level || 1));
 
-    return makePatient(pick(pool), group);
+    const patient = makePatient(pick(pool), group);
+
+    // Usta doktorlara bazen zor vaka gelir.
+    if (Math.random() < trickyChance()) {
+        patient.tricky = true;
+        makeTricky(patient);
+    }
+
+    return patient;
 }
 
 function refillQueue() {
@@ -168,7 +176,7 @@ function generatePatients() {
 
 // İyileşen hasta klinikte dolaşır ve sonra kontrole gelebilir.
 function rememberVisitor(patient) {
-    if (patient.ward) return;
+    if (patient.ward || patient.daily) return;
 
     state.treated.push({
         name: patient.name,
@@ -181,6 +189,9 @@ function rememberVisitor(patient) {
 }
 
 function removePatient(patient) {
+    // Günün vakası hiçbir listede durmaz.
+    if (patient.daily) return;
+
     if (patient.special) {
         state.weekly.patient = null;
         return;
@@ -209,7 +220,8 @@ function losePatient(patient, message) {
     closeModal();
     if (patient.special) state.weekly.failDay = dayKey();
     removePatient(patient);
-    const shiftNote = patient.ward || patient.story || patient.klass ? "" : advanceShift(30, 0);
+    if (patient.daily) dayCaseResult(0);
+    const shiftNote = patient.ward || patient.story || patient.klass || patient.daily ? "" : advanceShift(30, 0);
 
     // Hikâyede giden hastanın yerine aynı sıradaki yeni hasta gelir.
     if (patient.story) ensureStoryPatient();
@@ -259,7 +271,7 @@ function reportsLeft() {
 
 function payReport(patient, kind) {
     const key = kind + "Paid";
-    if (patient.special || patient.boss) return false;
+    if (patient.special || patient.boss || patient.daily) return false;
     if (patient[key]) return true;
 
     if (!reportsLeft()) {
@@ -363,6 +375,7 @@ function findPatient(id) {
     const special = state.weekly.patient;
     const story = state.story.current && state.story.current.patient;
 
+    if (dayCasePatient && dayCasePatient.id === id) return dayCasePatient;
     if (special && special.id === id) return special;
     if (story && story.id === id) return story;
 
@@ -565,7 +578,7 @@ function openTreatment(id) {
         return;
     }
 
-    const hard = patient.special || patient.boss;
+    const hard = patient.special || patient.boss || patient.daily;
 
     openModal("treatmentModal");
     activePatientId = id;
@@ -586,7 +599,9 @@ function openTreatment(id) {
         : t("Önce aletlerle muayene et, sonra bulgulara uyan kartı seç.\n\n") +
           t("Tahlil raporu vakanın kodunu verir; görüntüleme raporu seçenekleri iki karta indirir. ") +
           t("Her rapor o vakadan bir yıldız götürür ve bir klinik gününde 3 rapor hakkın var.")) +
-        (patient.emergency ? t("\n\n🚑 Acil vaka: süre dolmadan doğru kartı seç!") : "");
+        (patient.emergency ? t("\n\n🚑 Acil vaka: süre dolmadan doğru kartı seç!") : "") +
+        (patient.tricky ? t("\n\n🧩 Zor vaka: sabrı az ve bulgulardan biri seni yanıltabilir. Ödülü daha büyük!") : "") +
+        (patient.daily ? t("\n\n🗓️ Günün vakası: bugün herkese aynı vaka geldi. Yalnızca bir kez oynanır!") : "");
     $("tmOptions").hidden = true;
     $("treatmentChooseButton").hidden = false;
     renderExam();
@@ -638,10 +653,7 @@ function reqXray() {
 
     patient.usedXray = true;
 
-    // İkinci kart her açılışta aynı kalsın diye hastanın kimliğinden seçilir.
-    const others = cardsFor(patient).filter(card => card.id !== patient.correctTreatment);
-    const other = others[faceHash(patient.id) % others.length];
-    const pair = [patient.correctTreatment, other.id].sort().map(id => cardInfo(id).label);
+    const pair = hintPair(patient);
 
     $("tmResult").textContent =
         t("🩻 Kurgusal görüntüleme raporu\n\n") +
@@ -675,6 +687,7 @@ function applyTreat(id) {
     if (card !== id) {
         patient.mistakes++;
         patient.patience--;
+        if (patient.daily) state.dailyCase.mistakes = patient.mistakes;
         state.cardStats[card].wrong++;
         state.week.wrong[card] = (state.week.wrong[card] || 0) + 1;
 
@@ -719,6 +732,16 @@ function finishTreat(patient) {
     xp += event.xp || 0;
     if (event.vet && patient.ward === "vet") coins *= 2;
 
+    if (patient.tricky) {
+        coins += 15;
+        xp += 10;
+    }
+
+    if (patient.daily) {
+        coins += 30;
+        gems = 1;
+    }
+
     if (patient.emergency) {
         coins *= 2;
         xp *= 2;
@@ -738,15 +761,22 @@ function finishTreat(patient) {
         xp *= 2;
     }
 
+    // Sınıf yarışması hastası sırayı ve mesaiyi beklemeden gelir; küçük, sabit bir ödül verir.
+    if (patient.klass) {
+        coins = 5;
+        xp = 5;
+    }
+
     // Hasta önce kaldırılır; aynı karttan ikinci ödül alınamaz.
     const patientName = patient.name;
     const person = { name: patient.name, emoji: patient.emoji };
     const coached = coach !== null;
+    const slot = patient.klass ? -1 : scenePatients().indexOf(patient);
     closeModal();
     removePatient(patient);
 
     // Hastalar bazen küçük bir hediye bırakır.
-    const gift = Math.random() < (event.gift ? .6 : .2) ? 15 : 0;
+    const gift = !patient.klass && Math.random() < (event.gift ? .6 : .2) ? 15 : 0;
 
     // Gösterilen sağlık bilgisi ebeveyn köşesinde listelenir.
     const tip = Math.floor(Math.random() * healthTips.length);
@@ -762,7 +792,7 @@ function finishTreat(patient) {
     state.gems += gems;
     state.tipsSeen++;
     state.cardStats[card].right++;
-    state.week.cases++;
+    if (!patient.klass) state.week.cases++;
     if (patient.ward) state.wardCases[patient.ward]++;
     addXP(xp);
     questProgress("cases");
@@ -770,17 +800,18 @@ function finishTreat(patient) {
 
     if (stars === 3) {
         state.perfect++;
-        state.week.perfect++;
+        if (!patient.klass) state.week.perfect++;
         questProgress("perfect");
     }
 
     const regular = recordVisit(patient, stars);
     const chapter = patient.story ? advanceStory(stars) : "";
-    const sticker = rollSticker(
+    const sticker = patient.klass ? "" : rollSticker(
         patient.special || patient.boss || patient.emergency || event.sticker ? 1 : stars === 3 ? .7 : .5
     );
     const letter = maybeLetter(person);
-    const shiftNote = patient.ward || patient.story || patient.klass ? "" : advanceShift(30, stars);
+    const shiftNote = patient.ward || patient.story || patient.klass || patient.daily ? "" : advanceShift(30, stars);
+    if (patient.daily) dayCaseResult(stars);
 
     const saved = commit();
     refreshPatientScreens();
@@ -794,11 +825,15 @@ function finishTreat(patient) {
         t("\n+{0} coin, +{1} XP", coins, xp) + (gems ? `, +${gems} 💎` : "") +
         (gift ? t("\n🎁 {0} sana bir hediye bıraktı: +{1} coin", patientName, gift) : "") +
         regular + sticker +
+        (patient.daily ? t("\n🗓️ Günün vakası tamamlandı! Arkadaşlarına kaç yıldız aldığını söyle.") : "") +
         (currentUser && !saved ? t("\nİlerleme şu anda kalıcı kaydedilemedi.") : "") +
         chapter + letter + shiftNote +
         `\n\n💬 ${patientName}: "${pick(thanksLines)}"` +
         t("\n\n💡 Sağlık bilgisi\n") + healthTips[tip],
         t("Bu bilgiler geneldir. Merak ettiklerini bir büyüğüne veya doktoruna sor."));
+
+    // Sonuç penceresi kapanınca hasta el sallayarak klinikten çıkar.
+    if (slot >= 0) sceneLeaver = { person, slot };
 
     offerPhoto(person, stars);
     classResult(patient, stars);

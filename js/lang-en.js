@@ -531,6 +531,392 @@ translations.en = {
         "Find the right card on your first try without asking for a report and you get 3 stars. Each wrong card and each report costs one star.",
     "Tahlil raporu vakanın kodunu verir; kodun anlamını Rehber'de bulursun. Görüntüleme raporu seçenekleri iki karta indirir. Her rapor bir yıldız götürür ve bir klinik gününde 3 rapor hakkın var.":
         "The lab report gives the case code; look it up in the Guide. The imaging report narrows it down to two cards. Each report costs one star, and you get 3 reports per clinic day.",
+    "Takım olarak oynamak için takım sayısını seç; her takım 3 tur oynar:":
+        "To play in teams, pick the number of teams; each team plays 3 rounds:",
+    "👥 {0} Takım":
+        "👥 {0} Teams",
+    "{0}. tur / {1}":
+        "Round {0} / {1}",
+    "➡️ {0}. tura geç":
+        "➡️ Go to round {0}",
+    "Kulak Burun Boğaz Uzmanı":
+        "ENT Specialist",
+    "Kulak Burun Boğaz bölümünde 5 vaka tamamla.":
+        "Complete 5 cases in the Ear, Nose & Throat ward.",
+    "Beslenme Uzmanı":
+        "Nutrition Expert",
+    "Beslenme Köşesi'nde 5 vaka tamamla.":
+        "Complete 5 cases in the Nutrition Corner.",
+    "\n😴 Bugün çok oynadın; mini oyun coinleri yarın yeniden tam olur.":
+        "\n😴 You played a lot today; mini game coins will be full again tomorrow.",
+    "\n\n🧩 Zor vaka: sabrı az ve bulgulardan biri seni yanıltabilir. Ödülü daha büyük!":
+        "\n\n🧩 Tricky case: little patience, and one finding may mislead you. Bigger reward!",
+    "\n\n🗓️ Günün vakası: bugün herkese aynı vaka geldi. Yalnızca bir kez oynanır!":
+        "\n\n🗓️ Case of the day: everyone gets the same case today. You can play it only once!",
+    "\n🗓️ Günün vakası tamamlandı! Arkadaşlarına kaç yıldız aldığını söyle.":
+        "\n🗓️ Case of the day done! Tell your friends how many stars you got.",
+    "Simgeyi hastanın üstüne sürükle ya da düğmeye dokun ({0} kez).":
+        "Drag the icon onto the patient or tap the button ({0} times).",
+    "Uzmanlık bölümleri seviye atladıkça açılır: Diş Kliniği 2, Göz ve Pati Kliniği 3, Cilt ile Kulak Burun Boğaz 4, Çocuk Acil 5, Beslenme Köşesi 6. seviyede. Her bölümün kendi aletleri ve kartları var.":
+        "Specialist wards open as you level up: Dental Clinic at level 2, Eye and Pet Clinic at 3, Skin and Ear, Nose & Throat at 4, Children's ER at 5, Nutrition Corner at 6. Each ward has its own tools and cards.",
+    "Simgeyi hastanın üstüne bırak.":
+        "Drop the icon onto the patient.",
+    "Günün vakası":
+        "Case of the day",
+    "Bugünün vakasını çözdün: {0}":
+        "You solved today's case: {0}",
+    "Bugünün vakasında hasta gitti. Yarın yeniden dene!":
+        "The patient left in today's case. Try again tomorrow!",
+    "Yarın herkese yeni bir vaka gelecek. Arkadaşlarına kaç yıldız aldıklarını sor!":
+        "Tomorrow everyone gets a new case. Ask your friends how many stars they got!",
+    "Günün vakası herkeste aynıdır ve günde bir kez oynanır.":
+        "The case of the day is the same for everyone and can be played once a day.",
+    "🗓️ Günün Vakası: {0}":
+        "🗓️ Case of the Day: {0}",
+    "🗓️ Günün Vakası":
+        "🗓️ Case of the Day",
+    "Arkadaşının adını yaz.":
+        "Type your friend's name.",
+    "⚠️ Bu skor kodu geçerli değil. Harfleri kontrol et.":
+        "⚠️ This score code is not valid. Check the letters.",
+    "⚠️ Bu kod başka bir haftaya ait. Arkadaşından bu haftanın kodunu iste.":
+        "⚠️ This code is from another week. Ask your friend for this week's code.",
+    "🤝 {0} tabloya eklendi.":
+        "🤝 {0} was added to the table.",
+    "Bu hafta: {0} vaka, {1} tanesi 3 yıldız":
+        "This week: {0} cases, {1} with 3 stars",
+    "(sen)":
+        "(you)",
+    "{0} vaka":
+        "{0} cases",
+    "{0} adlı arkadaşı çıkar":
+        "Remove friend {0}",
+    "Kırmızı Takım":
+        "Red Team",
+    "Mavi Takım":
+        "Blue Team",
+    "Yeşil Takım":
+        "Green Team",
+    "Sarı Takım":
+        "Yellow Team",
+    "Kulak Burun Boğaz":
+        "Ear, Nose & Throat",
+    "Kulağı ağrıyan, burnu tıkanan ya da boğazı yanan çocuklar burada. Kulak feneri, burun ışığı ve dil çubuğuyla doğru kartı bul.":
+        "Children with ear aches, blocked noses or sore throats come here. Find the right card with the ear light, nose light and tongue stick.",
+    "Kulak Feneri":
+        "Ear Light",
+    "Burun Işığı":
+        "Nose Light",
+    "Dil Çubuğu":
+        "Tongue Stick",
+    "💧 Kulak Damlası Kartı":
+        "💧 Ear Drops Card",
+    "🔦 Kulak zarı kızarıktır. Burun açıktır, boğaz normal görünür.":
+        "🔦 The eardrum is red. The nose is clear and the throat looks normal.",
+    "Kulak zarı kıpkırmızı ve şiş!":
+        "The eardrum is bright red and swollen!",
+    "Burun yolu açık, akıntı yok.":
+        "The nose is clear, no runny nose.",
+    "Boğaz pembe ve normal görünüyor.":
+        "The throat looks pink and normal.",
+    "🌊 Tuzlu Su Spreyi Kartı":
+        "🌊 Salt Water Spray Card",
+    "👃 Burnun içi şiş ve tıkalıdır. Kulak zarı normaldir, boğaz hafif kızarık olabilir.":
+        "👃 The inside of the nose is swollen and blocked. The eardrum is normal; the throat may be a little red.",
+    "Kulak zarı parlak ve normal.":
+        "The eardrum is shiny and normal.",
+    "Burnun içi şişmiş, hava zor geçiyor!":
+        "The inside of the nose is swollen; air barely gets through!",
+    "Boğaz hafif kızarmış ama bademcikler şiş değil.":
+        "The throat is a little red, but the tonsils are not swollen.",
+    "🍯 Boğaz Pastili Kartı":
+        "🍯 Throat Lozenge Card",
+    "🥢 Bademcikler kızarık ve şiştir. Kulak zarı normaldir, burun açıktır.":
+        "🥢 The tonsils are red and swollen. The eardrum is normal and the nose is clear.",
+    "Bademcikler kıpkırmızı ve şişmiş!":
+        "The tonsils are bright red and swollen!",
+    "Beslenme Köşesi":
+        "Nutrition Corner",
+    "Çabuk yorulan, başı ağrıyan ya da sebzeyi sevmeyen çocuklar burada. Su sayacı, yemek günlüğü ve enerji testiyle doğru kartı bul.":
+        "Children who tire quickly, get headaches or don't like vegetables come here. Find the right card with the water counter, food diary and energy test.",
+    "Su Sayacı":
+        "Water Counter",
+    "Yemek Günlüğü":
+        "Food Diary",
+    "Enerji Testi":
+        "Energy Test",
+    "💧 Su Planı Kartı":
+        "💧 Water Plan Card",
+    "🚰 Günde yalnızca bir iki bardak su içer. Yemek günlüğü dengelidir; öğleden sonra başı ağrır.":
+        "🚰 Drinks only one or two glasses of water a day. The food diary is balanced; gets a headache in the afternoon.",
+    "Dün yalnızca 1 bardak su içmiş!":
+        "Drank only 1 glass of water yesterday!",
+    "Günlükte sebze, meyve ve kahvaltı var; tabak dengeli.":
+        "The diary has vegetables, fruit and breakfast; the plate is balanced.",
+    "Öğleden sonra başı ağrıyor ve dudakları kuru.":
+        "Gets a headache in the afternoon and has dry lips.",
+    "🥦 Renkli Tabak Kartı":
+        "🥦 Colourful Plate Card",
+    "📒 Günlükte hiç sebze ve meyve yoktur. Yeterince su içer, enerjisi normaldir.":
+        "📒 The diary has no vegetables or fruit at all. Drinks enough water; energy is normal.",
+    "Günde 6 bardak su içiyor, bu çok iyi.":
+        "Drinks 6 glasses of water a day, that's great.",
+    "Günlükte hiç sebze ve meyve yok; hep hamur işi!":
+        "No vegetables or fruit in the diary; only pastries!",
+    "Enerjisi normal: testi rahatça bitirdi.":
+        "Energy is normal: finished the test easily.",
+    "🍳 Kahvaltı Kartı":
+        "🍳 Breakfast Card",
+    "🏃 Sabahları enerjisi çok düşüktür ve 📒 günlükte kahvaltı yoktur. Yeterince su içer.":
+        "🏃 Energy is very low in the mornings and 📒 the diary has no breakfast. Drinks enough water.",
+    "Günlükte kahvaltı hiç yok; okula aç gidiyor.":
+        "No breakfast in the diary; goes to school hungry.",
+    "Sabah testinde hemen yoruldu, karnı guruldadı!":
+        "Got tired right away in the morning test, and the tummy rumbled!",
+    "🩹 Yara bandı":
+        "🩹 Plaster",
+    "🧴 Yara temizleme sıvısı":
+        "🧴 Wound cleaning liquid",
+    "🧻 Temiz gazlı bez":
+        "🧻 Clean gauze",
+    "✂️ Küçük makas":
+        "✂️ Small scissors",
+    "🧤 Tek kullanımlık eldiven":
+        "🧤 Disposable gloves",
+    "🌡️ Ateş ölçer":
+        "🌡️ Thermometer",
+    "🧊 Soğuk kompres":
+        "🧊 Cold pack",
+    "📞 Acil numaralar kartı":
+        "📞 Emergency numbers card",
+    "🍫 Çikolata":
+        "🍫 Chocolate",
+    "🎮 Oyun kolu":
+        "🎮 Game controller",
+    "🧸 Oyuncak ayı":
+        "🧸 Teddy bear",
+    "🖍️ Boya kalemi":
+        "🖍️ Crayon",
+    "⚽ Top":
+        "⚽ Ball",
+    "🍭 Lolipop":
+        "🍭 Lollipop",
+    "📺 Kumanda":
+        "📺 Remote control",
+    "🧦 Çorap":
+        "🧦 Sock",
+    "Bulunan: {0} / {1} • Hata: {2} / 3":
+        "Found: {0} / {1} • Mistakes: {2} / 3",
+    "İlk yardım çantasına girmesi gereken {0} şeyi bul.":
+        "Find the {0} things that belong in a first aid kit.",
+    "Çanta hazır! Hata: {0}. Puanın: {1} / 6.":
+        "The kit is ready! Mistakes: {0}. Your score: {1} / 6.",
+    "Üç hata oldu. Çantaya {0} doğru şey koydun.":
+        "Three mistakes. You put {0} right things in the kit.",
+    "Hangi organımız kanı bütün vücuda pompalar?":
+        "Which organ pumps blood around the whole body?",
+    "❤️ Kalp":
+        "❤️ Heart",
+    "🫁 Akciğer":
+        "🫁 Lungs",
+    "🧠 Beyin":
+        "🧠 Brain",
+    "Nefes aldığımızda hava hangi organımıza dolar?":
+        "When we breathe in, which organ fills with air?",
+    "🫃 Mide":
+        "🫃 Stomach",
+    "Düşünmemizi ve hatırlamamızı hangi organımız sağlar?":
+        "Which organ lets us think and remember?",
+    "🦴 Kemik":
+        "🦴 Bone",
+    "Yediğimiz yemek ilk olarak hangi organımızda sindirilmeye başlar?":
+        "In which organ does the food we eat first start to be digested?",
+    "👂 Kulak":
+        "👂 Ear",
+    "Vücudumuzu dik tutan ve organlarımızı koruyan nedir?":
+        "What keeps our body upright and protects our organs?",
+    "🦴 İskelet":
+        "🦴 Skeleton",
+    "💇 Saç":
+        "💇 Hair",
+    "💅 Tırnak":
+        "💅 Nails",
+    "Kanımızı süzüp temizleyen fasulye biçimli organlar hangileridir?":
+        "Which bean-shaped organs filter and clean our blood?",
+    "🫘 Böbrekler":
+        "🫘 Kidneys",
+    "👀 Gözler":
+        "👀 Eyes",
+    "🦷 Dişler":
+        "🦷 Teeth",
+    "Vücudumuzu dışarıdan saran en büyük organımız hangisidir?":
+        "Which is our biggest organ, covering the outside of the body?",
+    "🖐️ Deri":
+        "🖐️ Skin",
+    "Kolumuzu bükmemizi ve koşmamızı ne sağlar?":
+        "What lets us bend our arms and run?",
+    "💪 Kaslar":
+        "💪 Muscles",
+    "Kalbimiz dinlenirken dakikada yaklaşık kaç kez atar?":
+        "About how many times a minute does our heart beat at rest?",
+    "💓 70–100 kez":
+        "💓 70–100 times",
+    "5 kez":
+        "5 times",
+    "1000 kez":
+        "1000 times",
+    "Yetişkin bir insanda yaklaşık kaç kemik vardır?":
+        "About how many bones does an adult have?",
+    "🦴 206":
+        "🦴 206",
+    "İlk Yardım Çantası":
+        "First Aid Kit",
+    "Organ Bilmecesi":
+        "Organ Riddle",
+    "Günün Vakası her gün herkese aynı gelen zor bir vakadır. Günde bir kez oynanır; rapor istenemez. Arkadaşlarınla kaç yıldız aldığınızı karşılaştırabilirsin!":
+        "The Case of the Day is a tricky case that everyone gets the same each day. You play it once a day and can't ask for reports. Compare your stars with your friends!",
+    "Klinik ekranındaki \"Arkadaş Skorları\" penceresinde bu haftanın skor kodun yazar. Kodu arkadaşına söyle; o da kendi oyununa yazınca tabloda görünürsün. Oyun hiçbir şeyi internete göndermez.":
+        "The \"Friend Scores\" window on the clinic screen shows this week's score code. Tell your friend the code; when they type it into their game, you appear on their table. The game sends nothing over the internet.",
+    "Sınıf Yarışması'nda \"2 Takım\", \"3 Takım\" ya da \"4 Takım\" düğmesine basarsan takımlar hazır gelir ve üç tur oynanır. Her turda takımdan başka biri doktor olur.":
+        "In the Class Contest, press \"2 Teams\", \"3 Teams\" or \"4 Teams\" and the teams are ready; you play three rounds. In each round, someone else from the team is the doctor.",
+    "4. seviyeden sonra bazı hastalar 🧩 zor vaka olarak gelir: sabırları azdır ve bulgulardan biri yanıltabilir. Doğru bilirsen daha çok coin ve XP kazanırsın.":
+        "After level 4, some patients come as 🧩 tricky cases: they have little patience and one finding may mislead you. Get it right and you earn more coins and XP.",
+    "Doğru kartı bulunca tedaviyi sen uygularsın: simgeyi parmağınla hastanın üstüne sürükle ya da alttaki düğmeye dokun.":
+        "When you find the right card, you give the treatment yourself: drag the icon onto the patient with your finger or tap the button below.",
+    "Kalbin yumruğun kadar bir kastır. Hiç durmadan çalışır ve kanı bütün vücuduna pompalar. Koşunca daha hızlı atar, çünkü kasların daha çok oksijen ister. ❤️":
+        "Your heart is a muscle about the size of your fist. It never stops working and pumps blood around your whole body. It beats faster when you run, because your muscles need more oxygen. ❤️",
+    "İki akciğerin var. Nefes alınca havayla dolarlar ve havadaki oksijeni kana geçirirler. Burnundan yavaşça nefes almak seni sakinleştirir. 🫁":
+        "You have two lungs. They fill with air when you breathe in and pass the oxygen into your blood. Breathing slowly through your nose calms you down. 🫁",
+    "Beynin vücudunun yöneticisidir: düşünmeni, hatırlamanı ve hareket etmeni sağlar. Uyurken gün içinde öğrendiklerini düzenler; bu yüzden uyku çok önemlidir. 🧠":
+        "Your brain is your body's boss: it lets you think, remember and move. While you sleep it sorts out what you learned during the day, so sleep is very important. 🧠",
+    "Yediklerin miden ve bağırsaklarında küçük parçalara ayrılır; vücudun bunları enerjiye çevirir. Yavaş yemek ve iyi çiğnemek midene yardım eder. 🍽️":
+        "What you eat is broken into small pieces in your stomach and intestines, and your body turns them into energy. Eating slowly and chewing well helps your stomach. 🍽️",
+    "Yetişkin bir insanda yaklaşık 206 kemik vardır. İskeletin seni dik tutar ve organlarını korur. Süt, yoğurt ve güneş ışığı kemiklerini güçlendirir. 🦴":
+        "An adult has about 206 bones. Your skeleton keeps you upright and protects your organs. Milk, yoghurt and sunlight make your bones stronger. 🦴",
+    "Kan, damarlarında dolaşarak vücudunun her yerine oksijen ve besin taşır. Küçük bir kesikte kanın pıhtılaşması yarayı kapatır. 🩸":
+        "Blood travels through your blood vessels and carries oxygen and food to every part of your body. In a small cut, the blood clots and closes the wound. 🩸",
+    "Böbreklerin kanını süzen iki küçük filtredir. Yeterince su içmek onların işini kolaylaştırır. 💧":
+        "Your kidneys are two small filters that clean your blood. Drinking enough water makes their job easier. 💧",
+    "Mikroplar gözle görülemeyecek kadar küçük canlılardır. Çoğu zararsızdır, bazıları hasta eder. Ellerini sabunla 20 saniye yıkamak onlardan korunmanın en iyi yoludur. 🧼":
+        "Germs are living things too small to see. Most are harmless, some make you ill. Washing your hands with soap for 20 seconds is the best way to stay safe from them. 🧼",
+    "Aşı, vücuduna bir mikrobu önceden tanıtır; böylece gerçek mikrop gelince vücudun hazır olur. Aşıları doktorlar ve hemşireler yapar. 💉":
+        "A vaccine introduces a germ to your body in advance, so your body is ready when the real germ comes. Vaccines are given by doctors and nurses. 💉",
+    "Burnu kanayan kişi oturur, başını hafifçe öne eğer ve burnunun yumuşak kısmını birkaç dakika sıkar. Başını geriye atmaz. Hemen bir büyüğe haber verilir.":
+        "Someone with a nosebleed sits down, leans the head slightly forward and pinches the soft part of the nose for a few minutes. Don't tip the head back. Tell a grown-up right away.",
+    "Küçük bir yanıkta yanan yer birkaç dakika serin (buz gibi değil) suyun altında tutulur ve hemen bir büyüğe haber verilir. Üstüne diş macunu ya da yoğurt sürülmez.":
+        "For a small burn, hold the burnt spot under cool (not ice-cold) water for a few minutes and tell a grown-up right away. Don't put toothpaste or yoghurt on it.",
+    "İlk yardımın ilk kuralı: önce kendi güvenliğin, sonra hemen bir büyüğe haber ver. Türkiye'de acil durumda 112 aranır. Arayınca adını, nerede olduğunu ve ne olduğunu söylersin. 📞":
+        "The first rule of first aid: keep yourself safe first, then tell a grown-up right away. In Turkey, call 112 in an emergency. Say your name, where you are and what happened. 📞",
+    "Küçük bir sıyrık temiz suyla yıkanır ve üstü temiz bir yara bandıyla kapatılır. Bunu bir büyüğünle birlikte yap. 🩹":
+        "A small scrape is washed with clean water and covered with a clean plaster. Do this together with a grown-up. 🩹",
+    "Senin yaşındaki çocukların gecede 9–11 saat uykuya ihtiyacı vardır. Uyurken vücudun büyür, beynin de öğrendiklerini yerleştirir. 😴":
+        "Children your age need 9–11 hours of sleep a night. While you sleep your body grows and your brain stores what you learned. 😴",
+    "Vücudunun yarısından fazlası sudur. Susamayı beklemeden gün boyu su iç; özellikle oyun ve spordan sonra. 💧":
+        "More than half of your body is water. Drink water all day without waiting to feel thirsty, especially after playing and sport. 💧",
+    "Tabağın ne kadar renkli olursa o kadar iyi: sebze, meyve, tahıl ve protein birlikte. Kahvaltı sabah derslerinde enerjini yüksek tutar. 🥗":
+        "The more colourful your plate, the better: vegetables, fruit, grains and protein together. Breakfast keeps your energy up in morning lessons. 🥗",
+    "Her gün en az bir saat hareket etmek kalbini, kaslarını ve kemiklerini güçlendirir. Koşmak, ip atlamak, bisiklet… Hepsi sayılır! 🏃":
+        "Moving for at least an hour every day makes your heart, muscles and bones stronger. Running, skipping, cycling… it all counts! 🏃",
+    "Dişlerini günde en az iki kez, ikişer dakika fırçala: sabah kahvaltıdan sonra ve gece yatmadan önce. 🪥":
+        "Brush your teeth at least twice a day for two minutes: in the morning after breakfast and at night before bed. 🪥",
+    "Ekrana uzun süre bakınca gözlerin yorulur. Ara ara uzağa bak ve gözlerini kırp. Göz Polikliniği 3. seviyede açılır. 👀":
+        "Your eyes get tired when you look at a screen for a long time. Look far away now and then and blink. The Eye Clinic opens at level 3. 👀",
+    "{0} / 6 puan":
+        "{0} / 6 points",
+    "👂 Kulak Ağrısı":
+        "👂 Ear Ache",
+    "Havuzdan sonra kulağım zonklamaya başladı. 🏊":
+        "My ear started throbbing after the pool. 🏊",
+    "Kulağıma dokununca çok acıyor, gece uyuyamadım. 😢":
+        "It hurts a lot when I touch my ear; I couldn't sleep last night. 😢",
+    "👂 Az Duyma":
+        "👂 Muffled Hearing",
+    "Sağ kulağım sanki pamukla tıkalı, bir de sızlıyor. 😣":
+        "My right ear feels blocked with cotton, and it aches too. 😣",
+    "Öğretmenimi iyi duyamıyorum, kulağımın içi de sıcak. 🥵":
+        "I can't hear my teacher well, and the inside of my ear feels hot. 🥵",
+    "👃 Tıkalı Burun":
+        "👃 Blocked Nose",
+    "Burnum hep tıkalı, ağzımdan nefes alıyorum. 😮‍💨":
+        "My nose is always blocked, so I breathe through my mouth. 😮‍💨",
+    "Gece burnum tıkanınca horluyormuşum. 😴":
+        "They say I snore when my nose gets blocked at night. 😴",
+    "🤧 Hapşırık":
+        "🤧 Sneezing",
+    "Sabahları arka arkaya hapşırıyorum, burnum da kaşınıyor. 🤧":
+        "I sneeze again and again in the mornings, and my nose itches. 🤧",
+    "Burnumdan nefes alamıyorum, koku da alamıyorum. 👃":
+        "I can't breathe through my nose, and I can't smell anything. 👃",
+    "😖 Boğaz Yanması":
+        "😖 Burning Throat",
+    "Yutkunurken boğazım yanıyor, sesim de kısıldı. 😖":
+        "My throat burns when I swallow, and my voice is hoarse. 😖",
+    "Boğazımda sanki bir şey var, yemek yerken acıyor. 🍽️":
+        "It feels like something is in my throat; it hurts when I eat. 🍽️",
+    "🗣️ Ses Kısıklığı":
+        "🗣️ Hoarse Voice",
+    "Maçta çok bağırdım, şimdi boğazım acıyor. ⚽":
+        "I shouted a lot at the match, and now my throat hurts. ⚽",
+    "Sabah kalkınca boğazım kupkuru ve acıyor. 🌅":
+        "When I wake up, my throat is very dry and sore. 🌅",
+    "🤕 Öğleden Sonra Baş Ağrısı":
+        "🤕 Afternoon Headache",
+    "Okulda suluğumu hiç açmıyorum, öğleden sonra başım ağrıyor. 🤕":
+        "I never open my water bottle at school, and I get a headache in the afternoon. 🤕",
+    "Su içmeyi hep unutuyorum, dudaklarım çatladı. 👄":
+        "I always forget to drink water, and my lips are cracked. 👄",
+    "🥤 Hep Gazlı İçecek":
+        "🥤 Always Fizzy Drinks",
+    "Su yerine hep gazlı içecek içiyorum, yine de susuyorum. 🥤":
+        "I always drink fizzy drinks instead of water, and I'm still thirsty. 🥤",
+    "Beden eğitiminden sonra başım dönüyor, hiç su içmemiştim. 🏃":
+        "I feel dizzy after PE; I hadn't drunk any water. 🏃",
+    "🥦 Sebze Sevmeme":
+        "🥦 Doesn't Like Vegetables",
+    "Sebze hiç sevmem, hep makarna ve börek yerim. 🍝":
+        "I don't like vegetables at all; I only eat pasta and pastries. 🍝",
+    "Meyveyi en son ne zaman yedim hatırlamıyorum. 🍏":
+        "I can't remember the last time I ate fruit. 🍏",
+    "🍟 Hep Aynı Yemek":
+        "🍟 Always the Same Food",
+    "Her gün patates kızartması istiyorum, başka şey yemiyorum. 🍟":
+        "I want chips every day and won't eat anything else. 🍟",
+    "Tabağımdaki yeşil şeyleri hep kenara ayırıyorum. 🥬":
+        "I always push the green things to the side of my plate. 🥬",
+    "🥱 Sabah Yorgunluğu":
+        "🥱 Morning Tiredness",
+    "Sabah geç kalkıyorum, kahvaltı yapmadan okula koşuyorum. 🏫":
+        "I get up late and run to school without breakfast. 🏫",
+    "İlk derste karnım gurulduyor, dersi dinleyemiyorum. 🥱":
+        "My tummy rumbles in the first lesson and I can't listen. 🥱",
+    "😵 Teneffüste Halsizlik":
+        "😵 Weak at Break Time",
+    "Sabah bir şey yemiyorum, ilk teneffüste halim kalmıyor. 😵":
+        "I don't eat anything in the morning, and by the first break I have no energy. 😵",
+    "Kahvaltıyı sevmiyorum, öğlene kadar hiçbir şey yemiyorum. 🙅":
+        "I don't like breakfast; I eat nothing until lunch. 🙅",
+    "🤝 Arkadaş Skorları":
+        "🤝 Friend Scores",
+    "Çantaya girmesi gerekenleri seç.":
+        "Pick what belongs in the kit.",
+    "Organlar ne işe yarar? 5 soruda dene.":
+        "What do organs do? Try 5 questions.",
+    "Arkadaş Skorları":
+        "Friend Scores",
+    "Bu haftaki skor kodun:":
+        "Your score code this week:",
+    "Kodunu arkadaşına söyle. Onun kodunu da buraya yaz:":
+        "Tell your friend your code. Type their code here:",
+    "Kodlar ve adlar yalnızca bu cihazda durur; oyun hiçbir şeyi internete göndermez. Tablo her hafta sıfırlanır.":
+        "Codes and names stay only on this device; the game sends nothing over the internet. The table resets every week.",
+    "Arkadaşının adı":
+        "Your friend's name",
+    "Arkadaşının skor kodu":
+        "Your friend's score code",
+    "🔒 Gizlilik politikası":
+        "🔒 Privacy policy",
+    "Gizlilik politikası":
+        "Privacy policy",
     "Bu oyunu yapan: Mustafa":
         "Made by: Mustafa",
     "Çıkış Yap":

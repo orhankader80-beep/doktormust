@@ -89,7 +89,7 @@ const CLASS_MAX = 50;
 function openClass() {
     if (!appOpen) return;
 
-    classGame = classGame || { players: [], started: false, turn: 0, round: 1, patientId: null, cheered: false };
+    classGame = classGame || { players: [], started: false, turn: 0, round: 1, rounds: 0, patientId: null, cheered: false };
     openModal("classModal");
     renderClass();
 }
@@ -140,6 +140,12 @@ function endClass() {
 
 function newClassRound() {
     if (!classGame) return;
+
+    // Takım maçı bittiyse yeni maç sıfırdan başlar.
+    if (classGame.rounds && classGame.round >= classGame.rounds) {
+        classGame.players.forEach(player => { player.stars = 0; });
+        classGame.round = 0;
+    }
 
     classGame.players.forEach(player => { player.played = false; });
     classGame.turn = 0;
@@ -205,6 +211,10 @@ function renderClass() {
                 <button class="secondary-btn" type="submit">${escapeHTML(t("➕ Ekle"))}</button>
             </form>
             <div class="class-chips" id="classChips"></div>
+            <p class="small muted">${escapeHTML(t("Takım olarak oynamak için takım sayısını seç; her takım 3 tur oynar:"))}</p>
+            <div class="row team-row">
+                ${[2, 3, 4].map(count => `<button class="toggle" type="button" data-teams="${count}">${escapeHTML(t("👥 {0} Takım", count))}</button>`).join("")}
+            </div>
             <button class="primary-btn full" id="classStart">${escapeHTML(t("▶️ Yarışmayı Başlat"))}</button>
             <p class="notice">${escapeHTML(t("En az 2 oyuncu gerekir. Adlar yalnızca yarışma boyunca tutulur, kaydedilmez."))}</p>
         `;
@@ -212,6 +222,9 @@ function renderClass() {
         $("classForm").onsubmit = addClassPlayer;
         $("classStart").disabled = classGame.players.length < 2;
         $("classStart").onclick = startClass;
+        body.querySelectorAll("[data-teams]").forEach(button => {
+            button.onclick = () => fillTeams(Number(button.dataset.teams));
+        });
 
         classGame.players.forEach((player, index) => {
             const chip = document.createElement("button");
@@ -230,6 +243,7 @@ function renderClass() {
     }
 
     const done = classGame.players.every(player => player.played);
+    const more = done && classGame.rounds > 0 && classGame.round < classGame.rounds;
     const best = Math.max(...classGame.players.map(player => player.stars));
     const ranked = [...classGame.players].sort((a, b) => b.stars - a.stars);
     const current = classGame.players[classGame.turn];
@@ -245,16 +259,16 @@ function renderClass() {
     const winners = classGame.players.filter(player => player.stars === best).map(player => player.name);
 
     body.innerHTML = `
-        <p class="muted">${escapeHTML(t("{0}. tur", classGame.round))}</p>
+        <p class="muted">${escapeHTML(classGame.rounds ? t("{0}. tur / {1}", classGame.round, classGame.rounds) : t("{0}. tur", classGame.round))}</p>
         <ol class="class-board">${rows}</ol>
-        ${done ? `<p class="class-winner">${escapeHTML(winners.length > 5
+        ${done && !more ? `<p class="class-winner">${escapeHTML(winners.length > 5
             ? t("🏆 {0} kişi {1} yıldızla birinci!", winners.length, best)
             : winners.length > 1
             ? t("🏆 Berabere: {0}", winners.join(", "))
             : t("🏆 Kazanan: {0}!", winners[0]))}</p>` : ""}
         <div class="stack">
             ${done
-                ? `<button class="primary-btn full" id="classAgain">${escapeHTML(t("🔁 Yeni Tur"))}</button>`
+                ? `<button class="primary-btn full" id="classAgain">${escapeHTML(more ? t("➡️ {0}. tura geç", classGame.round + 1) : t("🔁 Yeni Tur"))}</button>`
                 : `<button class="primary-btn full" id="classGo">${escapeHTML(t("▶️ Sıra: {0}", current.name))}</button>`}
             <button class="danger-btn full" id="classEnd">${escapeHTML(t("✖ Yarışmayı Bitir"))}</button>
         </div>
@@ -264,7 +278,7 @@ function renderClass() {
     else $("classGo").onclick = classPlay;
     $("classEnd").onclick = endClass;
 
-    if (done && !classGame.cheered) {
+    if (done && !more && !classGame.cheered) {
         classGame.cheered = true;
         confetti();
         sfx("yay");

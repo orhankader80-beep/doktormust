@@ -193,7 +193,9 @@
                 </p>
 
                 <p class="scene-actions">
+                    <button class="secondary-btn" id="dayCaseButton" onclick="openDayCase()">🗓️ Günün Vakası</button>
                     <button class="secondary-btn" onclick="openClass()">🏫 Sınıf Yarışması</button>
+                    <button class="secondary-btn" onclick="openFriends()">🤝 Arkadaş Skorları</button>
                 </p>
 
                 <div class="home-panel" id="homePanel" hidden>
@@ -529,6 +531,20 @@
                         <button class="primary-btn" onclick="startGame('count')">Oyna</button>
                     </div>
                     <div class="card game-card">
+                        <div class="game-big">🧰</div>
+                        <h3>İlk Yardım Çantası</h3>
+                        <p>Çantaya girmesi gerekenleri seç.</p>
+                        <p class="small muted" id="rec-kit"></p>
+                        <button class="primary-btn" onclick="startGame('kit')">Oyna</button>
+                    </div>
+                    <div class="card game-card">
+                        <div class="game-big">🫀</div>
+                        <h3>Organ Bilmecesi</h3>
+                        <p>Organlar ne işe yarar? 5 soruda dene.</p>
+                        <p class="small muted" id="rec-organ"></p>
+                        <button class="primary-btn" onclick="startGame('organ')">Oyna</button>
+                    </div>
+                    <div class="card game-card">
                         <div class="game-big">🎈</div>
                         <h3>Nefes Egzersizi</h3>
                         <p>Balonla nefes al, ver ve sakinleş.</p>
@@ -719,6 +735,7 @@
                     <p class="small muted" id="installNote"></p>
                     <p class="small muted" id="saveInfo"></p>
                     <p class="small muted">Bu oyunu yapan: Mustafa</p>
+                    <p><button class="toggle" type="button" onclick="openPrivacy()">🔒 Gizlilik politikası</button></p>
                 </div>
             </section>
 
@@ -897,6 +914,7 @@
         <div class="cure-box" id="tmCure" hidden>
             <p class="cure-text" id="tmCureText"></p>
             <div class="cure-dots" id="tmCureDots" aria-live="polite"></div>
+            <div class="cure-token" id="tmCureToken" aria-hidden="true"></div>
             <button class="primary-btn full cure-btn" id="tmCureButton" onclick="cureTap()"></button>
         </div>
 
@@ -938,6 +956,34 @@
             <h3 id="classTitle">Sınıf Yarışması</h3>
         </div>
         <div id="classBody"></div>
+    </div>
+</div>
+
+<div class="modal-overlay" id="privacyModal" hidden>
+    <div class="modal" role="dialog" aria-modal="true" aria-label="Gizlilik politikası" tabindex="-1">
+        <button class="modal-close" onclick="closeModal()" aria-label="Pencereyi kapat">✕</button>
+        <iframe class="privacy-frame" id="privacyFrame" title="Gizlilik politikası"></iframe>
+    </div>
+</div>
+
+<div class="modal-overlay" id="friendsModal" hidden>
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="friendsTitle" tabindex="-1">
+        <button class="modal-close" onclick="closeModal()" aria-label="Pencereyi kapat">✕</button>
+        <div class="modal-header">
+            <div class="modal-emoji">🤝</div>
+            <h3 id="friendsTitle">Arkadaş Skorları</h3>
+        </div>
+        <p>Bu haftaki skor kodun:</p>
+        <div class="score-code" id="myScoreCode"></div>
+        <p class="small muted" id="myScoreLine"></p>
+        <p>Kodunu arkadaşına söyle. Onun kodunu da buraya yaz:</p>
+        <form class="friend-form" id="friendForm">
+            <input type="text" id="friendName" maxlength="14" autocomplete="off" placeholder="Arkadaşının adı" aria-label="Arkadaşının adı">
+            <input type="text" id="friendCode" maxlength="9" autocomplete="off" autocapitalize="characters" placeholder="XXXX-XXXX" aria-label="Arkadaşının skor kodu">
+            <button class="secondary-btn" type="submit">➕ Ekle</button>
+        </form>
+        <ol class="class-board" id="friendList"></ol>
+        <p class="notice">Kodlar ve adlar yalnızca bu cihazda durur; oyun hiçbir şeyi internete göndermez. Tablo her hafta sıfırlanır.</p>
     </div>
 </div>
 
@@ -1062,6 +1108,7 @@
 <script src="js/social.js"></script>
 <script src="js/clinic.js"></script>
 <script src="js/extras.js"></script>
+<script src="js/v9.js"></script>
 <script src="js/main.js"></script>
 </body>
 </html>

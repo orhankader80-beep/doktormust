@@ -196,7 +196,9 @@ function finishGame(result) {
     stopGame();
 
     const bonus = result.fixedReward ? 1 : difficulties[state.difficulty].bonus;
-    const coins = Math.round(result.coins * bonus);
+    // Aynı gün çok oynanınca coin ödülü azalır (rekorlar ve XP etkilenmez).
+    const tired = playFactor("games", 10) < 1;
+    const coins = Math.round(result.coins * bonus * (tired ? .25 : 1));
     const xp = Math.round(result.xp * bonus);
 
     const old = state.records[result.recordKey];
@@ -230,6 +232,7 @@ function finishGame(result) {
     $("gameResult").textContent =
         (result.won ? "🎉 " : "🙂 ") + result.text +
         t("\n+{0} coin, +{1} XP", coins, xp) + sticker +
+        (tired ? t("\n😴 Bugün çok oynadın; mini oyun coinleri yarın yeniden tam olur.") : "") +
         (record ? t("\n🏅 Yeni rekor!") : "") +
         (currentUser && !saved ? t("\nİlerleme şu anda kalıcı kaydedilemedi.") : "");
 
@@ -299,7 +302,7 @@ function answerQuiz(choice, button) {
         gameStatus("");
 
         finishGame({
-            recordKey: "quiz",
+            recordKey: round.recordKey || "quiz",
             score: round.score,
             coins: round.score * 8,
             xp: round.score * 6,

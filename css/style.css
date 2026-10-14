@@ -1561,3 +1561,26 @@ body.still .scene-spot.ready .spot-icon, body.still .scene-patient.walk-in { ani
 /* Kalabalik sinif yarismasinda ad listesi ve tablo kendi icinde kayar. */
 .class-chips { max-height: 190px; overflow-y: auto; }
 .class-board { max-height: 46vh; overflow-y: auto; padding-right: 4px; }
+
+/* ===== v9: sürüklenen tedavi simgesi, zor vaka, çıkan hasta, skor kodu ===== */
+.cure-token { position: relative; z-index: 5; display: grid; place-items: center; width: 64px; height: 64px; margin: 0 auto 12px; border-radius: 50%; background: #fff; box-shadow: 0 4px 12px rgba(0,0,0,.2); font-size: 34px; line-height: 1; cursor: grab; touch-action: none; user-select: none; -webkit-user-select: none; animation: token-bob 1s ease-in-out infinite alternate; }
+.cure-token.dragging { cursor: grabbing; animation: none; }
+@keyframes token-bob { to { transform: translateY(-7px); } }
+
+.scene-patient.tricky .sp-sign { background: #ede4ff; box-shadow: 0 0 0 3px #8b5cf6; }
+.scene-patient.walk-out { z-index: 40; pointer-events: none; animation: walk-out 2s ease-in both; }
+.scene-patient.walk-out .sp-sign { animation: hand-wave .35s ease-in-out infinite alternate; }
+@keyframes walk-out { 0%, 35% { transform: translate(-50%,-100%); opacity: 1; } 100% { transform: translate(380%,-100%); opacity: 0; } }
+@keyframes hand-wave { from { transform: translateX(-50%) rotate(-20deg); } to { transform: translateX(-50%) rotate(20deg); } }
+
+.score-code { margin: 8px 0; padding: 12px; border-radius: 14px; background: var(--soft); font-size: 28px; font-weight: 800; letter-spacing: .12em; text-align: center; user-select: all; -webkit-user-select: all; }
+.friend-form { display: flex; flex-wrap: wrap; gap: 8px; margin: 8px 0 12px; }
+.friend-form input { flex: 1 1 130px; min-width: 0; }
+.friend-score { display: flex; align-items: center; gap: 8px; }
+.friend-score .toggle { padding: 2px 9px; }
+.team-row { justify-content: center; margin: 0 0 12px; }
+.game-options.kit-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+.kit-grid .choice { margin: 0; padding: 12px 8px; font-size: 15px; }
+
+body.still .cure-token { animation: none !important; }
+.privacy-frame { display: block; width: 100%; height: min(72vh, 640px); margin-top: 34px; border: 0; border-radius: 12px; background: #f7fbff; }

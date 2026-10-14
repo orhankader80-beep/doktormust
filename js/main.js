@@ -153,6 +153,7 @@ function initialize() {
 
     setupScene();
     setupFamily();
+    setupV9();
     switchAuthView("home");
 
     try {

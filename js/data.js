@@ -60,6 +60,10 @@ const defaultState = {
     familyKey: "",
     familyCodes: { day: "", list: [] },
     theme: "blue",
+    // Günün vakası, arkadaş skor kodları ve aynı gün tekrar sayacı (denge).
+    dailyCase: { day: "", done: false, stars: 0, mistakes: 0 },
+    friends: [],
+    farm: { day: "", games: 0, duels: 0 },
     // Mesai saati: dakika olarak oyun saati, kaçıncı gün olduğu ve o günün sayıları.
     shift: { minute: 540, day: 1, cases: 0, stars: 0, closed: false, closedAt: 0, reports: 0 },
     diplomaSeen: false,
@@ -75,7 +79,7 @@ const defaultState = {
         quiz: 0, germ: 0, heart: 0,
         memory_kolay: 0, memory_normal: 0, memory_zor: 0,
         wash: 0, teeth: 0, plate: 0, bandage: 0,
-        maze: 0, bones: 0, count: 0
+        maze: 0, bones: 0, count: 0, kit: 0, organ: 0
     },
     daily: {
         lastClaim: "", streak: 0, questDate: "",
@@ -150,6 +154,8 @@ const badges = [
     ["ward_skin", "🧴", t("Cilt Uzmanı"), t("Cilt ve Alerji bölümünde 5 vaka tamamla.")],
     ["ward_er", "🚑", t("Acil Doktoru"), t("Çocuk Acil'de 5 vaka tamamla.")],
     ["ward_vet", "🐾", t("Pati Dostu"), t("Pati Kliniği'nde 5 vaka tamamla.")],
+    ["ward_ent", "👂", t("Kulak Burun Boğaz Uzmanı"), t("Kulak Burun Boğaz bölümünde 5 vaka tamamla.")],
+    ["ward_diet", "🥗", t("Beslenme Uzmanı"), t("Beslenme Köşesi'nde 5 vaka tamamla.")],
     ["team", "👥", t("Ekip Lideri"), t("Klinik ekibinin tamamını işe al.")],
     ["diploma", "🎓", t("Diplomalı Doktor"), t("Bir bölüm diplomasını görüntüle.")]
 ];

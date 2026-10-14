@@ -72,8 +72,8 @@ const robotTopics = [
         answer: t("Pati Kliniği 3. seviyede açılır. Orada kedilere, köpeklere ve tavşanlara bakarsın: patilerini, tüylerini ve karınlarını kontrol et.")
     },
     {
-        keys: ["bolum", "dis klinigi", "goz", "cilt", "acil", "ward", "dental", "eye"],
-        answer: t("Uzmanlık bölümleri seviye atladıkça açılır: Diş Kliniği 2, Göz ve Pati Kliniği 3, Cilt 4, Çocuk Acil 5. seviyede. Her bölümün kendi aletleri ve kartları var.")
+        keys: ["bolum", "dis klinigi", "goz", "cilt", "acil", "kulak burun", "kbb", "beslenme kosesi", "ward", "dental", "eye"],
+        answer: t("Uzmanlık bölümleri seviye atladıkça açılır: Diş Kliniği 2, Göz ve Pati Kliniği 3, Cilt ile Kulak Burun Boğaz 4, Çocuk Acil 5, Beslenme Köşesi 6. seviyede. Her bölümün kendi aletleri ve kartları var.")
     },
     {
         keys: ["sabir", "kalp", "patience", "heart"],
@@ -223,7 +223,7 @@ function robotHint() {
         text = t("Önce hastanı dinle, sonra bir aletle başla. \"{0}\" iyi bir ilk adım!", tools[0].name);
     } else if (unused.length) {
         text = t("Henüz \"{0}\" aletini denemedin. Ne kadar çok muayene edersen o kadar çok ipucu bulursun!", unused[0].name);
-    } else if (patient.special || patient.boss) {
+    } else if (patient.special || patient.boss || patient.daily) {
         text = t("Bu özel bir vaka; burada kartı ben söyleyemem. ❗ işaretli bulgulara ve ipucu tablosuna dikkatle bak!");
     } else if (stage === 0) {
         const alerts = tools.filter(tool => findingFor(patient, tool.id).alert).map(tool => tool.name);
@@ -234,8 +234,8 @@ function robotHint() {
             t("Bir ipucu daha istersen seçenekleri iki karta indiririm, ama o zaman en fazla 2 yıldız alırsın.");
         robotStage.set(patient.id, 1);
     } else {
-        const wrong = pick(cardsFor(patient).filter(card => card.id !== patient.correctTreatment));
-        const pair = shuffled([patient.correctTreatment, wrong.id]).map(id => cardInfo(id).label);
+        // Görüntüleme raporuyla aynı iki kart gösterilir; ikisi birleştirilip cevap bulunamaz.
+        const pair = hintPair(patient);
 
         // Güçlü ipucu, görüntüleme raporu gibi sayılır: o vakada en fazla 2 yıldız.
         patient.usedXray = true;

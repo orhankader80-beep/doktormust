@@ -65,6 +65,8 @@ function sceneAction(id) {
 function renderScene(force = false) {
     if (!appOpen || currentScreen !== "home") return;
 
+    showLeaver();
+
     const patients = scenePatients();
     const items = clinicItems.filter(item =>
         (item.room || "main") === "main" && state.ownedItems.includes(item.type));
@@ -136,7 +138,7 @@ function renderScene(force = false) {
     patients.forEach((patient, index) => {
         const [x, y] = sceneSlots[index];
         const fresh = !sceneSeen.has(patient.id);
-        const kind = patient.special ? " special" : patient.checkup ? " checkup" : patient.emergency ? " emergency" : "";
+        const kind = patient.special ? " special" : patient.checkup ? " checkup" : patient.emergency ? " emergency" : patient.tricky ? " tricky" : "";
         const sign = patient.special ? "🌟" : patient.checkup ? "💚" : patient.emergency ? "🚑" : t(patient.problem).split(" ")[0];
 
         const button = add("button", "scene-patient" + kind + (fresh ? " walk-in" : ""),

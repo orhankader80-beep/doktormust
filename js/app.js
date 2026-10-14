@@ -314,6 +314,7 @@ function normalizePatient(p, group) {
         mistakes: number(p.mistakes),
         usedXray: p.usedXray === true,
         usedTest: p.usedTest === true,
+        tricky: p.tricky === true && !ward && !checkup,
         testPaid: p.testPaid === true,
         xrayPaid: p.xrayPaid === true,
         emergency: ward ? ward.timed === true : p.emergency === true && !checkup,
@@ -382,6 +383,31 @@ function normalizeState(saved) {
         list: (Array.isArray(codes.list) ? codes.list : []).filter(code => typeof code === "string").slice(-20).map(code => code.slice(0,8))
     };
     result.theme = themes.some(theme => theme[0] === saved.theme) ? saved.theme : "blue";
+
+    const dayCase = isRecord(saved.dailyCase) ? saved.dailyCase : {};
+    result.dailyCase = {
+        day: typeof dayCase.day === "string" ? dayCase.day.slice(0,10) : "",
+        done: dayCase.done === true,
+        stars: clamp(number(dayCase.stars), 0, 3),
+        mistakes: clamp(number(dayCase.mistakes), 0, 2)
+    };
+
+    result.friends = (Array.isArray(saved.friends) ? saved.friends : [])
+        .filter(friend => isRecord(friend) && typeof friend.name === "string" && friend.name.trim() && typeof friend.week === "string")
+        .slice(-20)
+        .map(friend => ({
+            name: friend.name.trim().slice(0,14),
+            week: friend.week.slice(0,10),
+            cases: clamp(number(friend.cases), 0, 1155),
+            perfect: clamp(number(friend.perfect), 0, 1155)
+        }));
+
+    const farm = isRecord(saved.farm) ? saved.farm : {};
+    result.farm = {
+        day: typeof farm.day === "string" ? farm.day.slice(0,10) : "",
+        games: number(farm.games),
+        duels: number(farm.duels)
+    };
 
     const shift = isRecord(saved.shift) ? saved.shift : {};
     result.shift = {
@@ -1186,6 +1212,7 @@ function updateUI() {
     renderEvent();
     renderShift();
     renderCustom();
+    renderV9();
     renderRobot();
 
     // Sahne, açık bir pencere yokken güncellenir (pencere kapanınca da yenilenir).

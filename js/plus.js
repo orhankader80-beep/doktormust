@@ -204,7 +204,9 @@ function startCure(patient) {
 function renderCure() {
     const { plan, done } = cure;
 
-    $("tmCureText").textContent = t("Düğmeye {0} kez dokun.", plan.count);
+    $("tmCureText").textContent = t("Simgeyi hastanın üstüne sürükle ya da düğmeye dokun ({0} kez).", plan.count);
+    $("tmCureToken").textContent = plan.emoji[done % plan.emoji.length];
+    $("tmCureToken").hidden = done >= plan.count;
     $("tmCureDots").textContent = "🟢".repeat(done) + "⚪".repeat(plan.count - done);
     $("tmCureButton").textContent = plan.label;
 }

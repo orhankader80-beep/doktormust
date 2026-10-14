@@ -107,10 +107,13 @@ function finishDuel() {
         $("duelNote" + player).textContent = t("Puanın: {0}", mine);
     }
 
-    $("duelScore").textContent = `🔵 ${first} — ${second} 🔴 • ` + t("+10 coin");
+    // İlk üç yarışmadan sonra o günün ödülü azalır.
+    const coins = Math.round(10 * playFactor("duels", 3));
+
+    $("duelScore").textContent = `🔵 ${first} — ${second} 🔴 • ` + t("+{0} coin", coins);
     $("duelAgain").hidden = false;
 
-    state.coins += 10;
+    state.coins += coins;
     commit();
     playSound("win");
 }
