@@ -1568,9 +1568,11 @@ body.still .scene-spot.ready .spot-icon, body.still .scene-patient.walk-in { ani
 @keyframes token-bob { to { transform: translateY(-7px); } }
 
 .scene-patient.tricky .sp-sign { background: #ede4ff; box-shadow: 0 0 0 3px #8b5cf6; }
-.scene-patient.walk-out { z-index: 40; pointer-events: none; animation: walk-out 2s ease-in both; }
+.scene-patient.walk-out { z-index: 9; pointer-events: none; animation: walk-out 1.5s ease-in both; }
 .scene-patient.walk-out .sp-sign { animation: hand-wave .35s ease-in-out infinite alternate; }
-@keyframes walk-out { 0%, 35% { transform: translate(-50%,-100%); opacity: 1; } 100% { transform: translate(380%,-100%); opacity: 0; } }
+@keyframes walk-out { from { transform: translate(-50%,-100%); opacity: .95; } to { transform: translate(260%,-100%) scale(.9); opacity: 0; } }
+.scene-patient.walk-out.to-left { animation-name: walk-out-left; }
+@keyframes walk-out-left { from { transform: translate(-50%,-100%); opacity: .95; } to { transform: translate(-360%,-100%) scale(.9); opacity: 0; } }
 @keyframes hand-wave { from { transform: translateX(-50%) rotate(-20deg); } to { transform: translateX(-50%) rotate(20deg); } }
 
 .score-code { margin: 8px 0; padding: 12px; border-radius: 14px; background: var(--soft); font-size: 28px; font-weight: 800; letter-spacing: .12em; text-align: center; user-select: all; -webkit-user-select: all; }

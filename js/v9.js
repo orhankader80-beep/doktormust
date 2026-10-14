@@ -95,7 +95,8 @@ function showLeaver() {
     const [x, y] = sceneSlots[slot];
     const figure = document.createElement("div");
 
-    figure.className = "scene-patient walk-out";
+    // En yakın kenara yürür; böylece doktorun önünden geçmez.
+    figure.className = "scene-patient walk-out" + (x < 50 ? " to-left" : "");
     figure.setAttribute("aria-hidden", "true");
     figure.style.left = x + "%";
     figure.style.top = y + "%";
