@@ -1622,3 +1622,17 @@ body.still .cure-token { animation: none !important; }
 .pet-card .row { gap: 6px; }
 
 body.still .home-zzz { animation: none !important; }
+
+/* Dar ekranlar ve telefonda büyük yazı: muayene penceresinin başı iki sütundan ızgaraya geçer.
+   Resim ile ad/şikâyet yan yana, konuşma balonu altta tam genişlikte durur. */
+@media (max-width: 600px) {
+    .exam-top { display: grid; grid-template-columns: 92px minmax(0, 1fr); column-gap: 12px; row-gap: 6px; align-items: start; }
+    .exam-top .stage { grid-column: 1; grid-row: 1 / span 2; width: 92px; }
+    .exam-side { display: contents; }
+    .exam-side h3 { grid-column: 2; margin: 4px 40px 0 0; }
+    .exam-side .problem { grid-column: 2; justify-self: start; }
+    .exam-side .speech-row { grid-column: 1 / -1; margin: 6px 0 2px; }
+    .exam-side .speech-bubble { flex: 1; min-width: 0; }
+    .exam-side .game-status { grid-column: 1 / -1; }
+    .stock-list li { grid-template-columns: 30px minmax(0, 1fr) auto; padding: 10px; }
+}
