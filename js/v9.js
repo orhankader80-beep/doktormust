@@ -92,7 +92,7 @@ function showLeaver() {
 
     if (isStill() || state.shift.closed) return;
 
-    const [x, y] = sceneSlots[slot];
+    const [x, y] = slotsNow()[slot] || slotsNow()[0];
     const figure = document.createElement("div");
 
     // En yakın kenara yürür; böylece doktorun önünden geçmez.

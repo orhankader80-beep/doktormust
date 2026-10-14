@@ -21,6 +21,15 @@ const sceneSpots = [
 // Hastaların odada durduğu yerler (x %, y %: ayakların yeri). Arkadakiler önce çizilir.
 const sceneSlots = [[12, 81], [35, 81], [65, 81], [88, 81], [24, 98], [50, 98], [76, 98]];
 
+// Dar ekranda (telefonda, büyük yazıda) hastalar üst üste binmesin diye en fazla 5 hasta görünür:
+// ikisi arkada doktorun iki yanında, üçü önde. Sığmayanlar bekleme sırasında görünür.
+const sceneSlotsNarrow = [[13, 76], [87, 76], [28, 99], [50, 99], [72, 99]];
+
+function slotsNow() {
+    const scene = $("scene");
+    return scene && scene.clientWidth > 0 && scene.clientWidth < 520 ? sceneSlotsNarrow : sceneSlots;
+}
+
 let sceneKey = "";
 let sceneSeen = new Set();
 
@@ -28,7 +37,7 @@ function scenePatients() {
     if (state.shift.closed) return [];
 
     const special = state.weekly.patient;
-    return (special ? [special, ...state.activePatients] : state.activePatients).slice(0, sceneSlots.length);
+    return (special ? [special, ...state.activePatients] : state.activePatients).slice(0, slotsNow().length);
 }
 
 function giftReady() {
@@ -75,7 +84,7 @@ function renderScene(force = false) {
         patients.map(patient => [patient.id, patient.patience, patient.emergency, patient.checkup]),
         state.queue.map(patient => patient.id),
         items.map(item => [item.type, item.x, item.y, item.r]),
-        state.decor, state.doctor, state.dark, giftReady(), currentLang, state.shift.closed, state.shift.day, state.shift.home, shiftWait() > 0, state.clinicName, shownSeason() && shownSeason().id
+        slotsNow().length, state.decor, state.doctor, state.dark, giftReady(), currentLang, state.shift.closed, state.shift.day, state.shift.home, shiftWait() > 0, state.clinicName, shownSeason() && shownSeason().id
     ]);
 
     if (!force && key === sceneKey) return;
@@ -136,7 +145,7 @@ function renderScene(force = false) {
     doctor.onclick = () => sceneAction("doctor");
 
     patients.forEach((patient, index) => {
-        const [x, y] = sceneSlots[index];
+        const [x, y] = slotsNow()[index];
         const fresh = !sceneSeen.has(patient.id);
         const kind = patient.special ? " special" : patient.checkup ? " checkup" : patient.emergency ? " emergency" : patient.referral ? " referral" : patient.tricky ? " tricky" : "";
         const sign = patient.special ? "🌟" : patient.checkup ? "💚" : patient.referral ? "📞" : patient.emergency ? "🚑" : t(patient.problem).split(" ")[0];
@@ -173,7 +182,10 @@ function renderScene(force = false) {
         night.querySelector("button").onclick = home ? startDay : goHome;
     }
 
-    $("sceneQueue").innerHTML = state.queue.map(patient => faceSVG(patient, { mood: "sick" })).join("");
+    // Odaya sığmayan hastalar da bekleme sırasında görünür.
+    const special = state.weekly.patient;
+    const waiting = state.shift.closed ? [] : (special ? [special, ...state.activePatients] : state.activePatients).slice(patients.length);
+    $("sceneQueue").innerHTML = [...waiting, ...state.queue].map(patient => faceSVG(patient, { mood: "sick" })).join("");
     $("sceneHint").textContent = patients.length ? t("Bir hastaya dokun ve muayene et!") : t("Şu an bekleyen hasta yok.");
     if (state.shift.closed) renderDayButton();
 }

@@ -407,6 +407,11 @@ robotTopics.splice(robotTopics.findIndex(topic => topic.keys.includes("yildiz"))
 
 /* ---- Başlangıç ---- */
 
+// Telefon döndürülünce ya da pencere daralınca oda yeni genişliğe göre yeniden dizilir.
+addEventListener("resize", () => {
+    if (appOpen && !activeModal) renderScene();
+});
+
 function renderV10() {
     renderCareer();
     $("depotButton").classList.toggle("warn", supplies.some(item => state.stock[item.id] <= 2));
