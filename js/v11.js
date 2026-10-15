@@ -484,7 +484,7 @@ chapters.push(
         id: "opening", emoji: "🏥", name: t("Büyük Hastane Açılışı"), cases: 6,
         cards: ["antibiyotik", "dinlenme", "agri_kesici", "mide_ilaci", "vitamin", "alci"],
         intro: t("Kasabanın yeni hastanesi açılıyor ve açılışı sen yapacaksın! Bütün kasaba orada; her türlü vaka gelebilir. Bu, kariyerinin en büyük günü!"),
-        outro: t("Kurdele kesildi, hastane açıldı! Kasaba halkı seni alkışlıyor: Doktormust'un en iyi doktoru sensin!")
+        outro: t("Kurdele kesildi, hastane açıldı! Kasaba halkı seni alkışlıyor: Doctormust'un en iyi doktoru sensin!")
     }
 );
 

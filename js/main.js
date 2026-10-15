@@ -54,7 +54,7 @@ window.addEventListener("beforeinstallprompt", event => {
 window.addEventListener("appinstalled", () => {
     installPrompt = null;
     renderInstall();
-    toast(t("📲 Doktormust bu cihaza yüklendi!"));
+    toast(t("📲 Doctormust bu cihaza yüklendi!"));
 });
 
 window.addEventListener("load", registerWorker);

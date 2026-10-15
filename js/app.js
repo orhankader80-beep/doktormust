@@ -1674,7 +1674,7 @@ async function importBackup(input) {
         if (!currentUser || saved) toast(t("📥 Yedek yüklendi!"), true);
     } catch (error) {
         console.warn("Yedek yüklenemedi.", error);
-        toast(t("⚠️ Bu dosya geçerli bir Doktormust yedeği değil."));
+        toast(t("⚠️ Bu dosya geçerli bir Doctormust yedeği değil."));
     }
 }
 

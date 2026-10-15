@@ -5,8 +5,8 @@
 // Anahtar: koddaki Türkçe metin. Değer: İngilizce karşılığı.
 // {0}, {1}… yer tutucuları iki tarafta da aynı kalmalıdır.
 translations.en = {
-    "Doktormust — Çocuk Doktor Oyunu":
-        "Doktormust — Kids' Doctor Game",
+    "Doctormust — Çocuk Doktor Oyunu":
+        "Doctormust — Kids' Doctor Game",
     "Kendi kliniğini kur, oyun vakalarını çöz ve başarı rozetlerini topla!":
         "Build your own clinic, solve game cases and collect achievement badges!",
     "Hoş geldin! 👋":
@@ -467,10 +467,10 @@ translations.en = {
         "🔗 Paired with the parent app.",
     "Eşleşme kaldırılsın mı? Ebeveyn kodları artık bu profilde çalışmaz.":
         "Remove the pairing? Parent codes will no longer work on this profile.",
-    "Doktormust raporu":
-        "Doktormust report",
-    "Doktormust raporu: {0}":
-        "Doktormust report: {0}",
+    "Doctormust raporu":
+        "Doctormust report",
+    "Doctormust raporu: {0}":
+        "Doctormust report: {0}",
     "📋 Rapor bağlantısı kopyalandı. Kendinize gönderip ebeveyn uygulamasında açın.":
         "📋 Report link copied. Send it to yourself and open it in the parent app.",
     "Bağlantı aşağıdaki kutuda. Kopyalayıp kendinize gönderin.":
@@ -1191,8 +1191,8 @@ translations.en = {
         "Grand Hospital Opening",
     "Kasabanın yeni hastanesi açılıyor ve açılışı sen yapacaksın! Bütün kasaba orada; her türlü vaka gelebilir. Bu, kariyerinin en büyük günü!":
         "The town's new hospital is opening and you're cutting the ribbon! The whole town is there, so any kind of case can come in. It's the biggest day of your career!",
-    "Kurdele kesildi, hastane açıldı! Kasaba halkı seni alkışlıyor: Doktormust'un en iyi doktoru sensin!":
-        "The ribbon is cut and the hospital is open! The town is cheering: you're Doktormust's best doctor!",
+    "Kurdele kesildi, hastane açıldı! Kasaba halkı seni alkışlıyor: Doctormust'un en iyi doktoru sensin!":
+        "The ribbon is cut and the hospital is open! The town is cheering: you're Doctormust's best doctor!",
     "Gezi Doktoru":
         "Trip Doctor",
     "\"Okul Gezisi\" bölümünü tamamla.":
@@ -1815,8 +1815,8 @@ translations.en = {
         "Loading a backup replaces your current progress. Continue?",
     "📥 Yedek yüklendi!":
         "📥 Backup loaded!",
-    "⚠️ Bu dosya geçerli bir Doktormust yedeği değil.":
-        "⚠️ This file is not a valid Doktormust backup.",
+    "⚠️ Bu dosya geçerli bir Doctormust yedeği değil.":
+        "⚠️ This file is not a valid Doctormust backup.",
     "✅ Sayfa tamamlandı, ödülün alındı!":
         "✅ Page complete, reward claimed!",
     "Sayfayı tamamla: +5 💎 ve +100 coin":
@@ -3119,8 +3119,8 @@ translations.en = {
         "😌 Great! You took {0} deep breaths. I hope you feel calmer now.",
     "İlerleme şu anda kalıcı kaydedilemedi.":
         "Progress could not be saved permanently right now.",
-    "📲 Doktormust bu cihaza yüklendi!":
-        "📲 Doktormust is installed on this device!",
+    "📲 Doctormust bu cihaza yüklendi!":
+        "📲 Doctormust is installed on this device!",
     "⚠️ Eski kayıt okunamadı. Kayıt korunuyor; misafir olarak oynayabilirsin.":
         "⚠️ The old save could not be read. It is kept safe; you can play as a guest.",
     "🪙 Bu rapor için yeterli coinin yok.":
@@ -3369,8 +3369,8 @@ translations.en = {
         "This diploma is awarded to",
     "adlı doktora, \"{0}\" bölümünü {1} / {2} yıldızla tamamladığı için verilmiştir.":
         "for completing the \"{0}\" chapter with {1} / {2} stars.",
-    "Doktormust Kliniği":
-        "Doktormust Clinic",
+    "Doctormust Kliniği":
+        "Doctormust Clinic",
     "🎓 Diploma indirildi.":
         "🎓 Diploma downloaded.",
     "🎓 Diploma kaydedildi.":

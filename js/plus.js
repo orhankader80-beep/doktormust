@@ -387,7 +387,7 @@ async function drawPhoto(canvas, photo) {
 
     context.font = "800 40px 'Segoe UI', Arial, sans-serif";
     context.fillStyle = "#4f8cff";
-    context.fillText("Doktormust", size / 2, 965);
+    context.fillText("Doctormust", size / 2, 965);
 }
 
 async function savePhoto() {

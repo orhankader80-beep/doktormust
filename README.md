@@ -1,4 +1,4 @@
-# Doktormust — Çocuk Doktor Oyunu
+# Doctormust — Çocuk Doktor Oyunu
 
 **Yapan: Mustafa**
 

@@ -1,6 +1,6 @@
 {
-    "name": "Doktormust — Çocuk Doktor Oyunu",
-    "short_name": "Doktormust",
+    "name": "Doctormust — Çocuk Doktor Oyunu",
+    "short_name": "Doctormust",
     "description": "Kendi kliniğini kur, hastalarını muayene et, çıkartma topla.",
     "lang": "tr",
     "start_url": "./index.html",

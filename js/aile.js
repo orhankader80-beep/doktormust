@@ -119,7 +119,7 @@ async function sendFamilyReport() {
     // Telefonda paylaşma penceresi açılır; yoksa bağlantı panoya kopyalanır.
     try {
         if (navigator.share && !nativeApp()) {
-            await navigator.share({ title: t("Doktormust raporu"), text: t("Doktormust raporu: {0}", state.doctor.name), url: link });
+            await navigator.share({ title: t("Doctormust raporu"), text: t("Doctormust raporu: {0}", state.doctor.name), url: link });
             return;
         }
     } catch (error) {

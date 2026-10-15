@@ -1329,7 +1329,7 @@ for (const ward of wards) {
 }
 
 const screenData = [
-    ["home", "🏥", t("Klinik"), t("Doktormust Kliniği")],
+    ["home", "🏥", t("Klinik"), t("Doctormust Kliniği")],
     ["clinic", "🎨", t("Süsle"), t("Kliniğimi Süsle")],
     ["patients", "🧒", t("Hastalar"), t("Hastalarım")],
     ["story", "📚", t("Hikâye"), t("Hikâye Modu")],

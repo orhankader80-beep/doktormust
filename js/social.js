@@ -196,7 +196,7 @@ function drawDiploma(canvas, chapter) {
     context.textAlign = "left";
     context.fillText(dayLabel(dayKey()), 110, 760);
     context.textAlign = "right";
-    context.fillText(t("Doktormust Kliniği"), width - 110, 760);
+    context.fillText(t("Doctormust Kliniği"), width - 110, 760);
 
     context.strokeStyle = "#17324d";
     context.lineWidth = 2;
