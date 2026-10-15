@@ -243,8 +243,8 @@ translations.en = {
         "If you really don't feel well, please tell a grown-up right away. I'm only a game robot; real illnesses are looked after by doctors. 💙",
     "Ben Robi, kliniğinin yardımcı robotuyum. Gerçek bir yapay zekâ değilim; yalnızca bana öğretilen cevapları bilirim. 🤖":
         "I'm Robi, your clinic's helper robot. I'm not a real AI; I only know the answers I was taught. 🤖",
-    "Bu oyunu Mustafa yaptı! 🎉":
-        "This game was made by Mustafa! 🎉",
+    "Bu oyun sevgiyle yapıldı! 🎉 Yapanın adı bir sır olarak kalsın. 🤫":
+        "This game was made with love! 🎉 Who made it is a secret. 🤫",
     "Bugünün olayı: {0} {1}. {2}":
         "Today's event: {0} {1}. {2}",
     "Hastalar ekranından bir hasta seç. Önce derdini dinle, sonra aletlerle muayene et. ❗ işaretli bulgulara bak, ipucu tablosuyla karşılaştır ve doğru kartı seç. Sonra tedaviyi kendin uygula!":
@@ -1357,8 +1357,6 @@ translations.en = {
         "Read the prescription and bag the right items.",
     "🔘 Büyük düğmeler":
         "🔘 Big buttons",
-    "Bu oyunu yapan: Mustafa":
-        "Made by: Mustafa",
     "Çıkış Yap":
         "Log Out",
     "Doktor Paneli":

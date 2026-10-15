@@ -2,7 +2,7 @@
 
 // Çevrimdışı destek. Dosyalar önce ağdan istenir (çevrimiçiyken hep güncel sürüm),
 // ağ yoksa önbellekten verilir. Dosya listesi değişince CACHE adını da değiştir.
-const CACHE = "doktormust-v11-0";
+const CACHE = "doktormust-v11-1";
 
 const FILES = [
     "./",

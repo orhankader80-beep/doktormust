@@ -33,7 +33,7 @@ const robotTopics = [
     },
     {
         keys: ["kim yapti", "yapan kim", "yapimci", "who made"],
-        answer: t("Bu oyunu Mustafa yaptı! 🎉")
+        answer: t("Bu oyun sevgiyle yapıldı! 🎉 Yapanın adı bir sır olarak kalsın. 🤫")
     },
     {
         keys: ["ne yapayim", "ne yapmaliyim", "simdi ne", "sirada ne", "what should", "what now", "what next"],
